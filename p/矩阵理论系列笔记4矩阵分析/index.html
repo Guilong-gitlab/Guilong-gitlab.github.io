@@ -1,0 +1,2838 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="向量与矩阵范数 定义 1（向量范数） 设 $V$ 是数域 $F$（实数域或复数域）上的线性空间，若 $\\forall x \\in V$，均对应一个数，记为 $|x|$，满足以下三条性质：\n正定性：$|x| \\geq 0$，且 $|x| = 0 \\Leftrightarrow x = \\theta$；\n">
+<title>矩阵理论系列笔记4：矩阵分析</title>
+
+<link rel='canonical' href='https://Guilong-gitlab.github.io/p/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B04%E7%9F%A9%E9%98%B5%E5%88%86%E6%9E%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="矩阵理论系列笔记4：矩阵分析">
+<meta property='og:description' content="向量与矩阵范数 定义 1（向量范数） 设 $V$ 是数域 $F$（实数域或复数域）上的线性空间，若 $\\forall x \\in V$，均对应一个数，记为 $|x|$，满足以下三条性质：\n正定性：$|x| \\geq 0$，且 $|x| = 0 \\Leftrightarrow x = \\theta$；\n">
+<meta property='og:url' content='https://Guilong-gitlab.github.io/p/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B04%E7%9F%A9%E9%98%B5%E5%88%86%E6%9E%90/'>
+<meta property='og:site_name' content='刘贵泷的个人网页'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='矩阵论' /><meta property='article:published_time' content='2025-02-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-28T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="矩阵理论系列笔记4：矩阵分析">
+<meta name="twitter:description" content="向量与矩阵范数 定义 1（向量范数） 设 $V$ 是数域 $F$（实数域或复数域）上的线性空间，若 $\\forall x \\in V$，均对应一个数，记为 $|x|$，满足以下三条性质：\n正定性：$|x| \\geq 0$，且 $|x| = 0 \\Leftrightarrow x = \\theta$；\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/image/avatar_hu_5fc70999b694beba.png" width="300"
+                            height="294" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">刘贵泷的个人网页</a></h1>
+            <h2 class="site-description">个人主页</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Guilong-gitlab.github.io/en/" >English</option>
+                                
+                                    <option value="https://Guilong-gitlab.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#向量与矩阵范数">向量与矩阵范数</a>
+      <ol>
+        <li><a href="#定义-1向量范数">定义 1（向量范数）</a></li>
+        <li><a href="#定理-1">定理 1</a></li>
+        <li><a href="#定义1范数2范数无穷范数">定义：1范数、2范数、无穷范数</a></li>
+        <li><a href="#定义p范数">定义：p范数</a></li>
+        <li><a href="#命题">命题</a></li>
+        <li><a href="#定义">定义</a></li>
+        <li><a href="#定义-2">定义 2</a></li>
+        <li><a href="#定理-1-1">定理 1</a></li>
+        <li><a href="#定义-3极限">定义 3（极限）</a></li>
+        <li><a href="#定理-2">定理 2</a></li>
+        <li><a href="#定义-4">定义 4</a></li>
+        <li><a href="#定义-1">定义：</a></li>
+        <li><a href="#定理-3">定理 3</a></li>
+        <li><a href="#例-4">例 4</a></li>
+        <li><a href="#定理-4">定理 4</a></li>
+        <li><a href="#定义-6">定义 6</a></li>
+        <li><a href="#定理-5">定理 5</a></li>
+        <li><a href="#定理-6">定理 6</a></li>
+        <li><a href="#定理-7">定理 7</a></li>
+        <li><a href="#定理-8">定理 8</a></li>
+        <li><a href="#定义-7谱半径">定义 7（谱半径）</a></li>
+        <li><a href="#定理-9">定理 9</a></li>
+        <li><a href="#定理-10">定理 10</a></li>
+      </ol>
+    </li>
+    <li><a href="#特征值的估计">特征值的估计</a>
+      <ol>
+        <li><a href="#定理-11">定理 11</a></li>
+        <li><a href="#定义盖尔圆盘">定义（盖尔圆盘）</a></li>
+        <li><a href="#定理-12盖尔圆盘定理">定理 12（盖尔圆盘定理）</a></li>
+      </ol>
+    </li>
+    <li><a href="#矩阵级数">矩阵级数</a>
+      <ol>
+        <li><a href="#定义-1-1">定义 1</a></li>
+        <li><a href="#矩阵级数收敛性">矩阵级数收敛性</a></li>
+        <li><a href="#定义-2-1">定义 2</a></li>
+        <li><a href="#矩阵级数的性质">矩阵级数的性质</a></li>
+        <li><a href="#定义-3幂级数">定义 3（幂级数）</a></li>
+        <li><a href="#收敛性定义"><strong>收敛性定义</strong></a></li>
+        <li><a href="#定理-2-1">定理 2：</a></li>
+        <li><a href="#定理-3-1">定理 3：</a></li>
+      </ol>
+    </li>
+    <li><a href="#矩阵函数及其计算一">矩阵函数及其计算一</a>
+      <ol>
+        <li><a href="#定义-1矩阵函数">定义 1（<strong>矩阵函数</strong>）</a></li>
+        <li><a href="#矩阵函数的性质">矩阵函数的性质</a></li>
+        <li><a href="#证明">证明：</a></li>
+        <li><a href="#例-1">例 1：</a></li>
+        <li><a href="#解">解：</a></li>
+        <li><a href="#例-2">例 2：</a></li>
+        <li><a href="#矩阵函数的计算法一">矩阵函数的计算法（一）</a></li>
+        <li><a href="#a-为单纯矩阵求-fa-的步骤如下">$A$ 为单纯矩阵，求 $f(A)$ 的步骤如下：</a></li>
+        <li><a href="#特别地有">特别地，有：</a></li>
+        <li><a href="#2-若-a-为一般矩阵则存在可逆矩阵-p-使">2. 若 $A$ 为一般矩阵，则存在可逆矩阵 $P$ 使：</a></li>
+      </ol>
+    </li>
+    <li><a href="#矩阵函数及其计算二">矩阵函数及其计算二</a>
+      <ol>
+        <li><a href="#定理-1-2">定理 1：</a></li>
+        <li><a href="#关于谱上一致多项式的进一步说明">关于谱上一致多项式的进一步说明：</a></li>
+      </ol>
+    </li>
+    <li><a href="#矩阵函数的应用">矩阵函数的应用</a>
+      <ol>
+        <li><a href="#定义-1函数矩阵">定义 1：函数矩阵</a></li>
+        <li><a href="#命题-1">命题 1</a></li>
+        <li><a href="#命题-2">命题 2</a></li>
+        <li><a href="#命题-3">命题 3</a></li>
+      </ol>
+    </li>
+    <li><a href="#求解一阶线性常系数微分方程">求解一阶线性常系数微分方程</a>
+      <ol>
+        <li><a href="#一求解一阶线性常系数微分方程组">一、求解一阶线性常系数微分方程组</a></li>
+        <li><a href="#例2">例2</a></li>
+        <li><a href="#解-1">解：</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B04%E7%9F%A9%E9%98%B5%E5%88%86%E6%9E%90/">矩阵理论系列笔记4：矩阵分析</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-02-28</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 27 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="向量与矩阵范数">向量与矩阵范数
+</h2><h3 id="定义-1向量范数">定义 1（向量范数）
+</h3><p>设 $V$ 是数域 $F$（实数域或复数域）上的线性空间，若 $\forall x \in V$，均对应一个数，记为 $|x|$，满足以下三条性质：</p>
+<ol>
+<li>
+<p><strong>正定性</strong>：$|x| \geq 0$，且 $|x| = 0 \Leftrightarrow x = \theta$；</p>
+</li>
+<li>
+<p><strong>齐次性</strong>：$\forall k \in F, x \in V$，有 $|kx| = |k| \cdot |x|$；</p>
+</li>
+<li>
+<p><strong>三角不等式</strong>：$\forall x, y \in V$，有 $|x + y| \leq |x| + |y|$。</p>
+</li>
+</ol>
+<p>则称 $V$ 为<strong>赋范线性空间</strong>，$|x|$ 是 $x$ 的<strong>范数</strong>。</p>
+<p><strong>注：</strong> 上面三条性质称为<strong>范数的三条公理</strong>，即只要满足范数公理的实值函数均为向量的范数。</p>
+<h3 id="定理-1">定理 1
+</h3><ol>
+<li>
+<p>当 $x \neq \theta$ 时，$\frac{x}{|x|}$ 是范数为 $1$ 的向量（单位化）；</p>
+</li>
+<li>
+<p>$|-x| = |x|$；</p>
+</li>
+<li>
+<p>$\forall x, y \in V$，有 $\big||x| - |y|\big| \leq |x - y|$。</p>
+</li>
+</ol>
+<h3 id="定义1范数2范数无穷范数">定义：1范数、2范数、无穷范数
+</h3><p>$\forall x = (\xi_1, \xi_2, \dots, \xi_n)^T \in \mathbb{C}^n$，定义</p>
+<p>\begin{equation}\nonumber
+|x|<em>1 = \sum</em>{i=1}^{n} |\xi_i|, \quad |x|<em>\infty = \max</em>{1 \leq i \leq n} |\xi_i|.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+|x|<em>2 = \left( \sum</em>{i=1}^{n} |\xi_i|^2 \right)^{\frac{1}{2}}.
+\end{equation}</p>
+<p>则 $|x|<em>1, |x|</em>\infty$ 及 $|x|_2$ 均是 $\mathbb{C}^n$ 中的范数。</p>
+<p>证明：
+不难验证 $|x|<em>1, |x|</em>\infty$ 均是范数。对于 $|x|_2$，正定性和齐次性显然满足，下面证明它满足三角不等式。</p>
+<p>设</p>
+<p>\begin{equation}\nonumber
+x = (\xi_1, \xi_2, \dots, \xi_n)^T, \quad y = (\eta_1, \eta_2, \dots, \eta_n)^T \in \mathbb{C}^n.
+\end{equation}</p>
+<p>注意到</p>
+<p>\begin{equation}\nonumber
+|x|<em>2 = \left( \sum</em>{i=1}^{n} |\xi_i|^2 \right)^{\frac{1}{2}} = \sqrt{x^H x} = \sqrt{(x, x)},
+\end{equation}</p>
+<p>即 $|x|_2$ 是<strong>赋范空间</strong> $\mathbb{C}^n$ 中由<strong>内积</strong>导出的范数。</p>
+<p>由 <strong>Cauchy 不等式</strong> 得：</p>
+<p>\begin{equation}\nonumber
+|x + y|_2^2 = (x + y, x + y)
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= (x, x) + (x, y) + (y, x) + (y, y)
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= |x|_2^2 + 2 \operatorname{Re} (x, y) + |y|_2^2
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\leq |x|_2^2 + 2 |(x, y)| + |y|_2^2
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\leq |x|_2^2 + 2 |x|_2 |y|_2 + |y|_2^2 = (|x|_2 + |y|_2)^2
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\Rightarrow |x + y|_2 \leq |x|_2 + |y|_2.
+\end{equation}</p>
+<h3 id="定义p范数">定义：p范数
+</h3><p>设 $1 \leq p &lt; \infty$，$\forall x = (\xi_1, \xi_2, \dots, \xi_n)^T \in \mathbb{C}^n$，定义</p>
+<p>\begin{equation}\nonumber
+|x|<em>p = \left( \sum</em>{i=1}^{n} |\xi_i|^p \right)^{\frac{1}{p}}.
+\end{equation}</p>
+<p>则 $|x|_p$ 是 $\mathbb{C}^n$ 中的范数，称为**$p$-范数**。</p>
+<ul>
+<li>当 $p = 1$ 时，称为 <strong>1-范数</strong>；</li>
+<li>当 $p = 2$ 时，称为 <strong>2-范数</strong>；</li>
+<li>当令 $p \to \infty$ 时，得到 <strong>$\infty$-范数</strong>。</li>
+</ul>
+<p>这三种范数为常见范数。</p>
+<h3 id="命题">命题
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，$|\cdot|_\alpha$ 是 $\mathbb{C}^m$ 中的一个向量范数。$\forall x \in \mathbb{C}^n$，定义：</p>
+<p>\begin{equation}\nonumber
+|x|<em>\beta = |Ax|</em>\alpha.
+\end{equation}</p>
+<p>则 $|x|_\beta$ 是 $\mathbb{C}^n$ 中的一个向量范数。</p>
+<hr>
+<h3 id="定义">定义
+</h3><p>设 $A$ 是 $n$ 阶 Hermite 矩阵，$\forall x \in \mathbb{C}^n$，定义：</p>
+<p>\begin{equation}\nonumber
+|x|_A = \sqrt{x^H A x}.
+\end{equation}</p>
+<p>则 $|x|_A$ 是一个向量范数，称为<strong>加权范数</strong>或者<strong>椭圆范数</strong>。</p>
+<h3 id="定义-2">定义 2
+</h3><p>设 $V$ 是有限维线性空间，$|\cdot|<em>\alpha, |\cdot|</em>\beta$ 是 $V$ 中任意两种范数。若存在正数 $k_1$ 及 $k_2$，使得 $\forall x \in V$，都有：</p>
+<p>\begin{equation}\nonumber
+k_1 |x|<em>\beta \leq |x|</em>\alpha \leq k_2 |x|_\beta,
+\end{equation}</p>
+<p>则称 $|\cdot|<em>\alpha$ 与 $|\cdot|</em>\beta$ <strong>是等价的</strong>。</p>
+<hr>
+<h3 id="定理-1-1">定理 1
+</h3><p>有限维线性空间中任意两种范数都是等价的。</p>
+<h3 id="定义-3极限">定义 3（极限）
+</h3><p>设 $x_1, x_2, \dots, x_m, \dots$ 是线性空间 $V$ 中的元素序列，若 $x \in V$，使得：</p>
+<p>\begin{equation}\nonumber
+\lim\limits_{m \to \infty} |x_m - x|_\alpha = 0,
+\end{equation}</p>
+<p>则称序列 ${x_m}$ 按 <strong>$\alpha$-范数收敛</strong> 于 $x$，记为：</p>
+<p>\begin{equation}\nonumber
+\lim\limits_{m \to \infty} x_m^{\alpha} = x.
+\end{equation}</p>
+<hr>
+<p>线性空间可定义多种范数收敛，如 <strong>1-范数收敛</strong>、<strong>2-范数收敛</strong>，它们之间有什么关系呢？</p>
+<h3 id="定理-2">定理 2
+</h3><p>设 $V$ 是有限维线性空间，则：</p>
+<ol>
+<li>
+<p>序列 ${x_m}$ 按某种范数收敛于 $x_0$，则 ${x_m}$ 按任何范数收敛于 $x_0$。即<strong>在有限维线性空间中按范数收敛是等价的</strong>。</p>
+</li>
+<li>
+<p>${x_m}$ 按范数收敛于 $x_0$ $\Leftrightarrow$ <strong>按坐标收敛于 $x_0$</strong>。</p>
+</li>
+</ol>
+<p>证明：</p>
+<ol>
+<li>按范数收敛的等价性
+设 $|\cdot|<em>\alpha, |\cdot|</em>\beta$ 是 $V$ 中任意两种范数，则存在正数 $k_1$ 及 $k_2$，使得 $\forall x \in V$，都有：</li>
+</ol>
+<p>\begin{equation}\nonumber
+k_1 |x|<em>\beta \leq |x|</em>\alpha \leq k_2 |x|_\beta.
+\end{equation}</p>
+<p>若 $\lim\limits_{m \to \infty} |x_m - x_0|_\alpha = 0$，则有：</p>
+<p>\begin{equation}\nonumber
+0 \leq |x_m - x_0|<em>\beta \leq \frac{1}{k_1} |x_m - x_0|</em>\alpha.
+\end{equation}</p>
+<p>所以 $\lim\limits_{m \to \infty} |x_m - x_0|_\beta = 0$，即 ${x_m}$ 按 $\beta$-范数收敛于 $x_0$。反之亦然。</p>
+<ol start="2">
+<li>按范数收敛与按坐标收敛的等价性
+取 $V$ 的一组基底 ${e_1, \dots, e_n}$，令</li>
+</ol>
+<p>\begin{equation}\nonumber
+x_m = \xi_1^{(m)} e_1 + \dots + \xi_n^{(m)} e_n, \quad m = 1,2, \dots
+\end{equation}</p>
+<p>即</p>
+<p>\begin{equation}\nonumber
+x_m =
+\begin{bmatrix}
+\xi_1^{(m)} \
+\vdots \
+\xi_n^{(m)}
+\end{bmatrix}.
+\end{equation}</p>
+<p>我们回忆 <strong>2-范数</strong> 的定义，$\forall x = (\xi_1, \xi_2, \dots, \xi_n)^T \in \mathbb{C}^n$：</p>
+<p>\begin{equation}\nonumber
+|x|<em>2 = \left( \sum</em>{i=1}^{n} |\xi_i|^2 \right)^{\frac{1}{2}}.
+\end{equation}</p>
+<p>由于按范数收敛是等价的，所以有：</p>
+<p>\begin{equation}\nonumber
+\lim\limits_{m \to \infty} |x_m - x_0| = 0 \Leftrightarrow \lim\limits_{m \to \infty} |x_m - x_0|_2 = 0.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\Rightarrow \lim\limits_{m \to \infty} \left( \sum_{i=1}^{n} |\xi_i^{(m)} - \xi_i^{(0)}|^2 \right)^{\frac{1}{2}} = 0.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\Rightarrow \lim\limits_{m \to \infty} \xi_i^{(m)} = \xi_i^{(0)}, \quad i = 1, \dots, n.
+\end{equation}</p>
+<p>注：
+在<strong>有限维线性空间</strong>中，按<strong>任一种范数收敛</strong>均等价于<strong>按坐标收敛</strong>。</p>
+<hr>
+<p>任意 $m \times n$ 的矩阵均可看做 $mn$ 维向量，故可将向量范数直接移植到矩阵上来。</p>
+<h3 id="定义-4">定义 4
+</h3><p>若 $\forall A \in \mathbb{C}^{m \times n}$，均对应一个实数，记作 $|A|$，满足：</p>
+<ol>
+<li>
+<p><strong>正定性</strong>：
+\begin{equation}\nonumber
+|A| \geq 0, \quad \text{且} \quad |A| = 0 \Leftrightarrow A = 0;
+\end{equation}</p>
+</li>
+<li>
+<p><strong>齐次性</strong>：
+\begin{equation}\nonumber
+\forall \lambda \in \mathbb{C}, \quad |\lambda A| = |\lambda| |A|;
+\end{equation}</p>
+</li>
+<li>
+<p><strong>三角不等式</strong>：
+\begin{equation}\nonumber
+|A + B| \leq |A| + |B|.
+\end{equation}</p>
+</li>
+</ol>
+<p>则称 $|A|$ 是矩阵 $A$ 的<strong>向量范数</strong>（广义矩阵范数）。</p>
+<h3 id="定义-1">定义：
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，则</p>
+<p>\begin{equation}\nonumber
+|A|<em>{V_1} = \sum</em>{i,j=1}^{m,n} |a_{ij}|,
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+|A|<em>{V</em>\infty} = \max_{i,j} |a_{ij}|,
+\end{equation}</p>
+<p>以及</p>
+<p>\begin{equation}\nonumber
+|A|<em>{V_p} = \left( \sum</em>{i,j=1}^{m,n} |a_{ij}|^p \right)^{\frac{1}{p}}, \quad (p \geq 1)
+\end{equation}</p>
+<p>均是 $A$ 的范数。</p>
+<h3 id="定理-3">定理 3
+</h3><ol>
+<li>
+<p>$A \in \mathbb{C}^{m \times n}$ 的任一种范数均是 $A$ 的元素的<strong>连续函数</strong>；</p>
+</li>
+<li>
+<p>$\mathbb{C}^{m \times n}$ 的任意两种范数都是等价的，即对于 $|A|<em>\alpha, |B|</em>\beta$，存在正数 $k_1$ 及 $k_2$，使得：</p>
+</li>
+</ol>
+<p>\begin{equation}\nonumber
+k_1 |A|<em>\beta \leq |A|</em>\alpha \leq k_2 |A|_\beta, \quad \forall A \in \mathbb{C}^{m \times n};
+\end{equation}</p>
+<ol start="3">
+<li><strong>矩阵序列</strong> ${A_k}$ 按任一范数收敛于 $A_0$：</li>
+</ol>
+<p>\begin{equation}\nonumber
+\lim\limits_{k \to \infty} A_k = A_0
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\Leftrightarrow \lim\limits_{k \to \infty} a_{ij}^k = a_{ij}^0, \quad \forall i, j.
+\end{equation}</p>
+<h3 id="例-4">例 4
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，则</p>
+<p>\begin{equation}\nonumber
+|A|<em>{V_2} = \left( \sum</em>{i,j=1}^{n} |a_{ij}|^2 \right)^{\frac{1}{2}} = \left( \operatorname{tr} (A^H A) \right)^{\frac{1}{2}}
+\end{equation}</p>
+<p>是 $A$ 的矩阵范数。</p>
+<p>证明：
+只需验证<strong>相容性</strong>。设：</p>
+<p>\begin{equation}\nonumber
+A = (a_{ij})<em>{n \times n}, \quad B = (b</em>{ij})_{n \times n}.
+\end{equation}</p>
+<p>则：</p>
+<p>\begin{equation}\nonumber
+|AB|<em>{V_2}^2 = \sum</em>{i,j=1}^{n} |c_{ij}|^2.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= \sum_{i,j=1}^{n} |a_{i1} b_{1j} + a_{i2} b_{2j} + \dots + a_{in} b_{nj}|^2.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\leq \sum_{i,j=1}^{n} \left( (|a_{i1}|^2 + \dots + |a_{in}|^2) (|b_{1j}|^2 + \dots + |b_{nj}|^2) \right) \quad \text{(柯西不等式)}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= \sum_{i=1}^{n} \left( |a_{i1}|^2 + \dots + |a_{in}|^2 \right) \sum_{j=1}^{n} \left( |b_{1j}|^2 + \dots + |b_{nj}|^2 \right) \quad \text{(提取公因式)}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= |A|<em>{V_2}^2 |B|</em>{V_2}^2.
+\end{equation}</p>
+<p>因此，</p>
+<p>\begin{equation}\nonumber
+|AB|<em>{V_2} \leq |A|</em>{V_2} |B|_{V_2}.
+\end{equation}</p>
+<p>此范数称为 <strong>Frobenius 范数</strong>，简称 <strong>F-范数</strong>，常记为 $|A|_F$。它具有良好的性质。</p>
+<hr>
+<h3 id="定理-4">定理 4
+</h3><ol>
+<li>若 $A \in \mathbb{C}^{n \times n}, x \in \mathbb{C}^n$，则</li>
+</ol>
+<p>\begin{equation}\nonumber
+|Ax|_2 \leq |A|_F |x|_2.
+\end{equation}</p>
+<ol start="2">
+<li>设 $U, V$ 为酉矩阵，有</li>
+</ol>
+<p>\begin{equation}\nonumber
+|UA|_F = |AV|_F = |UAV|_F = |A|_F = \left( \operatorname{tr} (A^H A) \right)^{\frac{1}{2}}.
+\end{equation}</p>
+<p>证明 1)
+记 $A = (a_{ij})_{n \times n}$，第 $i$ 行表示为 $A_i$，即</p>
+<p>\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+A_1 \
+\vdots \
+A_n
+\end{bmatrix}.
+\end{equation}</p>
+<p>设</p>
+<p>\begin{equation}\nonumber
+x =
+\begin{bmatrix}
+\xi_1 \
+\vdots \
+\xi_n
+\end{bmatrix},
+\end{equation}</p>
+<p>则</p>
+<p>\begin{equation}\nonumber
+Ax =
+\begin{bmatrix}
+A_1 x \
+\vdots \
+A_n x
+\end{bmatrix}.
+\end{equation}</p>
+<p>由柯西不等式得：</p>
+<p>\begin{equation}\nonumber
+|A_i x|^2 = |a_{i1} \xi_1 + \dots + a_{in} \xi_n|^2 = \left| \sum_{k=1}^{n} a_{ik} \xi_k \right|^2.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\leq \sum_{k=1}^{n} |a_{ik}|^2 \sum_{k=1}^{n} |\xi_k|^2 = |A_i^T|_2^2 |x|_2^2, \quad i = 1, 2, \dots, n.
+\end{equation}</p>
+<p>因此，</p>
+<p>\begin{equation}\nonumber
+|Ax|<em>2^2 = \sum</em>{i=1}^{n} |A_i x|^2 \leq \sum_{i=1}^{n} \left( |A_i^T|_2^2 |x|_2^2 \right).
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= \left( \sum_{i=1}^{n} |A_i^T|_2^2 \right) |x|_2^2 = (|A|_F |x|_2)^2.
+\end{equation}</p>
+<p>因此，</p>
+<p>\begin{equation}\nonumber
+|Ax|_2 \leq |A|_F |x|_2.
+\end{equation}</p>
+<p>证明 2)
+显然有：</p>
+<p>\begin{equation}\nonumber
+|UA|_F^2 = \operatorname{tr}((UA)^H (UA)) = \operatorname{tr}(A^H U^H UA) = \operatorname{tr}(A^H A) = |A|_F^2.
+\end{equation}</p>
+<p>所以</p>
+<p>\begin{equation}\nonumber
+|UA|_F = |A|_F.
+\end{equation}</p>
+<p>注意到 $|A|_F = |A^H|_F$，$V^H$ 为酉矩阵，我们有：</p>
+<p>\begin{equation}\nonumber
+|AV|_F = |(AV)^H|_F = |V^H A^H|_F = |A^H|_F = |A|_F.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+|UAV|_F = |UA|_F = |A|_F.
+\end{equation}</p>
+<hr>
+<p>向量范数与矩阵范数在运算中会同时出现，故建立它们之间的关系。因此我们引入定义：</p>
+<h3 id="定义-6">定义 6
+</h3><p>若 $\forall A \in \mathbb{C}^{n \times n}, x \in \mathbb{C}^n$，向量范数 $|\cdot|_v$ 与矩阵范数 $|\cdot|_m$ 满足不等式：</p>
+<p>\begin{equation}\nonumber
+|Ax|_v \leq |A|_m |x|_v,
+\end{equation}</p>
+<p>则称 <strong>向量范数</strong> $|\cdot|_v$ <strong>与矩阵范数</strong> $|\cdot|_m$ <strong>相容</strong>。</p>
+<hr>
+<p>我们知道<strong>任何两种矩阵范数是等价的，任何两种向量范数也等价</strong>，故我们要问：</p>
+<p>给定矩阵范数，是否<strong>一定存在</strong>与之相容的<strong>向量范数</strong>？<br>
+反之，给定向量范数，又如何确定一个与之相容的<strong>矩阵范数</strong>？</p>
+<p>答案是肯定的。</p>
+<h3 id="定理-5">定理 5
+</h3><p>设 $|A|$ 是 $\mathbb{C}^{n \times n}$ 上的一个矩阵范数，则必存在 $\mathbb{C}^n$ 上与之相容的<strong>向量范数</strong>。</p>
+<p>证明：
+取定 $a (\neq 0) \in \mathbb{C}^n$，则 $\forall x \in \mathbb{C}^n$，定义：</p>
+<p>\begin{equation}\nonumber
+|x|_v = |x a^T|.
+\end{equation}</p>
+<p>则不难验证，它是一种向量范数，且与给定的矩阵范数相容。</p>
+<ol>
+<li><strong>正定性</strong>
+当 $x \neq 0$ 时，一定有 $x a^T$ 是<strong>非零矩阵</strong>，所以：</li>
+</ol>
+<p>\begin{equation}\nonumber
+|x a^T| &gt; 0.
+\end{equation}</p>
+<ol start="2">
+<li>
+<p><strong>齐次性</strong>
+\begin{equation}\nonumber
+|\lambda x|_v = |\lambda x a^T| = |\lambda| |x a^T| = |\lambda| |x|_v.
+\end{equation}</p>
+</li>
+<li>
+<p><strong>三角不等式</strong>
+\begin{equation}\nonumber
+|x + y|_v = |(x + y) a^T| = |x a^T + y a^T| \leq |x a^T| + |y a^T| = |x|_v + |y|_v.
+\end{equation}</p>
+</li>
+<li>
+<p><strong>相容性</strong>
+\begin{equation}\nonumber
+|Ax|_v = |Ax a^T| \leq |A| |x a^T| = |A| |x|_v.
+\end{equation}</p>
+</li>
+</ol>
+<p>给定向量范数，如何确定一个与之相容的矩阵范数？<br>
+我们有如下定理：</p>
+<h3 id="定理-6">定理 6
+</h3><p>若设 $|\cdot|_v$ 是 $\mathbb{C}^n$ 上的一个<strong>向量范数</strong>，则 $\forall A \in \mathbb{C}^{n \times n}$，定义：</p>
+<p>\begin{equation}\nonumber
+|A| = \max_{|x|_v = 1} |Ax|_v.
+\end{equation}</p>
+<p>则 $|A|$ 是一个与 $|\cdot|_v$ <strong>相容的矩阵范数</strong>，称此矩阵范数为<strong>从属于向量范数</strong> $|\cdot|_v$ 的<strong>算子范数</strong>。</p>
+<p>证明：</p>
+<ol>
+<li><strong>正定性</strong>
+若 $A \neq 0$，则存在 $x_1 \neq 0$ 使得 $Ax_1 \neq 0$。令：</li>
+</ol>
+<p>\begin{equation}\nonumber
+x_0 = \frac{x_1}{|x_1|_v},
+\end{equation}</p>
+<p>则 $|x_0|_v = 1$，故：</p>
+<p>\begin{equation}\nonumber
+|Ax_0|_v = \frac{|Ax_1|_v}{|x_1|_v} &gt; 0.
+\end{equation}</p>
+<p>因此：</p>
+<p>\begin{equation}\nonumber
+|A| = \max_{|x|_v = 1} |Ax|_v &gt; 0.
+\end{equation}</p>
+<ol start="2">
+<li><strong>齐次性</strong>
+$\forall \lambda \in \mathbb{C}$，有：</li>
+</ol>
+<p>\begin{equation}\nonumber
+|A| = \max_{|x|_v = 1} |Ax|<em>v = \max</em>{|x|_v = 1} |\lambda| |Ax|<em>v = |\lambda| \max</em>{|x|_v = 1} |Ax|_v = |\lambda| |A|.
+\end{equation}</p>
+<ol start="3">
+<li><strong>三角不等式</strong>
+$\forall A, B \in \mathbb{C}^{n \times n}$，存在 $x_0 \in \mathbb{C}^n$ 使得 $|x_0|_v = 1$，则：</li>
+</ol>
+<p>\begin{equation}\nonumber
+|(A + B)x_0|_v \leq |Ax_0|_v + |Bx_0|_v.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\Rightarrow \max_{|x|_v = 1} |(A + B)x|<em>v \leq \max</em>{|x|_v = 1} |Ax|<em>v + \max</em>{|x|_v = 1} |Bx|_v.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\Rightarrow |A + B| \leq |A| + |B|.
+\end{equation}</p>
+<ol start="4">
+<li><strong>相容性</strong>
+存在 $y_0 \in \mathbb{C}^n$（$|y_0|_v = 1$）使得：</li>
+</ol>
+<p>\begin{equation}\nonumber
+|AB| = |(AB)y_0|_v = |A (By_0)|_v.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= \left| A \left( \frac{By_0}{|By_0|_v} \right) \right|_v |By_0|_v.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\leq |A| |By_0|_v \leq |A| |B|.
+\end{equation}</p>
+<p>因此 $|A|$ 为矩阵范数。</p>
+<ol start="5">
+<li><strong>最终推导</strong>
+$\forall x (\neq 0) \in \mathbb{C}^n$，我们有：</li>
+</ol>
+<p>\begin{equation}\nonumber
+|Ax|_v = \left| A \left( \frac{x}{|x|_v} \right) \right|_v |x|_v.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\leq \left( \max_{|x|_v = 1} |Ax|_v \right) |x|_v.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\leq |A| |x|_v.
+\end{equation}</p>
+<hr>
+<p>我们常见的<strong>向量范数</strong>有 $|x|_1, |x|<em>2$ 及 $|x|</em>\infty$。<br>
+则从属于它们的<strong>算子范数</strong>记为 $|A|_1, |A|<em>2$ 及 $|A|</em>\infty$。<br>
+我们有如下定理：</p>
+<h3 id="定理-7">定理 7
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，$A = (a_{ij})_{n \times n}$，$x \in \mathbb{C}^n$，<br>
+则从属于向量范数 $|x|_1, |x|<em>2$ 及 $|x|</em>\infty$ 的<strong>算子范数</strong>为：</p>
+<ol>
+<li>
+<p><strong>列范数</strong>：
+\begin{equation}\nonumber
+|A|<em>1 = \max</em>{1 \leq j \leq n} \sum_{i=1}^{n} |a_{ij}|.
+\end{equation}</p>
+</li>
+<li>
+<p><strong>谱范数</strong>（谱模范数）：
+\begin{equation}\nonumber
+|A|_2 = \sqrt{\lambda_1}, \quad \lambda_1 \text{ 为 } A^H A \text{ 的最大特征值}.
+\end{equation}</p>
+</li>
+<li>
+<p><strong>行范数</strong>：
+\begin{equation}\nonumber
+|A|<em>\infty = \max</em>{1 \leq i \leq n} \sum_{j=1}^{n} |a_{ij}|.
+\end{equation}</p>
+</li>
+</ol>
+<h3 id="定理-8">定理 8
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，$|A|$ 是矩阵范数，若 $|A| &lt; 1$，则 $I - A$ <strong>非奇异</strong>，且：</p>
+<p>\begin{equation}\nonumber
+|(I - A)^{-1}| \leq \frac{|I|}{1 - |A|}.
+\end{equation}</p>
+<p>证明：
+若 $I - A$ <strong>奇异</strong>，则 $(I - A)x = 0$ 存在<strong>非零解</strong> $x_0 \neq 0$。<br>
+故有 $Ax_0 = I x_0 = x_0$，从而：</p>
+<p>\begin{equation}\nonumber
+|x_0| = |Ax_0| \leq |A| |x_0|.
+\end{equation}</p>
+<p>由于 $|x_0| &gt; 0$，则 $|A| \geq 1$，<strong>矛盾</strong>，所以 $I - A$ <strong>非奇异</strong>。</p>
+<p>令 $B = (I - A)^{-1}$，满足：</p>
+<p>\begin{equation}\nonumber
+B(I - A) = I.
+\end{equation}</p>
+<p>有：</p>
+<p>\begin{equation}\nonumber
+B = I + BA.
+\end{equation}</p>
+<p>因此，</p>
+<p>\begin{equation}\nonumber
+|B| = |I + BA| \leq |I| + |BA| \leq |I| + |B| |A|.
+\end{equation}</p>
+<p>故：</p>
+<p>\begin{equation}\nonumber
+|B| \leq \frac{|I|}{1 - |A|}.
+\end{equation}</p>
+<p>特别地，<strong>若 $|\cdot|$ 是算子范数</strong>，则：</p>
+<p>\begin{equation}\nonumber
+|I| = \max_{|x|=1} |Ix| = 1.
+\end{equation}</p>
+<p>此时：</p>
+<p>\begin{equation}\nonumber
+|(I - A)^{-1}| \leq \frac{1}{1 - |A|}.
+\end{equation}</p>
+<h3 id="定义-7谱半径">定义 7（谱半径）
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，称 $A$ 的 $n$ 个特征值的模的最大者为 <strong>$A$ 的谱半径</strong>，记为 $\rho(A)$，即：</p>
+<p>\begin{equation}\nonumber
+\rho(A) = \max_i |\lambda_i|, \quad \lambda_i \text{ 为 } A \text{ 的特征值}.
+\end{equation}</p>
+<hr>
+<h3 id="定理-9">定理 9
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，则 $\rho(A)$ <strong>不大于 $A$ 的任何一种矩阵范数</strong>，即：</p>
+<p>\begin{equation}\nonumber
+\rho(A) \leq |A|.
+\end{equation}</p>
+<p>证明：
+任取 $A$ 的特征值 $\lambda$，则存在<strong>非零向量</strong> $x$ 使得：</p>
+<p>\begin{equation}\nonumber
+Ax = \lambda x.
+\end{equation}</p>
+<p>取向量范数，得：</p>
+<p>\begin{equation}\nonumber
+|\lambda| |x| = |\lambda x| = |Ax| \leq |A| |x|.
+\end{equation}</p>
+<p>由于 $x \neq 0$，故 $|x| &gt; 0$，两边同除 $|x|$，得：</p>
+<p>\begin{equation}\nonumber
+|\lambda| \leq |A|.
+\end{equation}</p>
+<p>对所有特征值 $\lambda_i$ 取<strong>最大值</strong>，即得：</p>
+<p>\begin{equation}\nonumber
+\rho(A) = \max_i |\lambda_i| \leq |A|.
+\end{equation}</p>
+<h3 id="定理-10">定理 10
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，$\forall \varepsilon &gt; 0$，<br>
+存在某种 <strong>矩阵范数</strong> $|\cdot|$，使得：</p>
+<p>\begin{equation}\nonumber
+|A| \leq \rho(A) + \varepsilon.
+\end{equation}</p>
+<p>证明：
+由 <strong>Schur 定理</strong>，存在酉矩阵 $P$ 使得：</p>
+<p>\begin{equation}\nonumber
+P^{-1} A P = B =
+\begin{bmatrix}
+b_{11} &amp; b_{12} &amp; \cdots &amp; b_{1n} \
+0 &amp; b_{22} &amp; \cdots &amp; b_{2n} \
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \
+0 &amp; 0 &amp; \cdots &amp; b_{nn}
+\end{bmatrix}.
+\end{equation}</p>
+<p>其中<strong>对角线上的元素</strong>为 $A$ 的特征值。</p>
+<hr>
+<h2 id="特征值的估计">特征值的估计
+</h2><p>我们知道，对角矩阵和上、下三角矩阵的特征值为其对角线上元素；<br>
+幂等矩阵的特征值为 $0$ 或 $1$；<br>
+正交矩阵和酉矩阵的特征值在<strong>单位圆上</strong>；<br>
+<strong>实对称矩阵</strong>和<strong>Hermite 矩阵</strong>的特征值在<strong>实轴上</strong>；<br>
+<strong>反对称矩阵</strong>和<strong>反 Hermite 矩阵</strong>的特征值在<strong>虚轴上</strong>。</p>
+<p>那么，对一般矩阵的特征值是怎样分布的呢？</p>
+<h3 id="定理-11">定理 11
+</h3><p>设 $A = (a_{ij}) \in \mathbb{C}^{n \times n}$ 的特征值为 $\lambda_1, \dots, \lambda_n$，则：</p>
+<ol>
+<li>
+<p>最大列范数：
+\begin{equation}\nonumber
+|\lambda_i| \leq \max_{1 \leq j \leq n} \sum_{i=1}^{n} |a_{ij}| = |A|_1.
+\end{equation}</p>
+</li>
+<li>
+<p>最大行范数：
+\begin{equation}\nonumber
+|\lambda_i| \leq \max_{1 \leq i \leq n} \sum_{j=1}^{n} |a_{ij}| = |A|_\infty.
+\end{equation}</p>
+<p>以上两个结论中 $i = 1, \dots, n$。</p>
+</li>
+<li>
+<p><strong>Schur 不等式</strong>：
+\begin{equation}\nonumber
+\sum_{i=1}^{n} |\lambda_i|^2 \leq \sum_{i=1}^{n} \sum_{j=1}^{n} |a_{ij}|^2.
+\end{equation}</p>
+<p>等号成立 $\Leftrightarrow A$ <strong>正规矩阵</strong>。</p>
+</li>
+</ol>
+<p>证明：
+由于 $\rho(A) \leq A$ 的任何一个矩阵范数，取矩阵范数 $|\cdot|_1$ 和 $|\cdot|_2$ 即可得 (1) 和 (2)。</p>
+<p>对于 (3)，由 <strong>Schur 定理</strong>，知存在<strong>酉矩阵</strong> $U$ 使得：</p>
+<p>\begin{equation}\nonumber
+U^H A U = T,
+\end{equation}</p>
+<p>其中 $T$ 是<strong>上三角矩阵</strong>，即：</p>
+<p>\begin{equation}\nonumber
+T = (t_{ij})_{n \times n}.
+\end{equation}</p>
+<p>故 $T$ 的<strong>对角元</strong>为 $A$ 的特征值，因此：</p>
+<p>\begin{equation}\nonumber
+\sum_{i=1}^{n} |\lambda_i|^2 = \sum_{i=1}^{n} |t_{ii}|^2 \leq \sum_{i=1}^{n} \sum_{j=1}^{n} |t_{ij}|^2.
+\end{equation}</p>
+<p>由 $A = UTU^H$，得：</p>
+<p>\begin{equation}\nonumber
+A^H A = U T^H T U^H.
+\end{equation}</p>
+<p>由于<strong>相似矩阵有相同的迹</strong>，故：</p>
+<p>\begin{equation}\nonumber
+\sum_{i=1}^{n} |\lambda_i|^2 \leq \sum_{i=1}^{n} |t_{ii}|^2 = \text{tr}(T^H T) = \text{tr}(A^H A) = \sum_{i=1}^{n} \sum_{j=1}^{n} |a_{ij}|^2.
+\end{equation}</p>
+<p>易见等号成立 $\Leftrightarrow T$ <strong>的非对角线元素为零</strong>，即 $T$ <strong>是对角矩阵</strong>。<br>
+从而等号成立 $\Leftrightarrow A$ <strong>酉相似于一个对角矩阵</strong>，即 $A$ <strong>是正规矩阵</strong>。</p>
+<p><strong>注</strong>：<br>
+上述定理中的 (1)、(2) 通过<strong>列范数</strong>和<strong>行范数</strong>，将 $A$ 的特征值限定在复平面的某<strong>圆盘</strong>内，<br>
+但此界较粗略。因此，我们引入：</p>
+<h3 id="定义盖尔圆盘">定义（盖尔圆盘）
+</h3><p>设 $A = (a_{ij}) \in \mathbb{C}^{n \times n}$，定义：</p>
+<p>\begin{equation}\nonumber
+\delta_i = \sum_{j=1, j \neq i}^{n} |a_{ij}|,
+\end{equation}</p>
+<p>即<strong>第 $i$ 行非对角线元素的模的和</strong>，其中 $i = 1, \dots, n$。</p>
+<p>令：</p>
+<p>\begin{equation}\nonumber
+G_i = { z \in \mathbb{C} \mid |z - a_{ii}| \leq \delta_i }, \quad i = 1, \dots, n.
+\end{equation}</p>
+<p>即 $G_i$ 为复平面上<strong>以 $a_{ii}$ 为圆心，$\delta_i$ 为半径</strong>的闭圆盘，<br>
+称之为 $A$ 的<strong>一个盖尔圆</strong>。$A$ 有 $n$ 个盖尔圆。</p>
+<h3 id="定理-12盖尔圆盘定理">定理 12（盖尔圆盘定理）
+</h3><p>设 $A = (a_{ij}) \in \mathbb{C}^{n \times n}$ 的 $n$ 个<strong>盖尔圆</strong>为 $G_1, \dots, G_n$，则：</p>
+<ol>
+<li>
+<p>$A$ 的<strong>任一特征值</strong> $\lambda$ <strong>必属于</strong> $G_1 \cup G_2 \cup \dots \cup G_n$，即：</p>
+<p>\begin{equation}\nonumber
+\lambda \in \bigcup_{i=1}^{n} G_i.
+\end{equation}</p>
+</li>
+<li>
+<p>若 $A$ 的 $n$ 个盖尔圆中<strong>有 $k$ 个并形成一个连通的区域</strong>，<br>
+且与其余 $n-k$ 个盖尔圆<strong>都不相交</strong>，则<strong>此连通区域内必包含 $A$ 的 $k$ 个特征值</strong>。</p>
+<p>特别地，若<strong>某个盖尔圆是孤立的</strong>，则该圆内<strong>仅有且只有一个特征值</strong>。</p>
+</li>
+</ol>
+<p>例 1
+估计矩阵 $A$ 的特征值分布范围，其中：</p>
+<p>\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+2 &amp; -1 &amp; -2 &amp; 0 \
+-1 &amp; 3 &amp; 2i &amp; 0 \
+0 &amp; -i &amp; 10 &amp; i \
+-2 &amp; 0 &amp; 0 &amp; 6i
+\end{bmatrix}.
+\end{equation}</p>
+<p>解：
+$A$ 的<strong>四个盖尔圆</strong>为：</p>
+<p>\begin{equation}\nonumber
+G_1: |z - 2| \leq 3, \quad G_2: |z - 3| \leq 3.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+G_3: |z - 10| \leq 2, \quad G_4: |z - 6i| \leq 2.
+\end{equation}</p>
+<hr>
+<p>推论 1
+对于 $A \in \mathbb{C}^{n \times n}$，其 $n$ 个<strong>盖尔圆</strong>为 $G_1, \dots, G_n$，<br>
+若原点 $0 \in \bigcup_{i=1}^{n} G_i$，则 $A$ <strong>为非奇异矩阵</strong>。</p>
+<p>推论 2
+对于矩阵 $A = (a_{ij}) \in \mathbb{C}^{n \times n}$，若 $A$ <strong>对角占优</strong>，则 $A$ <strong>为非奇异矩阵</strong>。</p>
+<p>即：</p>
+<ul>
+<li>
+<p><strong>行对角占优</strong>：
+\begin{equation}\nonumber
+|a_{ii}| &gt; \sum_{j=1, j \neq i}^{n} |a_{ij}|, \quad i = 1, \dots, n.
+\end{equation}</p>
+</li>
+<li>
+<p><strong>列对角占优</strong>：
+\begin{equation}\nonumber
+|a_{jj}| &gt; \sum_{i=1, i \neq j}^{n} |a_{ij}|, \quad j = 1, \dots, n.
+\end{equation}</p>
+</li>
+</ul>
+<p>则 $A$ <strong>为非奇异矩阵</strong>。</p>
+<p>推论 3：
+对于 $A \in \mathbb{C}^{n \times n}$，若其 $n$ 个<strong>盖尔圆</strong>中有 $k$ 个<strong>孤立圆</strong>，<br>
+则 $A$ <strong>至少有 $k$ 个互异特征值</strong>。</p>
+<p>特别地，若 $A$ 的 $n$ 个<strong>盖尔圆两两不相交</strong>，则 $A$ <strong>有 $n$ 个互异的特征值</strong>，从而 $A$ <strong>可对角化</strong>。</p>
+<p>推论 4：
+对于 $A \in \mathbb{R}^{n \times n}$，若其 $n$ 个<strong>盖尔圆</strong>中有 $k$ 个<strong>孤立圆</strong>，<br>
+则 $A$ <strong>至少有 $k$ 个互异的实特征值</strong>。</p>
+<p>特别地，若 $A$ 的 $n$ 个<strong>盖尔圆两两不相交</strong>，则 $A$ <strong>有 $n$ 个互异的实特征值</strong>。</p>
+<p>推论 4 证明
+实矩阵 $A$ 的盖尔圆的<strong>圆心都在实轴上</strong>，且<strong>若有复特征值，则共轭出现</strong>。</p>
+<p>因此，<strong>孤立的盖尔圆中只能有一个特征值</strong>，故该特征值必为实数。</p>
+<p>例 2
+证明矩阵 $A$ 至少有两个实特征值，其中：</p>
+<p>\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+9 &amp; -1 &amp; -2 &amp; 1 \
+0 &amp; 8 &amp; 1 &amp; 0 \
+-1 &amp; 0 &amp; 4 &amp; 1 \
+1 &amp; 0 &amp; 0 &amp; 0
+\end{bmatrix}.
+\end{equation}</p>
+<p>解：
+$A$ 的<strong>四个盖尔圆</strong>为：</p>
+<p>\begin{equation}\nonumber
+G_1: |z - 9| \leq 4, \quad G_2: |z - 8| \leq 2,
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+G_3: |z - 4| \leq 1, \quad G_4: |z - 1| \leq 1.
+\end{equation}</p>
+<p>其中，$G_4$ <strong>为孤立圆</strong>，故其<strong>包含一个实特征值</strong>。</p>
+<p>同时，$G_1 \cup G_2 \cup G_3$ <strong>包含 3 个特征值</strong>，其中<strong>至少有一个为实值</strong>，<br>
+否则 $G_1 \cup G_2 \cup G_3$ 中将含有 <strong>4 个特征值</strong>，矛盾。</p>
+<p>因此，$A$ 至少有两个实特征值。</p>
+<hr>
+<p>在使用<strong>盖尔圆</strong>估计 $A$ 的特征值时，我们往往希望有更多的<strong>孤立圆</strong>，<br>
+可采用以下方法：</p>
+<p>方法 1：对 $A^T$ 使用盖尔圆定理
+由于 $A$ 与 $A^T$ 具有相同的特征值，我们可以对 $A^T$ 计算盖尔圆。</p>
+<p>设 $A^T$ 的盖尔圆为 $G_1&rsquo;, \dots, G_n&rsquo;$，则 $G_i$ 与 $G_i&rsquo;$ <strong>具有相同的圆心</strong>，<br>
+因此 $A$ 的特征值 $\lambda_i$ 必满足：</p>
+<p>\begin{equation}\nonumber
+\lambda_i \in \left( \bigcup_{i=1}^{n} G_i \right) \cap \left( \bigcup_{i=1}^{n} G_i&rsquo; \right).
+\end{equation}</p>
+<p>方法 2：选取合适的矩阵 $D$ 进行变换
+取适当的<strong>正数</strong> $d_1, d_2, \dots, d_n$，定义对角矩阵：</p>
+<p>\begin{equation}\nonumber
+D = \operatorname{diag} (d_1, d_2, \dots, d_n),
+\end{equation}</p>
+<p>构造矩阵：</p>
+<p>\begin{equation}\nonumber
+B = D A D^{-1} = (b_{ij}), \quad b_{ij} = \frac{a_{ij} d_i}{d_j}.
+\end{equation}</p>
+<p>$B$ 的盖尔圆的圆心<strong>仍为</strong> $a_{ii} \ (1 \leq i \leq n)$，<br>
+由于 $A$ 与 $B$ <strong>相似，因此它们具有相同的特征值</strong>。</p>
+<p><strong>通常的选取 $d_i$ 的方法：</strong></p>
+<ul>
+<li>若选择 $d_i &lt; 1$，其余 $d_j = 1$，则使<strong>第 $i$ 个盖尔圆</strong> $G_i$ <strong>缩小</strong>，其余盖尔圆扩大。</li>
+<li>若选择 $d_i &gt; 1$，其余 $d_j = 1$，则使<strong>第 $i$ 个盖尔圆</strong> $G_i$ <strong>扩大</strong>，其余盖尔圆缩小。</li>
+</ul>
+<p>例 3
+估计矩阵 $A$ 的特征值分布范围，其中：</p>
+<p>\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+9 &amp; 1 &amp; 1 \
+1 &amp; i &amp; 1 \
+1 &amp; 1 &amp; 3
+\end{bmatrix}.
+\end{equation}</p>
+<p>解：
+$A$ 的<strong>三个盖尔圆</strong>为：</p>
+<p>\begin{equation}\nonumber
+G_1: |z - 9| \leq 2, \quad G_2: |z - i| \leq 2, \quad G_3: |z - 3| \leq 2.
+\end{equation}</p>
+<p>由于希望 <strong>$G_2$ 和 $G_3$ 变小且不相交</strong>，<br>
+因此选取对角矩阵：</p>
+<p>\begin{equation}\nonumber
+D = \operatorname{diag} (2,1,1).
+\end{equation}</p>
+<p>则相似矩阵：</p>
+<p>\begin{equation}\nonumber
+B = D A D^{-1} =
+\begin{bmatrix}
+9 &amp; 2 &amp; 2 \
+0.5 &amp; i &amp; 1 \
+0.5 &amp; 1 &amp; 3
+\end{bmatrix}.
+\end{equation}</p>
+<p>$B$ 的<strong>三个盖尔圆</strong>为：</p>
+<p>\begin{equation}\nonumber
+G_1&rsquo;: |z - 9| \leq 4, \quad G_2&rsquo;: |z - i| \leq 1.5, \quad G_3&rsquo;: |z - 3| \leq 1.5.
+\end{equation}</p>
+<hr>
+<h2 id="矩阵级数">矩阵级数
+</h2><p>在数学分析中，我们以数列极限来讨论级数理论，现在我们以矩阵序列理论为基础来引入矩阵级数。在 4.1 节中我们知道：</p>
+<p>\begin{equation}\nonumber
+\lim\limits_{k \to \infty} A_k = A_0 \iff \lim\limits_{k \to \infty} a_{ij}^{(k)} = a_{ij}^{(0)}, \quad \forall 1 \leq j \leq n, 1 \leq i \leq m
+\end{equation}</p>
+<h3 id="定义-1-1">定义 1
+</h3><p>设 $\lbrace A_k \rbrace$，$A_k \in \mathbb{C}^{m \times n}$，称 $\sum_{k=1}^{\infty} A_k$ 为 <strong>矩阵级数</strong>。</p>
+<p>令 $S_N = \sum_{k=1}^{N} A_k$，若矩阵序列 $\lbrace S_N \rbrace$ 收敛且有极限 $S$，即：
+\begin{equation}\nonumber
+\lim\limits_{N \to \infty} S_N = S
+\end{equation}
+则称级数 $\sum_{k=1}^{\infty} A_k$ <strong>收敛且和为 $S$</strong>。</p>
+<p>记为：
+\begin{equation}\nonumber
+S = \sum_{k=1}^{\infty} A_k = \lim\limits_{N \to \infty} \sum_{k=1}^{N} A_k
+\end{equation}</p>
+<p><strong>注</strong>：不收敛的级数我们称为 <strong>发散级数</strong>。</p>
+<h3 id="矩阵级数收敛性">矩阵级数收敛性
+</h3><p><strong>注意</strong>：由定义知，
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} A_k \text{ 收敛} \iff mn \text{ 个数值级数 } \sum_{k=1}^{\infty} a_{ij}^{(k)} \text{ 收敛}
+\end{equation}</p>
+<p>而
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} A_k \text{ 发散} \iff mn \text{ 个数值级数中至少有一个发散}
+\end{equation}</p>
+<h3 id="定义-2-1">定义 2
+</h3><p>若 $\sum_{k=1}^{\infty} A_k$ 所对应的 $mn$ 个数值级数
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} a_{ij}^{(k)}, \quad (1 \leq i \leq m, 1 \leq j \leq n)
+\end{equation}
+<strong>都绝对收敛</strong>，则称
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} A_k \text{ 绝对收敛}
+\end{equation}</p>
+<h3 id="矩阵级数的性质">矩阵级数的性质
+</h3><p>显然有以下性质：</p>
+<ol>
+<li>若 $\sum_{k=1}^{\infty} A_k$ <strong>绝对收敛</strong>，则 $\sum_{k=1}^{\infty} A_k$ <strong>收敛</strong>。</li>
+<li>若 $\sum_{k=1}^{\infty} A_k$ <strong>绝对收敛</strong>，则对任一（向量）范数 $|\cdot|$，有：
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} |A_k| \text{ 收敛}
+\end{equation}</li>
+<li>对于任取常矩阵 $P, Q$，$P \in \mathbb{C}^{p \times m}$，$Q \in \mathbb{C}^{n \times q}$，若 $\sum_{k=1}^{\infty} A_k$ <strong>收敛（绝对收敛）</strong>，则矩阵级数 $\sum_{k=1}^{\infty} P A_k Q$ <strong>收敛（绝对收敛）</strong>。</li>
+</ol>
+<p>证明：
+（2）充分性 $\Leftarrow$</p>
+<p>设 $\sum_{k=1}^{\infty} |A_k|<em>1$ 收敛，其中：
+\begin{equation}\nonumber
+|A_k|<em>1 = \sum</em>{1 \leq i \leq m, 1 \leq j \leq n} |a</em>{ij}^{(k)}|
+\end{equation}</p>
+<p>而
+\begin{equation}\nonumber
+|a_{ij}^{(k)}| \leq |A_k|_1
+\end{equation}</p>
+<p>由 <strong>比较原理</strong> 知，
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} |a_{ij}^{(k)}| \text{ 收敛}，\quad (1 \leq i \leq m, 1 \leq j \leq n)
+\end{equation}
+即 $\sum_{k=1}^{\infty} A_k$ <strong>绝对收敛</strong>。</p>
+<p>（2）必要性 $\Rightarrow$</p>
+<p>由条件 $\sum_{k=1}^{\infty} |a_{ij}^{(k)}|$ （$1 \leq i \leq m, 1 \leq j \leq n$）<strong>收敛</strong>，</p>
+<p>\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \sum_{1 \leq i \leq m, 1 \leq j \leq n} |a_{ij}^{(k)}| \text{ 收敛}
+\end{equation}</p>
+<p>即：
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} |A_k|_1 \text{ 收敛}
+\end{equation}</p>
+<p>由于任意范数（矩阵的向量范数）是等价的，所以由 <strong>比较原理</strong>，结论成立。</p>
+<p>矩阵级数的性质 3
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} P A_k Q = \lim\limits_{N \to \infty} \sum_{k=1}^{N} P A_k Q
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= \lim\limits_{N \to \infty} P \left(\sum_{k=1}^{N} A_k\right) Q
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= P \left(\lim\limits_{N \to \infty} \sum_{k=1}^{N} A_k\right) Q \quad (\text{若 } \sum_{k=1}^{\infty} A_k \text{ 收敛})
+\end{equation}</p>
+<p>若 $\sum_{k=1}^{\infty} A_k$ <strong>绝对收敛</strong>，由 <strong>性质 2</strong> 可知：
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} |A_k| \text{ 收敛}
+\end{equation}</p>
+<p>且
+\begin{equation}\nonumber
+| P A_k Q | \leq |P| |A_k| |Q| = k |A_k| \quad (\text{取相容的矩阵范数即可})
+\end{equation}</p>
+<p>由 <strong>比较原理</strong> 知：
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} |P A_k Q| \text{ 收敛}
+\end{equation}</p>
+<p>再由 <strong>性质 2</strong>，可得：
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} P A_k Q \text{ 绝对收敛}
+\end{equation}</p>
+<h3 id="定义-3幂级数">定义 3（幂级数）
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，称 $\sum_{m=0}^{\infty} c_m A^m$ 为 <strong>幂级数</strong>。</p>
+<h3 id="收敛性定义"><strong>收敛性定义</strong>
+</h3><p>设 <strong>复变量幂级数</strong> $\sum_{m=0}^{\infty} c_m z^m$ 的收敛半径为 $R$，且 $A \in \mathbb{C}^{n \times n}$。</p>
+<p><strong>若 $A$ 的谱半径为 $\rho(A)$</strong>，则：</p>
+<ol>
+<li>当 $\rho(A) &lt; R$ 时，$\sum_{m=0}^{\infty} c_m A^m$ <strong>绝对收敛</strong>（<strong>Abel 型定理</strong>）。</li>
+<li>当 $\rho(A) &gt; R$ 时，$\sum_{m=0}^{\infty} c_m A^m$ <strong>发散</strong>。</li>
+</ol>
+<p>证明 1)</p>
+<p>由于 $\rho(A) &lt; R$，存在 $\varepsilon &gt; 0$ 使得 $\rho(A) + \varepsilon &lt; R$。</p>
+<p>由 <strong>Abel 定理</strong> 知：
+\begin{equation}\nonumber
+\sum_{m=0}^{\infty} |c_m| (\rho(A) + \varepsilon)^m \text{ 收敛}
+\end{equation}</p>
+<p>由 <strong>定理 10</strong> 可知，存在矩阵范数 $|\cdot|$ 使得 $|A| \leq \rho(A) + \varepsilon$，因此：
+\begin{equation}\nonumber
+|c_m| |A^m| = |c_m| |A^m| \leq |c_m| |A|^m
+\end{equation}
+\begin{equation}\nonumber
+\leq |c_m| (\rho(A) + \varepsilon)^m
+\end{equation}</p>
+<p>由 <strong>比较原理</strong> 知：
+\begin{equation}\nonumber
+\sum_{m=0}^{\infty} |c_m| |A^m| \text{ 收敛}
+\end{equation}
+从而
+\begin{equation}\nonumber
+\sum_{m=0}^{\infty} c_m A^m \text{ 绝对收敛}
+\end{equation}</p>
+<p>证明 2)</p>
+<p>若 $\rho(A) &gt; R$，设 $\rho(A) = |\lambda_k|$，令 $Ax = \lambda_k x$。</p>
+<p>则：
+\begin{equation}\nonumber
+A \frac{x}{|x|} = \lambda_k \frac{x}{|x|}
+\end{equation}</p>
+<p>令：
+\begin{equation}\nonumber
+y = \frac{x}{|x|}，\quad \text{则} \quad |y| = 1，\quad 且 Ay = \lambda_k y
+\end{equation}</p>
+<p><strong>（反证法）</strong> 假设 $\sum_{m=0}^{\infty} c_m A^m$ <strong>收敛</strong>，则由 <strong>性质 3</strong> 知：
+\begin{equation}\nonumber
+y^H \left(\sum_{m=0}^{\infty} c_m A^m\right) y = \sum_{m=0}^{\infty} c_m y^H A^m y
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= \sum_{m=0}^{\infty} c_m \lambda_k^m y^H y = \sum_{m=0}^{\infty} c_m \lambda_k^m
+\end{equation}</p>
+<p>亦收敛，与 <strong>Abel 定理</strong> 矛盾。因此，当 $\rho(A) &gt; R$ 时：
+\begin{equation}\nonumber
+\sum_{m=0}^{\infty} c_m A^m \text{ 发散}
+\end{equation}</p>
+<p><strong>推论</strong>
+\begin{equation}\nonumber
+\sum_{m=0}^{\infty} A^m \text{ 收敛} \iff \rho(A) &lt; 1
+\end{equation}
+（<strong>Neumann 定理</strong>，此时其和为 $(I - A)^{-1}$）。</p>
+<p><strong>注</strong>：
+<strong>定理 1</strong> 实际上定义了一种 <strong>映射</strong> $f(z)$：
+\begin{equation}\nonumber
+f(z) = \sum_{m=0}^{\infty} c_m z^m, \quad |z| &lt; R \text{（收敛半径）}
+\end{equation}</p>
+<p>对于任意 $A \in \mathbb{C}^{n \times n}$，若满足 $\rho(A) &lt; R$，则：
+\begin{equation}\nonumber
+f(A) = \sum_{m=0}^{\infty} c_m A^m \text{ 收敛}
+\end{equation}</p>
+<p>因此，对应一个矩阵，称 $f(A)$ 为 <strong>矩阵函数</strong>。</p>
+<hr>
+<h3 id="定理-2-1">定理 2：
+</h3><p>若对矩阵 $A$ 的某一种范数 $|A| &lt; 1$，则：
+\begin{equation}\nonumber
+\lim\limits_{k \to \infty} A^k = 0
+\end{equation}</p>
+<p><strong>证明</strong>：由 $|A^k| \leq |A|^k$，即可证明。</p>
+<h3 id="定理-3-1">定理 3：
+</h3><p>已知矩阵序列 $A, A^2, \ldots, A^k, \ldots$，则：
+\begin{equation}\nonumber
+\lim\limits_{k \to \infty} A^k = 0
+\end{equation}
+的<strong>充要条件</strong>是 $\rho(A) &lt; 1$。</p>
+<p>证明：</p>
+<p>证明过程中需要用到下面的公式。设 Jordan 块为：</p>
+<div>
+\begin{equation}\nonumber
+J =
+\begin{bmatrix}
+\lambda_k & 1 & & \\
+& \lambda_k & 1 & \\
+& & \lambda_k & \ddots \\
+& & & \ddots
+\end{bmatrix}
+\end{equation}
+</div>
+<p>则：</p>
+<div>
+\begin{equation}\nonumber
+J^k =
+\begin{bmatrix}
+\lambda_k^k & k \lambda_k^{k-1} & C_2^k \lambda_k^{k-2} & \cdots \\
+& \lambda_k^k & k \lambda_k^{k-1} & \cdots \\
+& & \lambda_k^k & \cdots \\
+& & & \ddots
+\end{bmatrix}
+\end{equation}
+</div>
+<p>例 1：判断矩阵序列 $A^k$ 的敛散性</p>
+<p>(1)</p>
+<div>
+\begin{equation}\nonumber
+A = 
+\begin{bmatrix}
+1 & 1 \\
+0 & 1
+\end{bmatrix}
+\end{equation}
+</div>
+<p>(2)</p>
+<div>
+\begin{equation}\nonumber
+A = 
+\begin{bmatrix}
+0.9 & 1 \\
+0 & 0.9
+\end{bmatrix}
+\end{equation}
+</div>
+<p>(3)</p>
+<div>
+\begin{equation}\nonumber
+A = 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0.9 & 1 \\
+0 & 0 & 0.9
+\end{bmatrix}
+\end{equation}
+</div>
+<p>(4)</p>
+<div>
+\begin{equation}\nonumber
+A = 
+\begin{bmatrix}
+0.3 & 0.8 \\
+0.6 & 0.1
+\end{bmatrix}
+\end{equation}
+</div>
+<p>解：</p>
+<p>(1)</p>
+<div>
+\begin{equation}\nonumber
+A^k = 
+\begin{bmatrix}
+1 & k \\
+0 & 1
+\end{bmatrix}, \quad \text{故 } \lim\limits_{k \to \infty} A^k \text{ 发散}
+\end{equation}
+</div>
+<p>(2) $\rho(A) = 0.9 &lt; 1$，故 $\lim\limits_{k \to \infty} A^k = 0$。</p>
+<p>(3)</p>
+<div>
+\begin{equation}\nonumber
+A^k =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0.9^k & k \cdot 0.9^{k-1} \\
+0 & 0 & 0.9^k
+\end{bmatrix}, \quad
+\lim\limits_{k \to \infty} A^k =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+\end{equation}
+</div>
+<p>(4) $|A|<em>1 = 0.9 &lt; 1$，故 $A^k$ 收敛，且：
+\begin{equation}\nonumber
+\lim\limits</em>{k \to \infty} A^k = 0
+\end{equation}</p>
+<p>例 2：判断矩阵序列 $A^k$ 的敛散性</p>
+<div>
+\begin{equation}\nonumber
+A = 
+\begin{bmatrix}
+1 & 1 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -1
+\end{bmatrix}
+\end{equation}
+</div>
+<p>解：</p>
+<p>$A$ 的特征值为 $\lambda_1 = \lambda_2 = 1, \lambda_3 = -1$，因此：
+\begin{equation}\nonumber
+\rho(A) = 1
+\end{equation}</p>
+<p>设 $J$ 是 $A$ 的 Jordan 标准型。由于：
+\begin{equation}\nonumber
+A^k = P J^k P^{-1}
+\end{equation}</p>
+<p>所以只需判断 $J^k$ 的敛散性即可。</p>
+<p>通过计算得出：</p>
+<div>
+\begin{equation}\nonumber
+J = 
+\begin{bmatrix}
+1 & 1 \\
+0 & 1
+\end{bmatrix}
+\Rightarrow J^k = 
+\begin{bmatrix}
+1 & k \\
+0 & 1
+\end{bmatrix}
+\end{equation}
+</div>
+<p>故 $A^k$ 发散。</p>
+<p>例 4：判断矩阵幂级数的敛散性</p>
+<p>(1)</p>
+<div>
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \frac{1}{k^2} 
+\begin{bmatrix}
+1 & 1 \\
+0 & 1
+\end{bmatrix}^k
+\end{equation}
+</div>
+<p>(2)</p>
+<div>
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \frac{1}{k^2} 
+\begin{bmatrix}
+-1 & 1 \\
+0 & -1
+\end{bmatrix}^k
+\end{equation}
+</div>
+<p>(3)</p>
+<div>
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \frac{1}{k^2} 
+\begin{bmatrix}
+-1 & 1 & 0 \\
+0 & -1 & 1 \\
+0 & 0 & -1
+\end{bmatrix}^k
+\end{equation}
+<p>(4)</p>
+<div>
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \frac{1}{k^2} 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & -1 & 1 \\
+0 & 0 & -1
+\end{bmatrix}^k
+\end{equation}
+</div>
+<p>解：(1)</p>
+<div>
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \frac{1}{k^2}
+\begin{bmatrix}
+1 & 1 \\
+0 & 1
+\end{bmatrix}^k
+=
+\sum_{k=1}^{\infty} \frac{1}{k^2}
+\begin{bmatrix}
+1 & k \\
+0 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum \frac{1}{k^2} & \sum \frac{k}{k^2} \\
+0 & \sum \frac{1}{k^2}
+\end{bmatrix}
+\end{equation}
+</div>
+<p>因为 $\sum \frac{k}{k^2} = \sum \frac{1}{k}$ 发散，故级数发散。</p>
+<p>解：(2)</p>
+<div>
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \frac{1}{k^2}
+\begin{bmatrix}
+-1 & 1 \\
+0 & -1
+\end{bmatrix}^k
+=
+\sum_{k=1}^{\infty} \frac{1}{k^2}
+\begin{bmatrix}
+(-1)^k & k(-1)^{k-1} \\
+0 & (-1)^k
+\end{bmatrix}
+\end{equation}
+</div>
+<div>
+\begin{equation}\nonumber
+=
+\begin{bmatrix}
+\sum \frac{(-1)^k}{k^2} & \sum \frac{k(-1)^{k-1}}{k^2} \\
+0 & \sum \frac{(-1)^k}{k^2}
+\end{bmatrix}
+\Rightarrow \text{收敛}
+\end{equation}
+</div>
+<p>解：(3)</p>
+<p>原式：</p>
+<div>
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \frac{1}{k^2}
+\begin{bmatrix}
+(-1)^k & k(-1)^{k-1} & \frac{k(k-1)}{2}(-1)^{k-2} \\
+0 & (-1)^k & k(-1)^{k-1} \\
+0 & 0 & (-1)^k
+\end{bmatrix}
+\end{equation}
+</div>
+<p>展开为：</p>
+<div>
+\begin{equation}\nonumber
+=
+\begin{bmatrix}
+\sum \frac{(-1)^k}{k^2} & \sum \frac{(-1)^{k}}{k} & \sum \frac{(k-1)(-1)^{k}}{2k} \\
+0 & \sum \frac{(-1)^k}{k^2} & \sum \frac{(-1)^k}{k} \\
+0 & 0 & \sum \frac{(-1)^k}{k^2}
+\end{bmatrix}
+\end{equation}
+</div>
+<p>由于含有 $\sum \frac{(-1)^k}{k}$ 发散项，<strong>所以级数发散</strong>。</p>
+<p>解：(4)</p>
+<div>
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} \frac{1}{k^2}
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & -1 & 1 \\
+0 & 0 & -1
+\end{bmatrix}^k
+=
+\sum_{k=1}^{\infty} \frac{1}{k^2}
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & (-1)^k & k(-1)^{k-1} \\
+0 & 0 & (-1)^k
+\end{bmatrix}
+\end{equation}
+</div>
+<div>
+\begin{equation}\nonumber
+=
+\begin{bmatrix}
+\sum \frac{1}{k^2} & 0 & 0 \\
+0 & \sum \frac{(-1)^k}{k^2} & \sum \frac{(-1)^k}{k} \\
+0 & 0 & \sum \frac{(-1)^k}{k^2}
+\end{bmatrix}
+\Rightarrow \text{条件收敛}
+\end{equation}
+</div>
+例 5：设 $A \in \mathbb{C}^{n \times n}$，且 $\rho(A) < 1$，求：
+\begin{equation}\nonumber
+\sum_{k=1}^{\infty} k^2 A^k
+\end{equation}
+<p>解：</p>
+<p>考虑复变幂级数 $\sum_{k=1}^{\infty} k^2 z^k$，因为：
+\begin{equation}\nonumber
+\lim\limits_{k \to \infty} \left( \frac{k^2 z^k}{z^{k+1}} \right) = \frac{k^2}{z}
+\end{equation}</p>
+<p>故收敛半径为 $1$，因此当 $\rho(A) &lt; 1$ 时，$\sum_{k=1}^{\infty} k^2 A^k$ 收敛。</p>
+<p>设 $f(z) = \sum_{k=1}^{\infty} k^2 z^k, |z| &lt; 1$，则令：</p>
+<p>\begin{equation}\nonumber
+f_1(z) = \sum_{k=1}^{\infty} k z^{k-1}, \quad \Rightarrow f(z) = z f_1(z)
+\end{equation}</p>
+<p>当 $|z| &lt; 1$ 时：
+\begin{equation}\nonumber
+\int_0^z f_1(z), dz = \sum_{k=1}^{\infty} \int_0^z k z^{k-1} , dz = \sum_{k=1}^{\infty} z^k
+= \frac{z}{1 - z}, \quad |z| &lt; 1
+\end{equation}</p>
+<p>再对 $\sum_{k=1}^{\infty} k z^{k-1}$ 积分：
+\begin{equation}\nonumber
+\int_0^z \sum_{k=1}^{\infty} k z^{k-1} , dz = \sum_{k=1}^{\infty} \int_0^z k z^{k-1} dz = \sum_{k=1}^{\infty} z^k = \frac{z}{1 - z}
+\end{equation}</p>
+<p>再对 $\frac{z}{1 - z}$ 求导得：
+\begin{equation}\nonumber
+f(z) = \frac{z(z+1)}{(1 - z)^3}, \quad |z| &lt; 1
+\end{equation}</p>
+<p>因此：
+\begin{equation}\nonumber
+f(A) = A (I + A)(I - A)^{-3}, \quad \rho(A) &lt; 1
+\end{equation}</p>
+<hr>
+<h2 id="矩阵函数及其计算一">矩阵函数及其计算一
+</h2><h3 id="定义-1矩阵函数">定义 1（<strong>矩阵函数</strong>）
+</h3><p>设幂级数 $\sum_{m=0}^{\infty} c_m z^m$ 的收敛半径为 $R$，且当 $|z| &lt; R$ 时，幂级数收敛于函数 $f(z)$，即：</p>
+<p>\begin{equation}\nonumber
+f(z) = \sum_{m=0}^{\infty} c_m z^m, \quad |z| &lt; R
+\end{equation}</p>
+<p>若 $\forall A \in \mathbb{C}^{n \times n}$，满足 $\rho(A) &lt; R$，称收敛的矩阵幂级数 $\sum_{m=0}^{\infty} c_m A^m$ 的和为<strong>矩阵函数</strong>，记为 $f(A)$。</p>
+<p>即：
+\begin{equation}\nonumber
+f(A) = \sum_{m=0}^{\infty} c_m A^m
+\end{equation}</p>
+<p>特别地，当 $R = +\infty$ 时，$\forall A \in \mathbb{C}^{n \times n}$，有：
+\begin{equation}\nonumber
+f(A) = \sum_{m=0}^{\infty} c_m A^m
+\end{equation}</p>
+<p>我们熟悉的一些函数数有：</p>
+<p>\begin{equation}\nonumber
+e^z = \sum_{m=0}^{\infty} \frac{1}{m!} z^m, \quad R = +\infty
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\sin z = \sum_{m=0}^{\infty} \frac{(-1)^m}{(2m + 1)!} z^{2m + 1}, \quad R = +\infty
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\cos z = \sum_{m=0}^{\infty} \frac{(-1)^m}{(2m)!} z^{2m}, \quad R = +\infty
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\frac{1}{1 - z} = \sum_{m=0}^{\infty} z^m, \quad R = 1
+\end{equation}</p>
+<p>对应的<strong>矩阵函数</strong>为：</p>
+<p>\begin{equation}\nonumber
+e^A = \sum_{m=0}^{\infty} \frac{1}{m!} A^m, \quad \forall A \in \mathbb{C}^{n \times n}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\sin A = \sum_{m=0}^{\infty} \frac{(-1)^m}{(2m + 1)!} A^{2m + 1}, \quad \forall A \in \mathbb{C}^{n \times n}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\cos A = \sum_{m=0}^{\infty} \frac{(-1)^m}{(2m)!} A^{2m}, \quad \forall A \in \mathbb{C}^{n \times n}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+(I - A)^{-1} = \sum_{m=0}^{\infty} A^m, \quad \rho(A) &lt; 1
+\end{equation}</p>
+<p>称 $e^A$ 为<strong>矩阵指数函数</strong>，$\sin A$ 为<strong>矩阵正弦函数</strong>，$\cos A$ 为<strong>矩阵余弦函数</strong>。</p>
+<p>若 $f(A)$ 的变量换成 $At$，$t$ 为参数，则有：
+\begin{equation}\nonumber
+f(At) = \sum_{m=0}^{\infty} c_m (At)^m, \quad |t| \rho(A) &lt; R
+\end{equation}</p>
+<p>在实际应用中会经常遇到含参数的矩阵函数。</p>
+<h3 id="矩阵函数的性质">矩阵函数的性质
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，则：</p>
+<ol>
+<li>
+<p>$e^{iA} = \cos A + i \sin A$</p>
+</li>
+<li>
+<p>$\cos A = \frac{1}{2} \left( e^{iA} + e^{-iA} \right)$</p>
+</li>
+<li>
+<p>$\sin A = \frac{1}{2i} \left( e^{iA} - e^{-iA} \right)$</p>
+</li>
+<li>
+<p>$\sin^2 A + \cos^2 A = I$</p>
+</li>
+<li>
+<p>若 $AB = BA$，则 $e^A e^B = e^B e^A = e^{A + B}$</p>
+</li>
+<li>
+<p>一般的，$e^A e^B, e^B e^A, e^{A + B}$ 互不相等</p>
+</li>
+<li>
+<p>$e^A e^{-A} = e^{-A} e^A = I$，即 $(e^A)^{-1} = e^{-A}$</p>
+</li>
+</ol>
+<p><strong>注</strong>：$\forall A$，$e^A$ 总是可逆的。</p>
+<h3 id="证明">证明：
+</h3><p>1)–4) 可直接验证；6) 可见书上反例；7) 为 5) 的推论。</p>
+<p>下证 5)，只需验证当 $AB = BA$ 时，有：</p>
+<p>\begin{equation}\nonumber
+e^A e^B = e^{A + B}
+\end{equation}</p>
+<p>根据定义：</p>
+<p>\begin{equation}\nonumber
+e^A e^B = \left( \sum_{m=0}^{\infty} \frac{1}{m!} A^m \right)
+\left( \sum_{n=0}^{\infty} \frac{1}{n!} B^n \right)
+\end{equation}</p>
+<p>展开得：</p>
+<p>\begin{equation}\nonumber
+= I + (A + B) + \frac{1}{2!}(A^2 + AB + BA + B^2) + \cdots
+\end{equation}</p>
+<p>因为 $AB = BA$，可整理为：</p>
+<p>\begin{equation}\nonumber
+= I + (A + B) + \frac{1}{2!}(A + B)^2 + \cdots
+\end{equation}</p>
+<p>即：</p>
+<p>\begin{equation}\nonumber
+= \sum_{m=0}^{\infty} \frac{1}{m!} (A + B)^m = e^{A + B}
+\end{equation}</p>
+<h3 id="例-1">例 1：
+</h3><p>设</p>
+<div>
+\begin{equation}\nonumber
+A = 
+\begin{bmatrix}
+0 & 1 \\
+-1 & 0
+\end{bmatrix}, \quad \text{求 } e^{At}
+\end{equation}
+</div>
+<hr>
+<h3 id="解">解：
+</h3><p>$|\lambda I - A| = \lambda^2 + 1$，由 <strong>Cayley 定理</strong> 知，$A^2 + I = 0$，<br>
+故 $A^2 = -I$，$A^3 = -A$，$A^4 = I$，$A^5 = A$，…… 有：</p>
+<p>\begin{equation}\nonumber
+A^{2k} = (-1)^k I, \quad A^{2k + 1} = (-1)^k A, \quad k = 1,2,\ldots
+\end{equation}</p>
+<p>因此：</p>
+<p>\begin{equation}\nonumber
+e^{At} = \sum_{k=0}^{\infty} \frac{1}{k!} (At)^k =
+\left(1 - \frac{1}{2!} t^2 + \frac{1}{4!} t^4 - \cdots \right) I +
+\left(t - \frac{t^3}{3!} + \frac{t^5}{5!} - \cdots \right) A
+\end{equation}</p>
+<p>注意到：
+\begin{equation}\nonumber
+\cos t = 1 - \frac{t^2}{2!} + \frac{t^4}{4!} - \cdots, \quad
+\sin t = t - \frac{t^3}{3!} + \frac{t^5}{5!} - \cdots
+\end{equation}</p>
+<p>所以：</p>
+<p>\begin{equation}\nonumber
+e^{At} = (\cos t) I + (\sin t) A
+\end{equation}</p>
+<p>即：</p>
+<div>
+\begin{equation}\nonumber
+e^{At} = 
+\begin{bmatrix}
+\cos t & \sin t \\
+-\sin t & \cos t
+\end{bmatrix}
+\end{equation}
+</div>
+<h3 id="例-2">例 2：
+</h3><p>设 $A \in \mathbb{C}^{4 \times 4}$，特征值为 $\pi, -\pi, 0, 0$，求 $e^A, \cos A, \sin A$。</p>
+<p>解：</p>
+<p>由条件知：
+\begin{equation}\nonumber
+|\lambda I - A| = \lambda^2 (\lambda - \pi)(\lambda + \pi) = \lambda^4 - \pi^2 \lambda^2
+\end{equation}</p>
+<p>由 Cayley 定理知：
+\begin{equation}\nonumber
+A^4 = \pi^2 A^2
+\end{equation}</p>
+<p>因此：
+\begin{equation}\nonumber
+\sin A = A - \frac{1}{3!} A^3 + \frac{1}{5!} A^5 - \frac{1}{7!} A^7 + \cdots
+\end{equation}</p>
+<p>由于 $A^5 = A \cdot A^4 = A \cdot \pi^2 A^2 = \pi^2 A^3$，且 $A^7 = \pi^4 A^3$，可得：</p>
+<p>\begin{equation}\nonumber
+\sin A = A + \left( -\frac{1}{3!} + \frac{\pi^2}{5!} - \frac{\pi^4}{7!} + \cdots \right) A^3
+\end{equation}</p>
+<p>令：
+\begin{equation}\nonumber
+\sin A = A + \frac{\sin(\pi) - \pi}{\pi^3} A^3 = A - \pi^{-2} A^3
+\end{equation}</p>
+<p>同理可得：
+\begin{equation}\nonumber
+\cos A = I - \frac{1}{2} A^2 = I - \frac{2}{\pi^2} A^2
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+e^A = I + A + \frac{p}{\pi^2} A^2 + \frac{e^{\pi} + e^{-\pi} - 2 - 2p}{2 \pi^3} A^3
+\end{equation}</p>
+<p>其中：
+\begin{equation}\nonumber
+p = \frac{e^{\pi} + e^{-\pi}}{2} - 1
+\end{equation}</p>
+<p>注 1：</p>
+<p>由特征多项式的零化特性，可将矩阵函数计算简化，但一般仍显繁琐。</p>
+<p>注 2：</p>
+<p>由上面两个例子可以看到，矩阵指数函数和三角函数可表示为一个次数不超过特征多项式次数的矩阵多项式。</p>
+<p>对一般矩阵函数，这个结论也是成立的。</p>
+<hr>
+<h3 id="矩阵函数的计算法一">矩阵函数的计算法（一）
+</h3><ol>
+<li>若 $A$ 为<strong>单纯矩阵</strong>，则存在可逆矩阵 $P$ 使：</li>
+</ol>
+<p>\begin{equation}\nonumber
+A = P , \mathrm{diag} \lbrace \lambda_1, \ldots, \lambda_n \rbrace P^{-1}
+\end{equation}</p>
+<p>设 $f(z) = \sum_{m=0}^{\infty} c_m z^m$，$|z| &lt; R$，则当 $\rho(A) &lt; R$ 时，有：</p>
+<p>\begin{equation}\nonumber
+f(A) = \sum_{m=0}^{\infty} c_m A^m
+\end{equation}</p>
+<p>因此：</p>
+<p>\begin{equation}\nonumber
+f(A) = \sum_{m=0}^{\infty} c_m A^m
+= \sum_{m=0}^{\infty} c_m \left( P , \mathrm{diag} \lbrace \lambda_1, \ldots, \lambda_n \rbrace P^{-1} \right)^m
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= P \left( \sum_{m=0}^{\infty} c_m , \mathrm{diag} \lbrace \lambda_1^m, \ldots, \lambda_n^m \rbrace \right) P^{-1}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+f(A) = P \left( \mathrm{diag} \left\lbrace \sum_{m=0}^{\infty} c_m \lambda_1^m, \ldots, \sum_{m=0}^{\infty} c_m \lambda_n^m \right\rbrace \right) P^{-1}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= P \left( \mathrm{diag} \left\lbrace f(\lambda_1), \ldots, f(\lambda_n) \right\rbrace \right) P^{-1}
+\end{equation}</p>
+<p>故 $A$ 为单纯矩阵，$f(A)$ 仍为单纯矩阵。</p>
+<h3 id="a-为单纯矩阵求-fa-的步骤如下">$A$ 为单纯矩阵，求 $f(A)$ 的步骤如下：
+</h3><ol>
+<li>求 $A$ 的特征值 $\lambda_1, \ldots, \lambda_n$，以及可逆矩阵 $P$ 使得：</li>
+</ol>
+<p>\begin{equation}\nonumber
+P^{-1} A P = \mathrm{diag} \lbrace \lambda_1, \ldots, \lambda_n \rbrace
+\end{equation}</p>
+<ol start="2">
+<li>若 $\rho(A) &lt; R$，则：</li>
+</ol>
+<p>\begin{equation}\nonumber
+f(A) = P \left( \mathrm{diag} \lbrace f(\lambda_1), \ldots, f(\lambda_n) \rbrace \right) P^{-1}
+\end{equation}</p>
+<h3 id="特别地有">特别地，有：
+</h3><p>\begin{equation}\nonumber
+e^A = P \left( \mathrm{diag} \lbrace e^{\lambda_1}, \ldots, e^{\lambda_n} \rbrace \right) P^{-1}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\sin A = P \left( \mathrm{diag} \lbrace \sin \lambda_1, \ldots, \sin \lambda_n \rbrace \right) P^{-1}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\cos A = P \left( \mathrm{diag} \lbrace \cos \lambda_1, \ldots, \cos \lambda_n \rbrace \right) P^{-1}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+e^{At} = P \left( \mathrm{diag} \lbrace e^{\lambda_1 t}, \ldots, e^{\lambda_n t} \rbrace \right) P^{-1}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\sin(At) = P \left( \mathrm{diag} \lbrace \sin (\lambda_1 t), \ldots, \sin (\lambda_n t) \rbrace \right) P^{-1}
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+\cos(At) = P \left( \mathrm{diag} \lbrace \cos (\lambda_1 t), \ldots, \cos (\lambda_n t) \rbrace \right) P^{-1}
+\end{equation}</p>
+<p>注 1：</p>
+<p>同理有：
+\begin{equation}\nonumber
+f(At) = P \left( \mathrm{diag} \lbrace f(\lambda_1 t), \ldots, f(\lambda_n t) \rbrace \right) P^{-1}, \quad |t| \rho(A) &lt; R
+\end{equation}</p>
+<p>注 2：</p>
+<p>若 $A$ 为单纯矩阵，有谱分解：
+\begin{equation}\nonumber
+A = \sum_{i=1}^{k} \lambda_i E_i
+\end{equation}</p>
+<p>其中 $\lambda_1, \ldots, \lambda_k$ 为 $A$ 的<strong>互异特征值</strong>。若 $\rho(A) &lt; R$，则：</p>
+<p>\begin{equation}\nonumber
+f(A) = \sum_{m=0}^{\infty} c_m A^m
+= \sum_{m=0}^{\infty} c_m \left( \sum_{i=1}^{k} \lambda_i E_i \right)^m
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= \sum_{i=1}^{k} \left( \sum_{m=0}^{\infty} c_m \lambda_i^m \right) E_i
+= \sum_{i=1}^{k} f(\lambda_i) E_i
+\end{equation}</p>
+<h3 id="2-若-a-为一般矩阵则存在可逆矩阵-p-使">2. 若 $A$ 为一般矩阵，则存在可逆矩阵 $P$ 使：
+</h3><p>\begin{equation}\nonumber
+P^{-1} A P = J =
+\begin{pmatrix}
+J_1(\lambda_1) &amp; 0 &amp; \cdots &amp; 0 \
+0 &amp; \ddots &amp; &amp; \vdots \
+\vdots &amp; &amp; \ddots &amp; 0 \
+0 &amp; \cdots &amp; 0 &amp; J_s(\lambda_s)
+\end{pmatrix}
+\end{equation}</p>
+<p>其中 $J_i(\lambda_i)$ 为 Jordan 块，形式如下：</p>
+<div>
+\begin{equation}\nonumber
+J_i(\lambda_i) =
+\begin{bmatrix}
+\lambda_i & 1 & & \\
+& \lambda_i & 1 & \\
+& & \ddots & 1 \\
+& & & \lambda_i
+\end{bmatrix}, \quad 1 \leq i \leq s
+\end{equation}
+</div>
+<p>设 $f(z) = \sum_{m=0}^{\infty} c_m z^m,\ |z| &lt; R$，则当 $\rho(A) &lt; R$ 时，</p>
+<p>\begin{equation}\nonumber
+f(A) = \sum_{m=0}^{\infty} c_m A^m
+= \sum_{m=0}^{\infty} c_m (PJP^{-1})^m
+= P \left( \sum_{m=0}^{\infty} c_m J^m \right) P^{-1}
+\end{equation}</p>
+<p><strong>Jordan 块的幂：</strong></p>
+<div>
+\begin{equation}\nonumber
+J_i^m(\lambda_i) =
+\begin{bmatrix}
+\lambda_i^m & \binom{m}{1} \lambda_i^{m-1} & \cdots & \binom{m}{n_i - 1} \lambda_i^{m - n_i + 1} \\
+0 & \lambda_i^m & \cdots & \binom{m}{n_i - 2} \lambda_i^{m - n_i + 2} \\
+\vdots & \ddots & \ddots & \vdots \\
+0 & \cdots & 0 & \lambda_i^m
+\end{bmatrix}, \quad n_i \times n_i
+\end{equation}
+</div>
+<p><strong>上三角元的和：</strong>
+\begin{equation}\nonumber
+\sum_{m=1}^{\infty} c_m \binom{m}{l} \lambda_i^{m - l}
+= \frac{1}{l!} \sum_{m=1}^{\infty} c_m m (m-1) \cdots (m - l + 1) \lambda_i^{m - l}
+= \frac{1}{l!} f^{(l)}(\lambda_i), \quad 0 \leq l \leq n_i - 1
+\end{equation}</p>
+<p><strong>最终结论：</strong></p>
+<p>\begin{equation}\nonumber
+f(A) = P
+\begin{pmatrix}
+f(J_1(\lambda_1)) &amp; &amp; \
+&amp; \ddots &amp; \
+&amp; &amp; f(J_s(\lambda_s))
+\end{pmatrix} P^{-1}
+\end{equation}</p>
+<p>其中每个 Jordan 块函数形式为：</p>
+<div>
+\begin{equation}\nonumber
+f(J_i(\lambda_i)) =
+\begin{bmatrix}
+f(\lambda_i) & f'(\lambda_i) & \cdots & \frac{1}{(n_i - 1)!} f^{(n_i - 1)}(\lambda_i) \\
+0 & f(\lambda_i) & \cdots & \frac{1}{(n_i - 2)!} f^{(n_i - 2)}(\lambda_i) \\
+\vdots & \ddots & \ddots & \vdots \\
+0 & \cdots & 0 & f(\lambda_i)
+\end{bmatrix}
+\end{equation}
+</div>
+<p>该展开形式称为 <strong>Sylvester 公式</strong>。</p>
+<p>例 4：</p>
+<p>设</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+-1 & 0 & 1 \\
+1 & 2 & 0 \\
+-4 & 0 & 3
+\end{bmatrix}, \quad \text{求 } e^A, \sin(At)
+\end{equation}
+</div>
+<p>解：</p>
+<p>先计算 $A$ 的初等因子为 $(\lambda - 1)^2 (\lambda - 2)$，故有 Jordan 形式：</p>
+<div>
+\begin{equation}\nonumber
+J =
+\begin{bmatrix}
+1 & 1 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 2
+\end{bmatrix}
+\end{equation}
+</div>
+<p>求出变换矩阵：</p>
+<div>
+\begin{equation}\nonumber
+P =
+\begin{bmatrix}
+-1 & 0 & 0 \\
+-1 & -1 & 1 \\
+2 & 1 & 0
+\end{bmatrix}, \quad \text{使得 } P^{-1} A P = J
+\end{equation}
+</div>
+<p>计算 $e^A$：</p>
+<p>\begin{equation}\nonumber
+e^A = P
+\begin{bmatrix}
+e &amp; e &amp; 0 \
+0 &amp; e &amp; 0 \
+0 &amp; 0 &amp; e^2
+\end{bmatrix}
+P^{-1}
+\end{equation}</p>
+<p>化简结果为：</p>
+<div>
+\begin{equation}\nonumber
+e^A =
+\begin{bmatrix}
+-e & 0 & e \\
+3e - e^2 & e^2 & -2e + e^2 \\
+-4e & 0 & 3e
+\end{bmatrix}
+\end{equation}
+</div>
+<p>计算 $\sin(At)$：</p>
+<p>设 $f(\lambda) = \sin \lambda$，根据 Sylvester 公式：</p>
+<p>\begin{equation}\nonumber
+\sin(At) = P
+\begin{bmatrix}
+\sin t &amp; t \cos t &amp; 0 \
+0 &amp; \sin t &amp; 0 \
+0 &amp; 0 &amp; \sin(2t)
+\end{bmatrix}
+P^{-1}
+\end{equation}</p>
+<p>（图中未写出 $P^{-1}$ 展开，保留为一般表达）</p>
+<hr>
+<h2 id="矩阵函数及其计算二">矩阵函数及其计算二
+</h2><p>我们看到，尽管 Sylvester 公式非常漂亮，但当 $A$ 是非单纯矩阵时，计算非常繁琐，<br>
+所以我们引入下面的谱上的一致多项式。</p>
+<hr>
+<h3 id="定理-1-2">定理 1：
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，$m_A(\lambda)$ 为 $A$ 的最小多项式，<br>
+记 $\deg m_A(\lambda) = l$。若复函数 $f(z) = \sum_{m=0}^{\infty} c_m z^m$ 的收敛半径为 $R$，<br>
+且 $\rho(A) &lt; R$，则 $f(A) = \sum_{m=0}^{\infty} c_m A^m$ 可表示为 $A$ 的 $l-1$ 次多项式 $p(A)$：</p>
+<p>\begin{equation}\nonumber
+p(\lambda) = \beta_0 + \beta_1 \lambda + \cdots + \beta_{l-1} \lambda^{l-1}
+\end{equation}</p>
+<p>使得：</p>
+<p>\begin{equation}\nonumber
+f(A) = \beta_0 I + \beta_1 A + \cdots + \beta_{l-1} A^{l-1} = p(A)
+\end{equation}</p>
+<p>且 $p(\lambda)$ 是<strong>唯一的</strong>。</p>
+<p>证明：</p>
+<p>设 $m_A(\lambda)$ 为 $A$ 的最小多项式，$\deg m_A(\lambda) = l$，<br>
+当 $m \geq l$ 时，有：</p>
+<p>\begin{equation}\nonumber
+\lambda^m = q_m(\lambda) m_A(\lambda) + r_m(\lambda), \quad \deg r_m(\lambda) \leq l - 1
+\end{equation}</p>
+<p>代入 $A$ 得：</p>
+<p>\begin{equation}\nonumber
+A^m = q_m(A) m_A(A) + r_m(A) = r_m(A)
+\end{equation}</p>
+<p>因此，</p>
+<p>\begin{equation}\nonumber
+f(A) = \sum_{m=0}^{\infty} c_m A^m = \sum_{m=0}^{l-1} c_m A^m + \sum_{m \geq l} c_m A^m
+\end{equation}</p>
+<p>由于 $\sum_{m=0}^{\infty} c_m A^m$ <strong>绝对收敛</strong>，任意调整次数仍绝对收敛，<br>
+故可写为：</p>
+<p>\begin{equation}\nonumber
+f(A) = \beta_0 I + \beta_1 A + \cdots + \beta_{l-1} A^{l-1}
+\end{equation}</p>
+<p>其中 $\beta_0, \ldots, \beta_{l-1}$ 均为绝对收敛的数值级数之和。</p>
+<p>唯一性说明：</p>
+<p>设还有另一多项式：</p>
+<p>\begin{equation}\nonumber
+p_1(\lambda) = \beta&rsquo;_0 + \beta&rsquo;<em>1 \lambda + \cdots + \beta&rsquo;</em>{l-1} \lambda^{l-1} \neq p(\lambda)
+\end{equation}</p>
+<p>若</p>
+<p>\begin{equation}\nonumber
+f(A) = \beta&rsquo;_0 I + \beta&rsquo;<em>1 A + \cdots + \beta&rsquo;</em>{l-1} A^{l-1} = p_1(A)
+\end{equation}</p>
+<p>则有：</p>
+<p>\begin{equation}\nonumber
+p(\lambda) - p_1(\lambda) = 0,\quad \deg \left( p(\lambda) - p_1(\lambda) \right) \leq l - 1
+\end{equation}</p>
+<p>这与 $m_A(\lambda)$ 是最小多项式矛盾，因此唯一性成立。</p>
+<p>总结：将 $f(A)$ 表示为矩阵多项式的步骤：</p>
+<ol>
+<li>求 $A$ 的互异特征值 $\lambda_1, \ldots, \lambda_s$，以及最小多项式：</li>
+</ol>
+<p>\begin{equation}\nonumber
+m_A(\lambda) = \prod_{i=1}^{s} (\lambda - \lambda_i)^{m_i},\quad \deg m_A(\lambda) = l = m_1 + \cdots + m_s
+\end{equation}</p>
+<ol start="2">
+<li>设 $p(\lambda) = \beta_0 + \beta_1 \lambda + \cdots + \beta_{l-1} \lambda^{l-1}$，<br>
+令 $\beta_0, \ldots, \beta_{l-1}$ 满足插值条件：</li>
+</ol>
+<p>\begin{equation}\nonumber
+p^{(j)}(\lambda_i) = f^{(j)}(\lambda_i), \quad j = 0, \ldots, m_i - 1;\quad i = 1, \ldots, s
+\end{equation}</p>
+<ol start="3">
+<li>
+<p>\begin{equation}\nonumber
+f(A) = p(A) = \beta_0 I + \beta_1 A + \cdots + \beta_{l-1} A^{l-1}
+\end{equation}</p>
+<p>称 $p(\lambda)$ 为 $A$ 的<strong>谱上一致多项式</strong>。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>注 1：</strong><br>
+无论 $A$ 是否为单纯矩阵，方法二均适用。<br>
+当 $A$ 的非单纯矩阵成分较多时，方法二相对更简单。</p></blockquote>
+<blockquote>
+<p><strong>注 2：</strong><br>
+以上步骤可视为对矩阵函数 $f(A)$ 的一种<strong>重新定义方式</strong>。</p></blockquote>
+<p>例 5：</p>
+<p>设</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 4 \\
+3 & 2
+\end{bmatrix}, \quad \text{求 } e^A
+\end{equation}
+</div>
+<p>解：</p>
+<p>由
+\begin{equation}\nonumber
+| \lambda I - A | = (\lambda - 5)(\lambda + 2)
+\Rightarrow m_A(\lambda) = (\lambda - 5)(\lambda + 2)
+\end{equation}</p>
+<p>设 $p(\lambda) = \beta_0 + \beta_1 \lambda$，令 $f(\lambda) = e^{\lambda}$，则有插值条件：</p>
+<div>
+\begin{equation}\nonumber
+\begin{cases}
+p(5) = f(5) = e^5 \\
+p(-2) = f(-2) = e^{-2}
+\end{cases}
+\Rightarrow
+\begin{cases}
+\beta_0 + 5 \beta_1 = e^5 \\
+\beta_0 - 2 \beta_1 = e^{-2}
+\end{cases}
+\Rightarrow
+\begin{cases}
+\beta_0 = \frac{1}{7} (2 e^5 + 5 e^{-2}) \\
+\beta_1 = \frac{1}{7} (e^5 - e^{-2})
+\end{cases}
+\end{equation}
+</div>
+<p>故：</p>
+<p>\begin{equation}\nonumber
+f(A) = e^A = p(A) = \beta_0 I + \beta_1 A
+\end{equation}</p>
+<p>展开得：</p>
+<div>
+\begin{equation}\nonumber
+e^A =
+\frac{1}{7}
+\begin{bmatrix}
+3 e^5 + 4 e^{-2} & 4 e^5 - 4 e^{-2} \\
+3 e^5 - 3 e^{-2} & 4 e^5 + 3 e^{-2}
+\end{bmatrix}
+\end{equation}
+</div>
+<p>例 6：</p>
+<p>设</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+2 & 1 & 4 \\
+0 & 2 & 0 \\
+0 & 3 & 1
+\end{bmatrix}, \quad \text{求 } \sin A
+\end{equation}
+</div>
+<p>解：</p>
+<p>计算可得 $A \sim \mathrm{diag} \lbrace 1,1, (\lambda - 2)^2, (\lambda - 1) \rbrace$，<br>
+故最小多项式为：</p>
+<p>\begin{equation}\nonumber
+m_A(\lambda) = (\lambda - 2)^2 (\lambda - 1)
+\end{equation}</p>
+<p>设插值多项式：
+\begin{equation}\nonumber
+p(\lambda) = \beta_0 + \beta_1 \lambda + \beta_2 \lambda^2, \quad f(\lambda) = \sin \lambda
+\end{equation}</p>
+<p>由插值条件得到方程组：</p>
+<div>
+\begin{equation}\nonumber
+\begin{cases}
+p(1) = f(1) \Rightarrow \beta_0 + \beta_1 + \beta_2 = \sin 1 \\
+p(2) = f(2) \Rightarrow \beta_0 + 2\beta_1 + 4\beta_2 = \sin 2 \\
+p'(2) = f'(2) \Rightarrow \beta_1 + 4\beta_2 = \cos 2
+\end{cases}
+\Rightarrow
+\begin{cases}
+\beta_0 = 4 \sin 1 - 3 \sin 2 + 2 \cos 2 \\
+\beta_1 = -4 \sin 1 + 4 \sin 2 - 3 \cos 2 \\
+\beta_2 = \sin 1 - \sin 2 + \cos 2
+\end{cases}
+\end{equation}
+</div>
+<p>因此：</p>
+<p>\begin{equation}\nonumber
+\sin A = p(A) = \beta_0 I + \beta_1 A + \beta_2 A^2
+\end{equation}</p>
+<p>展开后：</p>
+<div>
+\begin{equation}\nonumber
+\sin A =
+\begin{bmatrix}
+\sin 2 & 12 \sin 1 - 12 \sin 2 + 13 \cos 2 & -4 \sin 1 + 4 \sin 2 \\
+0 & \sin 2 & 0 \\
+0 & -3 \sin 1 + 3 \sin 2 & \sin 1
+\end{bmatrix}
+\end{equation}
+</div>
+<hr>
+<h3 id="关于谱上一致多项式的进一步说明">关于谱上一致多项式的进一步说明：
+</h3><p>设
+\begin{equation}\nonumber
+p(\lambda) = \beta_0 + \beta_1 \lambda + \cdots + \beta_{l-1} \lambda^{l-1}
+\end{equation}</p>
+<p>共 $l$ 个系数 $\beta_0, \beta_1, \ldots, \beta_{l-1}$。</p>
+<p>由以下 $l$ 个独立条件唯一确定这些系数：</p>
+<p>\begin{equation}\nonumber
+p^{(j)}(\lambda_i) = f^{(j)}(\lambda_i),\quad j = 0, \ldots, m_i - 1;\quad i = 1, \ldots, s
+\end{equation}</p>
+<p>则矩阵函数为：
+\begin{equation}\nonumber
+f(A) = p(A) = \beta_0 I + \beta_1 A + \cdots + \beta_{l-1} A^{l-1}
+\end{equation}</p>
+<p>若考虑 $At$ 情形，即函数带参数 $t$：</p>
+<p>令
+\begin{equation}\nonumber
+p_t(\lambda) = \alpha_0(t) + \alpha_1(t) \lambda + \cdots + \alpha_{l-1}(t) \lambda^{l-1}
+\end{equation}</p>
+<p>共 $l$ 个系数，$\alpha_0(t), \alpha_1(t), \ldots, \alpha_{l-1}(t)$ 均为 $t$ 的函数。<br>
+这些函数由以下 $l$ 个独立条件唯一确定：</p>
+<p>\begin{equation}\nonumber
+p_t^{(j)}(\lambda_i) = t^j f^{(j)}(\lambda_i),\quad j = 0, \ldots, m_i - 1;\quad i = 1, \ldots, s
+\end{equation}</p>
+<p>于是：</p>
+<p>\begin{equation}\nonumber
+f(At) = \alpha_0(t) I + \alpha_1(t) A + \cdots + \alpha_{l-1}(t) A^{l-1}
+\end{equation}</p>
+<p>例 7：</p>
+<p>设</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+2 & 1 & 0 \\
+0 & 2 & 1 \\
+0 & 0 & 2
+\end{bmatrix}, \quad \text{求 } e^{At}
+\end{equation}
+</div>
+<p>解：</p>
+<p>由 $A \sim \mathrm{diag} \lbrace 1,1, (\lambda - 2)^3 \rbrace$ 可知：</p>
+<p>\begin{equation}\nonumber
+m_A(\lambda) = (\lambda - 2)^3
+\end{equation}</p>
+<p>设插值多项式为：</p>
+<p>\begin{equation}\nonumber
+p_t(\lambda) = \alpha_0(t) + \alpha_1(t) \lambda + \alpha_2(t) \lambda^2, \quad f(\lambda) = e^{\lambda}
+\end{equation}</p>
+<p>由以下条件确定：</p>
+<div>
+\begin{equation}\nonumber
+\begin{cases}
+p_t(2) = f(2t) = e^{2t} \\
+p_t'(2) = t f'(2t) = t e^{2t} \\
+p_t''(2) = t^2 f''(2t) = 4 t^2 e^{2t}
+\end{cases}
+\Rightarrow
+\begin{cases}
+\alpha_0(t) + 2 \alpha_1(t) + 4 \alpha_2(t) = e^{2t} \\
+\alpha_1(t) + 4 \alpha_2(t) = t e^{2t} \\
+2 \alpha_2(t) = t^2 e^{2t}
+\end{cases}
+\Rightarrow
+\begin{cases}
+\alpha_2(t) = \frac{t^2 e^{2t}}{2} \\
+\alpha_1(t) = e^{2t}(t - t^2) \\
+\alpha_0(t) = e^{2t}(1 - 2t + 2t^2)
+\end{cases}
+\end{equation}
+</div>
+<p>因此，</p>
+<p>\begin{equation}\nonumber
+e^{At} = p_t(A) = \alpha_0(t) I + \alpha_1(t) A + \alpha_2(t) A^2
+\end{equation}</p>
+<p>展开表达为：</p>
+<p>\begin{equation}\nonumber
+e^{At} = e^{2t} \left( (1 - 2t + 2t^2) I + (t - t^2) A + \frac{t^2}{2} A^2 \right)
+\end{equation}</p>
+<hr>
+<h2 id="矩阵函数的应用">矩阵函数的应用
+</h2><h3 id="定义-1函数矩阵">定义 1：函数矩阵
+</h3><p>以变量 $t$ 的函数为元素的矩阵
+\begin{equation}\nonumber
+A(t) = (a_{ij}(t))_{m \times n}
+\end{equation}</p>
+<p>称为<strong>函数矩阵</strong>，若每个 $a_{ij}(t)$ 在区间 $[a, b]$ 上是连续、可微或可积的，<br>
+则称 $A(t)$ 在 $[a, b]$ 上连续、可微、可积。定义如下：</p>
+<p><strong>导数定义：</strong>
+\begin{equation}\nonumber
+A&rsquo;(t) = \frac{d}{dt} A(t) = \left( \frac{d}{dt} a_{ij}(t) \right)_{m \times n}
+\end{equation}</p>
+<p><strong>积分定义：</strong>
+\begin{equation}\nonumber
+\int_a^b A(t),dt = \left( \int_a^b a_{ij}(t),dt \right)_{m \times n}
+\end{equation}</p>
+<p>例 1：</p>
+<p>求矩阵函数</p>
+<div>
+\begin{equation}\nonumber
+A(t) =
+\begin{bmatrix}
+\sin t & \cos t & t \\
+e^t & e^{2t} & e^{3t} \\
+0 & 1 & t^2
+\end{bmatrix}
+\end{equation}
+</div>
+<p>的导数。</p>
+<p>解：</p>
+<p>对 $A(t)$ 按元素求导，得到：</p>
+<div>
+\begin{equation}\nonumber
+\frac{d}{dt} A(t) =
+\begin{bmatrix}
+\cos t & -\sin t & 1 \\
+e^t & 2e^{2t} & 3e^{3t} \\
+0 & 0 & 2t
+\end{bmatrix}
+\end{equation}
+</div>
+<h3 id="命题-1">命题 1
+</h3><p>设 $A(t), B(t)$ 为适当阶的可微矩阵，则：</p>
+<p>1）加法法则：
+\begin{equation}\nonumber
+\frac{d}{dt}(A(t) + B(t)) = \frac{d}{dt} A(t) + \frac{d}{dt} B(t)
+\end{equation}</p>
+<p>2）数乘法则（$\lambda(t)$ 为可微函数）：
+\begin{equation}\nonumber
+\frac{d}{dt}(\lambda(t) A(t)) = \frac{d\lambda(t)}{dt} A(t) + \lambda(t) \frac{d}{dt} A(t)
+\end{equation}</p>
+<p>3）乘积法则：
+\begin{equation}\nonumber
+\frac{d}{dt}(A(t) B(t)) = \left( \frac{d}{dt} A(t) \right) B(t) + A(t) \left( \frac{d}{dt} B(t) \right)
+\end{equation}</p>
+<p>4）链式法则：若 $u = f(t)$ 可微，则
+\begin{equation}\nonumber
+\frac{d}{dt} A(u) = f&rsquo;(t) \frac{d}{du} A(u)
+\end{equation}</p>
+<p>5）逆矩阵导数公式：若 $A^{-1}(t)$ 是可微矩阵，则
+\begin{equation}\nonumber
+\frac{d}{dt} A^{-1}(t) = -A^{-1}(t) \frac{d}{dt} A(t) A^{-1}(t)
+\end{equation}</p>
+<hr>
+<h3 id="命题-2">命题 2
+</h3><p>设 $A \in \mathbb{C}^{n \times n}$，则：</p>
+<p>1）
+\begin{equation}\nonumber
+\frac{d}{dt} e^{At} = A e^{At} = e^{At} A
+\end{equation}</p>
+<p>2）
+\begin{equation}\nonumber
+\frac{d}{dt} \sin(At) = A \cos(At) = (\cos(At)) A
+\end{equation}</p>
+<p>3）
+\begin{equation}\nonumber
+\frac{d}{dt} \cos(At) = -A \sin(At) = -(\sin(At)) A
+\end{equation}</p>
+<p>证明（仅证 1）：</p>
+<p>由于
+\begin{equation}\nonumber
+e^{At} = \sum_{k=0}^{\infty} \frac{t^k}{k!} A^k
+\end{equation}</p>
+<p>可得：</p>
+<p>\begin{equation}\nonumber
+\frac{d}{dt} e^{At} = \frac{d}{dt} \left( \sum_{k=0}^{\infty} \frac{t^k}{k!} A^k \right)
+= \sum_{k=1}^{\infty} \frac{t^{k-1}}{(k-1)!} A^k = A \sum_{k=0}^{\infty} \frac{t^k}{k!} A^k = A e^{At}
+\end{equation}</p>
+<h3 id="命题-3">命题 3
+</h3><p>设 $A(t), B(t)$ 是 $[a, b]$ 上适当阶的可积矩阵，$\lambda \in \mathbb{C}$，则：</p>
+<p>1）
+\begin{equation}\nonumber
+\int_a^b (A(t) + B(t)),dt = \int_a^b A(t),dt + \int_a^b B(t),dt
+\end{equation}</p>
+<p>2）
+\begin{equation}\nonumber
+\int_a^b \lambda A(t),dt = \lambda \int_a^b A(t),dt
+\end{equation}</p>
+<p>3）若 $A(t)$ 在 $[a, b]$ 连续，则对任意 $t \in (a, b)$ 有：
+\begin{equation}\nonumber
+\frac{d}{dt} \left( \int_a^t A(\tau),d\tau \right) = A(t)
+\end{equation}</p>
+<p>4）若 $A(t)$ 在 $[a, b]$ 可微，则有（Newton-Leibniz公式）：
+\begin{equation}\nonumber
+\int_a^b A&rsquo;(t),dt = A(b) - A(a)
+\end{equation}</p>
+<hr>
+<h2 id="求解一阶线性常系数微分方程">求解一阶线性常系数微分方程
+</h2><h3 id="一求解一阶线性常系数微分方程组">一、求解一阶线性常系数微分方程组
+</h3><p>设微分方程组如下：</p>
+<p>\begin{equation}\nonumber
+\left\lbrace
+\begin{aligned}
+\frac{dx_1(t)}{dt} &amp;= a_{11}x_1(t) + \cdots + a_{1n}x_n(t) + f_1(t) \
+&amp;\quad \vdots \
+\frac{dx_n(t)}{dt} &amp;= a_{n1}x_1(t) + \cdots + a_{nn}x_n(t) + f_n(t)
+\end{aligned}
+\right.
+\end{equation}</p>
+<p>满足初始条件 $x_i(t_0) = c_i,\ i = 1, \cdots, n$</p>
+<p>由微分方程的理论知：上述方程的解是存在的、稳定的，且满足初始条件的解是唯一的。</p>
+<p>令 $A = (a_{ij})_{n \times n},\ c = (c_1, \cdots, c_n)^T,\ x(t) = (x_1(t), \cdots, x_n(t))^T,\ f(t) = (f_1(t), \cdots, f_n(t))^T$</p>
+<p>则上述方程可写为：</p>
+<p>\begin{equation}\nonumber
+\left\lbrace
+\begin{aligned}
+\frac{dx(t)}{dt} &amp;= Ax(t) + f(t) \
+x(t_0) &amp;= c
+\end{aligned}
+\right.
+\end{equation}</p>
+<p>由下式计算：</p>
+<p>\begin{equation}\nonumber
+\frac{d}{dt}\left(e^{-At}x(t)\right)
+= -Ae^{-At}x(t) + e^{-At} \frac{dx(t)}{dt}
+= e^{-At} \left( \frac{dx(t)}{dt} - Ax(t) \right)
+= e^{-At} f(t)
+\end{equation}
+由上式两边积分可得：</p>
+<p>\begin{equation}\nonumber
+e^{-At}x(t) - e^{-At_0}x(t_0) = \int_{t_0}^{t} e^{-A\tau} f(\tau) d\tau
+\end{equation}</p>
+<p>于是方程组的解为：</p>
+<p>\begin{equation}\nonumber
+x(t) = e^{A(t - t_0)}c + e^{At} \int_{t_0}^{t} e^{-A\tau} f(\tau) d\tau
+\end{equation}</p>
+<p>特别地，当 $f(x) = 0$ 时，即齐次线性方程组的解为：</p>
+<p>\begin{equation}\nonumber
+x(t) = e^{A(t - t_0)}c
+\end{equation}</p>
+<p><strong>结论：要求方程组的解，主要是求 $e^{At}$。</strong></p>
+<h3 id="例2">例2
+</h3><p>设</p>
+<div>
+\begin{equation}\nonumber
+A = 
+\begin{bmatrix}
+2 & 0 & 0 \\
+1 & 1 & 1 \\
+1 & -1 & 3
+\end{bmatrix}
+\end{equation}
+</div>
+求解 
+\begin{equation}\nonumber
+\frac{d x(t)}{dt} = A x(t) + f(t), \quad x(t_0) = x_0
+\end{equation}
+其中 $x(t) = (x_1(t), x_2(t), x_3(t))^T,\ x_0 = (1, 0, -1)^T = x(0),\ f(t) = (1, -t, t)^T$
+<hr>
+<h3 id="解-1">解：
+</h3><p>先计算 $e^{At}$，由 $\lvert \lambda I - A \rvert \cong$</p>
+<div>
+\begin{equation}\nonumber
+\begin{bmatrix}
+1 & \lambda - 2 & 0 \\
+0 & & \\
+& & (\lambda - 2)^2
+\end{bmatrix}
+\end{equation}
+</div>
+得最小多项式 $m_A(\lambda) = (\lambda - 2)^2$
+<hr>
+<p>设 $p_t(\lambda) = \alpha_0(t) + \alpha_1(t)\lambda,\quad g(\lambda) = e^{\lambda t}$，则</p>
+<div>
+\begin{equation}\nonumber
+\left\{
+\begin{aligned}
+p_t(2) &= g(2t) = \alpha_0(t) + 2\alpha_1(t) = e^{2t} \\
+p_t'(2) &= t g'(2t) = \alpha_1(t) = t e^{2t}
+\end{aligned}
+\right.
+\end{equation}
+</div>
+解得 
+<div>
+\begin{equation}\nonumber
+\alpha_0(t) = (1 - 2t) e^{2t},\quad \alpha_1(t) = t e^{2t}
+\end{equation}
+</div>
+从而得 
+<div>
+\begin{equation}\nonumber
+e^{At} = p_t(A) = \alpha_0(t) I + \alpha_1(t) A = e^{2t}
+\begin{bmatrix}
+1 & 0 & 0 \\
+t & 1 - t & t \\
+- t & t & 1 + t
+\end{bmatrix}
+\end{equation}
+</div>
+所以定解为：
+<p>\begin{equation}\nonumber
+x(t) = e^{At} x_0 + \int_{0}^{t} e^{A(t - \tau)} f(\tau) d\tau
+\end{equation}</p>
+<p>继续求：</p>
+<div>
+\begin{equation}\nonumber
+\int_0^t e^{A(t - \tau)} f(\tau) d\tau 
+= e^{2t}
+\begin{bmatrix}
+1 & 0 & 0 \\
+t & 1 - t & t \\
+- t & t & 1 + t
+\end{bmatrix}
+\begin{bmatrix}
+1 \\
+0 \\
+-1
+\end{bmatrix}
++ \int_0^t e^{2(t - \tau)} 
+\begin{bmatrix}
+1 & 0 & 0 \\
+t - \tau & 1 - t + \tau & t \\
+- t + \tau & t - \tau & 1 + t
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+- \tau \\
+\tau
+\end{bmatrix}
+d\tau
+\end{equation}
+</div>
+<div>
+\begin{equation}\nonumber
+=e^{2t}
+\begin{bmatrix}
+3/2 - 1/2 e^{-2t}\\
+\frac{1}{2}(2t + 1 ) + (-2t^2 - 2t - 1/2)e^{-2t} \\
+(-2t^2 -3t -1)e^{-2t} - t
+\end{bmatrix}
+\end{equation}
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%9F%A9%E9%98%B5%E8%AE%BA/">矩阵论</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Example Person
+    </section>
+    
+    <section class="powerby">
+        
+            guilonglgl@gmail.com <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

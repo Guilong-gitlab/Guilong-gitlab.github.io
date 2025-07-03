@@ -1,0 +1,2645 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基本概念 定义 1（广义逆矩阵） 设 $A \\in \\mathbb{C}^{m \\times n}$，若 $X \\in \\mathbb{C}^{n \\times m}$ 满足以下四个 Penrose 方程：\n$AXA = A$ $XAX = X$ $(AX)^H = AX$ $(XA)^H = XA$ 的全部或者一部分，则称矩阵 $X$ 是矩阵 $A$ 的 广义逆矩阵。\n">
+<title>矩阵理论系列笔记3：广义逆矩阵</title>
+
+<link rel='canonical' href='https://Guilong-gitlab.github.io/p/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B03%E5%B9%BF%E4%B9%89%E9%80%86%E7%9F%A9%E9%98%B5/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="矩阵理论系列笔记3：广义逆矩阵">
+<meta property='og:description' content="基本概念 定义 1（广义逆矩阵） 设 $A \\in \\mathbb{C}^{m \\times n}$，若 $X \\in \\mathbb{C}^{n \\times m}$ 满足以下四个 Penrose 方程：\n$AXA = A$ $XAX = X$ $(AX)^H = AX$ $(XA)^H = XA$ 的全部或者一部分，则称矩阵 $X$ 是矩阵 $A$ 的 广义逆矩阵。\n">
+<meta property='og:url' content='https://Guilong-gitlab.github.io/p/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B03%E5%B9%BF%E4%B9%89%E9%80%86%E7%9F%A9%E9%98%B5/'>
+<meta property='og:site_name' content='刘贵泷的个人网页'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='矩阵论' /><meta property='article:published_time' content='2025-02-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-28T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="矩阵理论系列笔记3：广义逆矩阵">
+<meta name="twitter:description" content="基本概念 定义 1（广义逆矩阵） 设 $A \\in \\mathbb{C}^{m \\times n}$，若 $X \\in \\mathbb{C}^{n \\times m}$ 满足以下四个 Penrose 方程：\n$AXA = A$ $XAX = X$ $(AX)^H = AX$ $(XA)^H = XA$ 的全部或者一部分，则称矩阵 $X$ 是矩阵 $A$ 的 广义逆矩阵。\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/image/avatar_hu_5fc70999b694beba.png" width="300"
+                            height="294" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">刘贵泷的个人网页</a></h1>
+            <h2 class="site-description">个人主页</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Guilong-gitlab.github.io/en/" >English</option>
+                                
+                                    <option value="https://Guilong-gitlab.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#基本概念">基本概念</a>
+      <ol>
+        <li><a href="#定义-1广义逆矩阵">定义 1（广义逆矩阵）</a></li>
+        <li><a href="#广义逆的特殊情况">广义逆的特殊情况</a></li>
+      </ol>
+    </li>
+    <li><a href="#广义逆矩阵-a">广义逆矩阵 $A^+$</a>
+      <ol>
+        <li><a href="#定理-2">定理 2</a></li>
+      </ol>
+    </li>
+    <li><a href="#a-矩阵的几种求法">$A^+$ 矩阵的几种求法</a>
+      <ol>
+        <li><a href="#满秩分解求a">满秩分解求$A^+$</a></li>
+        <li><a href="#定理-1">定理 1</a></li>
+        <li><a href="#推论-1">推论 1</a></li>
+        <li><a href="#奇异值分解求a">奇异值分解求$A^+$</a></li>
+        <li><a href="#定理-2-1">定理 2</a></li>
+        <li><a href="#简化奇异值分解求-a">简化奇异值分解求 $A^+$</a></li>
+        <li><a href="#定理-3">定理 3</a></li>
+        <li><a href="#利用奇异值分解求-a-的简化步骤">利用奇异值分解求 $A^+$ 的简化步骤</a></li>
+      </ol>
+    </li>
+    <li><a href="#广义逆与线性方程组">广义逆与线性方程组</a>
+      <ol>
+        <li><a href="#考察非齐次线性方程组">考察非齐次线性方程组</a></li>
+        <li><a href="#线性方程组的相容性通解与-a1">线性方程组的相容性、通解与 $A{1}$</a></li>
+        <li><a href="#定理-1penrose-定理">定理 1（Penrose 定理）</a></li>
+        <li><a href="#推论-1-1">推论 1</a></li>
+        <li><a href="#推论-2"><strong>推论 2</strong></a></li>
+        <li><a href="#初等等解法">初等等解法：</a></li>
+        <li><a href="#定理-2-2">定理 2</a></li>
+      </ol>
+    </li>
+    <li><a href="#二相容线性方程组的极小范数解与-a14"><strong>二、相容线性方程组的极小范数解与 $A^{(1,4)}$</strong></a>
+      <ol>
+        <li><a href="#引理-1"><strong>引理 1</strong></a></li>
+        <li><a href="#定理-3-1"><strong>定理 3</strong></a></li>
+        <li><a href="#定理-4"><strong>定理 4</strong></a></li>
+        <li><a href="#定理-5"><strong>定理 5</strong></a></li>
+        <li><a href="#证明"><strong>证明</strong></a></li>
+      </ol>
+    </li>
+    <li><a href="#三不相容线性方程组的最小二乘解与-a13"><strong>三、不相容线性方程组的最小二乘解与 $A^{(1,3)}$</strong></a>
+      <ol>
+        <li><a href="#引理-2"><strong>引理 2</strong></a></li>
+        <li><a href="#定理-6">定理 6</a></li>
+        <li><a href="#定理-7">定理 7</a></li>
+        <li><a href="#定理-8">定理 8</a></li>
+        <li><a href="#定理-9">定理 9</a></li>
+        <li><a href="#推论">推论</a></li>
+      </ol>
+    </li>
+    <li><a href="#四不相容方程组的极小范数最小二乘解与-a">四、不相容方程组的极小范数最小二乘解与 $A^+$</a>
+      <ol>
+        <li><a href="#引理-3">引理 3</a></li>
+        <li><a href="#定理-10">定理 10</a></li>
+      </ol>
+    </li>
+    <li><a href="#总结">总结</a>
+      <ol>
+        <li><a href="#例-5">例 5</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E7%B3%BB%E5%88%97%E7%AC%94%E8%AE%B03%E5%B9%BF%E4%B9%89%E9%80%86%E7%9F%A9%E9%98%B5/">矩阵理论系列笔记3：广义逆矩阵</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-02-28</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 19 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="基本概念">基本概念
+</h2><h3 id="定义-1广义逆矩阵">定义 1（广义逆矩阵）
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，若 $X \in \mathbb{C}^{n \times m}$ 满足以下四个 <strong>Penrose 方程</strong>：</p>
+<ol>
+<li>$AXA = A$</li>
+<li>$XAX = X$</li>
+<li>$(AX)^H = AX$</li>
+<li>$(XA)^H = XA$</li>
+</ol>
+<p>的全部或者一部分，则称矩阵 $X$ 是矩阵 $A$ 的 <strong>广义逆矩阵</strong>。</p>
+<p>注 1</p>
+<p>满足 <strong>定义 1</strong> 中一个、两个、三个或四个 Penrose 方程的广义逆矩阵共有 <strong>15 种</strong>。</p>
+<ul>
+<li>
+<p>若矩阵 $G$ <strong>仅</strong> 满足第 $i$ 个 Penrose 方程的广义逆矩阵，则记为：
+\begin{equation}\nonumber
+G = A^{(i)}, \quad i = 1,2,3,4.
+\end{equation}</p>
+</li>
+<li>
+<p>若矩阵 $G$ <strong>同时</strong> 满足 <strong>第 $i$ 和第 $j$ 个</strong> Penrose 方程的广义逆矩阵，则记为：
+\begin{equation}\nonumber
+G = A^{(i,j)}, \quad i,j = 1,2,3,4 \quad 且 \quad i \neq j.
+\end{equation}</p>
+</li>
+<li>
+<p>若矩阵 $G$ <strong>同时</strong> 满足 <strong>第 $i$、第 $j$ 和第 $k$ 个</strong> Penrose 方程的广义逆矩阵，则记为：
+\begin{equation}\nonumber
+G = A^{(i,j,k)}, \quad i,j,k = 1,2,3,4 \quad 且 \quad i,j,k \text{ 互不相等}.
+\end{equation}</p>
+</li>
+</ul>
+<h3 id="广义逆的特殊情况">广义逆的特殊情况
+</h3><p>若矩阵 $G$ <strong>满足全部四个 Penrose 方程</strong>，则记为：
+\begin{equation}\nonumber
+G = A^{(1,2,3,4)} \quad \text{或} \quad A^+.
+\end{equation}</p>
+<p>并将其称为 <strong>加号逆</strong> 或 <strong>伪逆</strong>，也称为 <strong>Moore-Penrose 广义逆</strong>。</p>
+<p>常见的广义逆有 $A^{(1)}$、$A^{(1,3)}$、$A^{(1,4)}$ 和 $A^+$，其中：</p>
+<ul>
+<li>$A^{(1)}$ 称为 <strong>环奇逆</strong>，记为 $A_l$；</li>
+<li>$A^{(1,3)}$ 称为 <strong>最小二乘广义逆</strong>，记为 $A^+$；</li>
+<li>$A^{(1,4)}$ 称为 <strong>极小范数广义逆</strong>，记为 $A_m$。</li>
+</ul>
+<h2 id="广义逆矩阵-a">广义逆矩阵 $A^+$
+</h2><p>例 1</p>
+<p>令：</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 1 \\
+0 & 0
+\end{bmatrix},
+\quad
+B =
+\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>可直接验证：</p>
+<div>
+\begin{equation}\nonumber
+A^+ =
+\begin{bmatrix}
+1/2 & 0 \\
+1/2 & 0
+\end{bmatrix},
+\quad
+B^+ =
+\begin{bmatrix}
+1/2 & 1/2
+\end{bmatrix}.
+\end{equation}
+</div>
+<hr>
+<p>问题</p>
+<p>对于任意矩阵 $A \in \mathbb{C}^{m \times n}$，<strong>伪逆是否存在？若存在是否唯一？</strong></p>
+<h3 id="定理-2">定理 2
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，则：</p>
+<ol>
+<li>$(A^+)^+ = A$；</li>
+<li>$(A^+)^H = (A^H)^+$；</li>
+<li>$(A^T)^+ = (A^+)^T$；</li>
+<li>$(A^+)^+ = A^+$；</li>
+<li>$(AB)^+ \neq B^+ A^+$；</li>
+<li><strong>一般地</strong>，$A^+ A \neq A A^+ \neq I$；</li>
+<li>$\operatorname{r}(A^+) = \operatorname{r}(A)$；</li>
+<li>$A^+ = (A^H A)^+ A^H = A^H (A A^H)^+$；</li>
+<li>$\operatorname{R}(A^+) = \operatorname{R}(A^H)$，$\operatorname{N}(A^+) = \operatorname{N}(A^H)$。</li>
+</ol>
+<p>证明</p>
+<ol>
+<li>
+<p>由于<strong>存在唯一性</strong>，且 <strong>方程 1–4</strong> 中 $A$ 与 $A^+$ <strong>对等地位</strong>，可得结论。</p>
+</li>
+<li></li>
+<li>
+<p>由于<strong>方程 1–4 共轭转置或转置可得</strong>，结论成立。</p>
+</li>
+<li>
+<p><strong>直接验证</strong>，如方程 1：
+\begin{equation}\nonumber
+A^H A (A^+ (A^H)^+) A^H A = A^H (AA^+)^H (AA^+)^H A.
+\end{equation}</p>
+</li>
+</ol>
+<p>由于：
+\begin{equation}\nonumber
+(AA^+)^H (AA^+) = A^H A.
+\end{equation}
+因此：
+\begin{equation}\nonumber
+(A^H A)^H A^H Y = A^H Y = Y.
+\end{equation}</p>
+<ol start="5">
+<li>反例验证 $(AB)^+ \neq B^+ A^+$</li>
+</ol>
+<p>取：</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix}, \quad
+B =
+\begin{bmatrix}
+1 & 0 \\
+1 & 1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>易得：</p>
+<div>
+\begin{equation}\nonumber
+A^+ =
+\begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix}, \quad
+B^+ = B^{-1} =
+\begin{bmatrix}
+1 & 0 \\
+-1 & 1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算：</p>
+<div>
+\begin{equation}\nonumber
+AB =
+\begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix}, \quad
+(AB)^+ =
+\begin{bmatrix}
+1/2 & 0 \\
+1/2 & 0
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>然而：</p>
+<div>
+\begin{equation}\nonumber
+B^+ A^+ =
+\begin{bmatrix}
+1 & 0 \\
+-1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>因此：
+\begin{equation}\nonumber
+(AB)^+ \neq B^+ A^+.
+\end{equation}</p>
+<ol start="6">
+<li>验证 $A^+ A \neq I$</li>
+</ol>
+<p>取：
+\begin{equation}\nonumber
+A = 0_{3 \times 2}.
+\end{equation}</p>
+<p>易见：
+\begin{equation}\nonumber
+A^+ = 0_{2 \times 3}.
+\end{equation}</p>
+<p>但：
+\begin{equation}\nonumber
+A^+ A = 0_{2 \times 2} \neq I.
+\end{equation}</p>
+<p>且：
+\begin{equation}\nonumber
+AA^+ = 0_{3 \times 3}.
+\end{equation}</p>
+<ol start="7">
+<li>结论</li>
+</ol>
+<p>由方程 1,2 <strong>易得</strong>，因为<strong>矩阵乘积的秩不超过各因子的秩</strong>，即：
+\begin{equation}\nonumber
+\operatorname{r}(A^+) = \operatorname{r}(A).
+\end{equation}</p>
+<ol start="8">
+<li>结论</li>
+</ol>
+<p>由 4) 可得：
+\begin{equation}\nonumber
+(A^H A)^+ A^H = A^+ (A^H)^+ A^H = A^+ (AA^+)^H.
+\end{equation}</p>
+<p>由于：
+\begin{equation}\nonumber
+A^+ AA^+ = A^+.
+\end{equation}</p>
+<p>则：
+\begin{equation}\nonumber
+(A^H A)^+ A^H = A^+.
+\end{equation}</p>
+<p>同理：
+\begin{equation}\nonumber
+A^H (A^H)^+ = A^H (A^H)^+ A^+ = (A^+)^H A^+ = A^+ A A^+ = A^+.
+\end{equation}</p>
+<ol start="9">
+<li>结论</li>
+</ol>
+<p>由 7) <strong>可得</strong>：
+\begin{equation}\nonumber
+\operatorname{r}(A^+) = \operatorname{r}(A) = \operatorname{r}(A^H).
+\end{equation}</p>
+<p>从而：
+\begin{equation}\nonumber
+\dim \operatorname{R}(A^+) = \dim \operatorname{R}(A^H).
+\end{equation}</p>
+<p>并且：
+\begin{equation}\nonumber
+\operatorname{R}(A^+) = \operatorname{R}(A^+ A A^+).
+\end{equation}</p>
+<p>又因为：
+\begin{equation}\nonumber
+\operatorname{R}(A^+ A A^+) \subseteq \operatorname{R}(A^H).
+\end{equation}</p>
+<p>因此：
+\begin{equation}\nonumber
+\operatorname{R}(A^+) = \operatorname{R}(A^H).
+\end{equation}</p>
+<p>由<strong>秩-加-核定理</strong>知：
+\begin{equation}\nonumber
+\dim N(A^+) + \dim R(A^+) = \dim N(A^H) + \dim R(A^H).
+\end{equation}</p>
+<p>因此：
+\begin{equation}\nonumber
+\dim N(A^+) = \dim N(A^H).
+\end{equation}</p>
+<p>另一方面：
+\begin{equation}\nonumber
+N(A^+) = N(A^+ AA^+) = N(A^+ (A^+)^H A^H).
+\end{equation}</p>
+<p>由于：
+\begin{equation}\nonumber
+N(A^+ (A^+)^H A^H) \supseteq N(A^H),
+\end{equation}
+可得：
+\begin{equation}\nonumber
+N(A^+) = N(A^H).
+\end{equation}</p>
+<hr>
+<p>注 1</p>
+<ol>
+<li>
+<p><strong>标量情况下的伪逆</strong>：
+\begin{equation}\nonumber
+(AA)^+ = \lambda^+ A^+,
+\end{equation}
+其中：
+\begin{equation}\nonumber
+\lambda^+ =
+\begin{cases}
+\frac{1}{\lambda}, &amp; \lambda \neq 0, \
+0, &amp; \lambda = 0.
+\end{cases}
+\end{equation}</p>
+</li>
+<li>
+<p><strong>对角矩阵的伪逆</strong>：</p>
+<p>若：
+\begin{equation}\nonumber
+D = \operatorname{diag}(d_1, \dots, d_n),
+\end{equation}
+则：
+\begin{equation}\nonumber
+D^+ = \operatorname{diag}(d_1^+, \dots, d_n^+),
+\end{equation}
+且：
+\begin{equation}\nonumber
+D^+ D = D D^+.
+\end{equation}</p>
+</li>
+<li>
+<p><strong>分块矩阵的伪逆</strong>：</p>
+<p>设：</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+A_1 & 0 \\
+0 & A_2
+\end{bmatrix}_{m \times n},
+\end{equation}
+</div>
+则：
+<div>
+\begin{equation}\nonumber
+A^+ =
+\begin{bmatrix}
+A_1^+ & 0 \\
+0 & A_2^+
+\end{bmatrix}_{n \times m}.
+\end{equation}
+</div>
+</li>
+<li>
+<p>若 <strong>列西矩阵</strong> $A$ 满足：
+\begin{equation}\nonumber
+A^H A = I,
+\end{equation}
+则：
+\begin{equation}\nonumber
+A^+ = A^H.
+\end{equation}</p>
+</li>
+</ol>
+<p><strong>示例：</strong></p>
+<p>设：</p>
+  <div>
+  \begin{equation}\nonumber
+  A =
+  \begin{bmatrix}
+  \frac{1}{\sqrt{2}} & 0 \\
+  0 & 1 \\
+  \frac{1}{\sqrt{2}} & 0
+  \end{bmatrix},
+  \end{equation}
+  </div>
+  则：
+  <div>
+  \begin{equation}\nonumber
+  A^+ = A^H =
+  \begin{bmatrix}
+  \frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}} \\
+  0 & 1 & 0
+  \end{bmatrix}.
+  \end{equation}
+  </div>
+<h2 id="a-矩阵的几种求法">$A^+$ 矩阵的几种求法
+</h2><h3 id="满秩分解求a">满秩分解求$A^+$
+</h3><h3 id="定理-1">定理 1
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，满足<strong>秩分解</strong>：
+\begin{equation}\nonumber
+A = BC,
+\end{equation}
+其中：</p>
+<ul>
+<li>$B \in \mathbb{C}^{m \times r}$，</li>
+<li>$C \in \mathbb{C}^{r \times n}$，</li>
+</ul>
+<p>则：
+\begin{equation}\nonumber
+A^+ = C^H (CC^H)^{-1} (B^H B)^{-1} B^H.
+\end{equation}</p>
+<p>等价地：
+\begin{equation}\nonumber
+A^+ = C^H (B^H A C^H)^{-1} B^H.
+\end{equation}</p>
+<p>证明</p>
+<p>由于：
+\begin{equation}\nonumber
+\operatorname{r}(CC^H) = \operatorname{r}(B^H B) = r,
+\end{equation}
+所以矩阵 $CC^H$ 与 $B^H B$ <strong>均可逆</strong>。</p>
+<p>因此，仅需验证上述 $A^+$ <strong>满足 Penrose 四个方程</strong>。</p>
+<p>证明方程 1：
+\begin{equation}\nonumber
+AXA = BCC^H (CC^H)^{-1} (B^H B)^{-1} B^H A.
+\end{equation}</p>
+<p>由于：
+\begin{equation}\nonumber
+CC^H (CC^H)^{-1} = I, \quad (B^H B)^{-1} B^H B = I,
+\end{equation}
+则：
+\begin{equation}\nonumber
+AXA = BC = A.
+\end{equation}</p>
+<p>证明方程 3：
+\begin{equation}\nonumber
+AX = BCC^H (CC^H)^{-1} (B^H B)^{-1} B^H.
+\end{equation}</p>
+<p>化简得：
+\begin{equation}\nonumber
+AX = B (B^H B)^{-1} B^H.
+\end{equation}</p>
+<p>因此：
+\begin{equation}\nonumber
+(AX)^H = AX.
+\end{equation}</p>
+<p>类似地，可证<strong>其余两个方程</strong>，从而证得 $A^+$ <strong>满足 Penrose 方程</strong>。</p>
+<hr>
+<h3 id="推论-1">推论 1
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，则：</p>
+<ol>
+<li>
+<p>当 $r = n$（<strong>列满秩</strong>）时：
+\begin{equation}\nonumber
+A^+ = (A^H A)^{-1} A^H.
+\end{equation}</p>
+</li>
+<li>
+<p>当 $r = m$（<strong>行满秩</strong>）时：
+\begin{equation}\nonumber
+A^+ = A^H (A A^H)^{-1}.
+\end{equation}</p>
+</li>
+</ol>
+<p>证明：</p>
+<ol>
+<li>
+<p>当 $r = n$，则 $A = AI_n = BC$ 为 $A$ <strong>的秩分解</strong>，由<strong>定理 1</strong> 可得：
+\begin{equation}\nonumber
+A^+ = (A^H A)^{-1} A^H.
+\end{equation}</p>
+</li>
+<li>
+<p>当 $r = m$，则 $A = I_m A = BC$，同理可证。</p>
+</li>
+</ol>
+<p>例 1 求伪逆</p>
+<p>给定矩阵：</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 2 & 1 & 5 \\
+2 & 5 & 1 & 14 \\
+4 & 9 & 3 & 24
+\end{bmatrix},
+\quad
+B =
+\begin{bmatrix}
+1 \\
+3
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>解</p>
+<p>对 $A$ 进行行变换：</p>
+<div>
+\begin{equation}\nonumber
+A \to
+\begin{bmatrix}
+1 & 2 & 1 & 5 \\
+0 & 1 & -1 & 4 \\
+0 & 1 & -1 & 4
+\end{bmatrix}
+\to
+\begin{bmatrix}
+1 & 0 & 3 & -3 \\
+0 & 1 & -1 & 4 \\
+0 & 1 & -1 & 0
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>令：</p>
+<div>
+\begin{equation}\nonumber
+B =
+\begin{bmatrix}
+1 & 2 \\
+2 & 5 \\
+4 & 9
+\end{bmatrix},
+\quad
+C =
+\begin{bmatrix}
+1 & 0 & 3 & -3 \\
+0 & 1 & -1 & 4
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算伪逆</p>
+<p>由<strong>定理 1</strong>：
+\begin{equation}\nonumber
+A^+ = C^H (CC^H)^{-1} (B^H B)^{-1} B^H.
+\end{equation}</p>
+<p>计算得：</p>
+<div>
+\begin{equation}\nonumber
+A^+ =
+\frac{1}{234}
+\begin{bmatrix}
+54 & -75 & 32 \\
+-43 & 21 & 130 \\
+-180 & -182 & -34 \\
+53 & -15 & -5
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算 $B$ 的伪逆</p>
+<p>由于 $B$ <strong>列满秩</strong>，可用：
+\begin{equation}\nonumber
+B^+ = (B^H B)^{-1} B^H.
+\end{equation}</p>
+<p>计算：</p>
+<div>
+\begin{equation}\nonumber
+B^+ = 
+\left(
+\begin{bmatrix}
+1 \\
+3
+\end{bmatrix}^H
+\begin{bmatrix}
+1 \\
+3
+\end{bmatrix}
+\right)^{-1}
+\begin{bmatrix}
+1 \\
+3
+\end{bmatrix}^H
+= \frac{1}{10}
+\begin{bmatrix}
+1 & 3
+\end{bmatrix}.
+\end{equation}
+</div>
+<hr>
+<h3 id="奇异值分解求a">奇异值分解求$A^+$
+</h3><h3 id="定理-2-1">定理 2
+</h3><p>设 $A \in \mathbb{C}_r^{m \times n}$，其<strong>奇异值分解</strong>为：</p>
+<div>
+\begin{equation}\nonumber
+A = U
+\begin{bmatrix}
+S_r & 0 \\
+0 & 0
+\end{bmatrix}
+V^H,
+\end{equation}
+</div>
+其中：
+- $S_r = \operatorname{diag}(\sigma_1, \dots, \sigma_r)$，且 $\sigma_i > 0$，$1 \leq i \leq r$。
+<p>则 $A^+$ 为：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = V
+\begin{bmatrix}
+S_r^{-1} & 0 \\
+0 & 0
+\end{bmatrix}
+U^H.
+\end{equation}
+</div>
+<p>其中：</p>
+<div>
+\begin{equation}\nonumber
+S_r^{-1} = \operatorname{diag}(\sigma_1^{-1}, \dots, \sigma_r^{-1}).
+\end{equation}
+</div>
+<hr>
+<h3 id="简化奇异值分解求-a">简化奇异值分解求 $A^+$
+</h3><p>设 $A \in \mathbb{C}_r^{m \times n}$，则：</p>
+<div>
+\begin{equation}\nonumber
+A = U_1
+\begin{bmatrix}
+\sigma_1 &  &  \\
+ & \ddots &  \\
+ &  & \sigma_r
+\end{bmatrix}
+V_1^H.
+\end{equation}
+</div>
+<p>其中：</p>
+<ul>
+<li>$U_1 = (y_1, \dots, y_r)_{m \times r}$，</li>
+<li>$V_1 = (x_1, \dots, x_r)_{n \times r}$ 为<strong>列酉矩阵</strong>。</li>
+</ul>
+<p>则 $A^+$ 由下式给出：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = V_1
+\begin{bmatrix}
+\sigma_1^{-1} &  &  \\
+ & \ddots &  \\
+ &  & \sigma_r^{-1}
+\end{bmatrix}
+U_1^H.
+\end{equation}
+</div>
+<h3 id="定理-3">定理 3
+</h3><p>设 $A \in \mathbb{C}_r^{m \times n}$，则 $A$ 的<strong>简化奇异值分解</strong>为：</p>
+<div>
+\begin{equation}\nonumber
+A = U_1 S_r V_1^H.
+\end{equation}
+</div>
+<p>则 $A^+$ 由下式给出：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = V_1
+\begin{bmatrix}
+\lambda_1^{-1} &  &  \\
+ & \ddots &  \\
+ &  & \lambda_r^{-1}
+\end{bmatrix}
+V_1^H A^H.
+\end{equation}
+</div>
+<hr>
+<h3 id="利用奇异值分解求-a-的简化步骤">利用奇异值分解求 $A^+$ 的简化步骤
+</h3><ol>
+<li>
+<p><strong>求出 $A^H A$ 的 $r$ 个非零特征值</strong> $\lambda_1, \dots, \lambda_r$，其中 $\lambda_i &gt; 0$。</p>
+</li>
+<li>
+<p><strong>求出 $A^H A$ 对应于特征值</strong> $\lambda_1, \dots, \lambda_r$ <strong>的标准正交特征向量</strong> $a_1, \dots, a_r$，令：
+\begin{equation}\nonumber
+V_1 = (a_1, \dots, a_r).
+\end{equation}</p>
+</li>
+<li>
+<p><strong>则 $A^+$ 由下式给出</strong>：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = V_1
+\begin{bmatrix}
+\lambda_1^{-1} &  &  \\
+& \ddots &  \\
+&  & \lambda_r^{-1}
+\end{bmatrix}
+V_1^H A^H.
+\end{equation}
+</div>
+</li>
+</ol>
+<p>注：当 $\operatorname{r}(A) = 1$ 时的伪逆计算</p>
+<p>当 $\operatorname{r}(A) = 1$ 时，非零特征值<strong>只有 1 个</strong>，则：
+\begin{equation}\nonumber
+A^+ = \frac{1}{\lambda_1} A^H.
+\end{equation}</p>
+<p>此时，设：
+\begin{equation}\nonumber
+A = (a_{ij})_{m \times n},
+\end{equation}
+且：
+\begin{equation}\nonumber
+\operatorname{r}(A^H A) = \operatorname{r}(A) = 1.
+\end{equation}</p>
+<p>由此可知：</p>
+<div>
+\begin{equation}\nonumber
+\lambda_1 = \operatorname{tr}
+\begin{bmatrix}
+\lambda_1 & 0 & \cdots & 0 \\
+0 & 0 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 0
+\end{bmatrix}
+= \operatorname{tr}(A^H A).
+\end{equation}
+</div>
+<p>计算：
+\begin{equation}\nonumber
+\lambda_1 = \sum_{j=1}^{n} \sum_{i=1}^{m} |a_{ij}|^2.
+\end{equation}</p>
+<p><strong>有核 1 公式</strong>：
+若 $\operatorname{r}(A) = 1$，则：
+\begin{equation}\nonumber
+A^+ = \frac{1}{\sum_{i,j} |a_{ij}|^2} A^H.
+\end{equation}</p>
+<hr>
+<p>例 2 用各种方法求伪逆</p>
+<p>给定矩阵：</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 2 \\
+0 & 0 \\
+2 & 4
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>解 (1) 用 SVD 计算 $A^+$</p>
+<p>计算：</p>
+<div>
+\begin{equation}\nonumber
+A^H A =
+\begin{bmatrix}
+1 & 0 & 2 \\
+2 & 0 & 4
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 \\
+0 & 0 \\
+2 & 4
+\end{bmatrix}
+=
+\begin{bmatrix}
+5 & 10 \\
+10 & 20
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算特征值：
+\begin{equation}\nonumber
+| \lambda I - A^H A | = \lambda (\lambda - 25) = 0,
+\end{equation}
+得 $\lambda_1 = 25$。</p>
+<p>对应特征向量：
+\begin{equation}\nonumber
+x_1 = (1,2)^T, \quad Ax_1 = (5,0,10)^T.
+\end{equation}</p>
+<p>单位化：</p>
+<div>
+\begin{equation}\nonumber
+V_1 =
+\begin{bmatrix}
+\frac{1}{\sqrt{5}} \\
+\frac{2}{\sqrt{5}}
+\end{bmatrix},
+\quad
+U_1 =
+\begin{bmatrix}
+\frac{1}{\sqrt{5}} & 0 \\
+0 & 2/\sqrt{5}
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算 $A^+$：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = V_1 (5)^{-1} U_1^H = V_1 (5)^{-1} U_1^H A^H.
+\end{equation}
+</div>
+<p>最终：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = \frac{1}{25}
+\begin{bmatrix}
+1 & 0 & 2 \\
+2 & 0 & 4
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>解 (2) 用定理 3 计算 $A^+$</p>
+<div>
+\begin{equation}\nonumber
+V_1 =
+\begin{bmatrix}
+\frac{1}{\sqrt{5}} \\
+\frac{2}{\sqrt{5}}
+\end{bmatrix},
+\quad
+A^+ = V_1 (25)^{-1} V_1^H A^H.
+\end{equation}
+</div>
+<p>最终：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = \frac{1}{25}
+\begin{bmatrix}
+1 & 0 & 2 \\
+2 & 0 & 4
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>解 (3) 用满秩分解计算 $A^+$</p>
+<p>令：</p>
+<div>
+\begin{equation}\nonumber
+A = BC =
+\begin{bmatrix}
+1 \\
+0 \\
+2
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算：</p>
+<div>
+\begin{equation}\nonumber
+B^+ = (B^H B)^{-1} B^H = \frac{1}{5}
+\begin{bmatrix}
+1 & 0 & 2
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算：</p>
+<div>
+\begin{equation}\nonumber
+C^+ = C^H (CC^H)^{-1} = \frac{1}{5}
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = C^+ B^+ = \frac{1}{25}
+\begin{bmatrix}
+1 & 0 & 2 \\
+2 & 0 & 4
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>解 (4) 用秩 1 公式计算 $A^+$</p>
+<div>
+\begin{equation}\nonumber
+A^+ = \frac{1}{25} A^H.
+\end{equation}
+</div>
+<p>最终：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = \frac{1}{25}
+\begin{bmatrix}
+1 & 0 & 2 \\
+2 & 0 & 4
+\end{bmatrix}.
+\end{equation}
+</div>
+<hr>
+<h2 id="广义逆与线性方程组">广义逆与线性方程组
+</h2><h3 id="考察非齐次线性方程组">考察非齐次线性方程组
+</h3><p>\begin{equation}\nonumber
+Ax = b \quad (1)
+\end{equation}</p>
+<p>其中：</p>
+<ul>
+<li>$A \in \mathbb{C}^{m \times n}$，</li>
+<li>$b \in \mathbb{C}^{m}$ 给定，</li>
+<li>$x \in \mathbb{C}^{n}$ 待定。</li>
+</ul>
+<p>若存在 $x \in \mathbb{C}^{n}$ 使得 $(1)$ 式成立，则称此方程组<strong>相容</strong>，否则称为<strong>不相容</strong>或<strong>矛盾</strong>。</p>
+<p>关于方程组 $(1)$ 的几个问题：</p>
+<ol>
+<li>
+<p><strong>方程组 $(1)$ 相容的条件是什么？</strong><br>
+<strong>相容时，如何求其通解？</strong></p>
+</li>
+<li>
+<p><strong>方程组相容时，如何求其通解中极小范数解？</strong><br>
+即求 $x_0$ 使得：
+\begin{equation}\nonumber
+|x_0| = \min_{Ax = b} |x|,
+\end{equation}
+其中 $|\cdot|$ 为 $\mathbb{C}^n$ 中<strong>内积诱导的范数</strong>。</p>
+</li>
+<li>
+<p><strong>方程组不相容时</strong>，需要求出这样的 $x_0$，满足：
+\begin{equation}\nonumber
+|Ax_0 - b| = \min_{x \in \mathbb{C}^n} |Ax - b|.
+\end{equation}
+此时，称 $x_0$ 为方程组的<strong>最小二乘解</strong>。</p>
+</li>
+<li>
+<p><strong>一般而言，矛盾的方程组的最小二乘解并不唯一</strong>，需要求出具有<strong>极小范数</strong>的向量 $x_0$，即 $x_0$ 满足：
+\begin{equation}\nonumber
+|x_0| = \min_{|Ax - b|} |x|.
+\end{equation}</p>
+<p>这一条件可证明 $x_0$ 是<strong>唯一</strong>的，称为<strong>极小范数最小二乘解</strong>。</p>
+</li>
+</ol>
+<h3 id="线性方程组的相容性通解与-a1">线性方程组的相容性、通解与 $A{1}$
+</h3><p>在方程组 $(1)$：
+\begin{equation}\nonumber
+Ax = b
+\end{equation}
+中，若 $A$ <strong>可逆</strong>，则唯一解为：
+\begin{equation}\nonumber
+x = A^{-1} b.
+\end{equation}</p>
+<p>当 $A$ <strong>不可逆，或不是方阵</strong> 时，如何处理？</p>
+<hr>
+<h3 id="定理-1penrose-定理">定理 1（Penrose 定理）
+</h3><p>设：</p>
+<ul>
+<li>$A \in \mathbb{C}^{m \times n}$，</li>
+<li>$B \in \mathbb{C}^{p \times q}$，</li>
+<li>$C \in \mathbb{C}^{m \times q}$。</li>
+</ul>
+<p>则矩阵方程：
+\begin{equation}\nonumber
+AXB = D
+\end{equation}
+<strong>相容的充要条件</strong>是：
+\begin{equation}\nonumber
+AA^{(1)} D B^{(1)} B = D.
+\end{equation}</p>
+<p>其中：</p>
+<ul>
+<li>$A^{(1)} \in A{1}$，</li>
+<li>$B^{(1)} \in B{1}$。</li>
+</ul>
+<p>此时，该方程组的<strong>通解</strong>为：
+\begin{equation}\nonumber
+X = A^{(1)} D B^{(1)} + Y - A^{(1)} A Y B B^{(1)}.
+\end{equation}
+其中：</p>
+<ul>
+<li>$Y \in \mathbb{C}^{n \times p}$ 为<strong>任意矩阵</strong>。</li>
+</ul>
+<p>证明：</p>
+<p><strong>充要性：</strong></p>
+<ul>
+<li>
+<p><strong>$\Rightarrow$ 方向</strong>：若 $AA^{(1)} D B^{(1)} B = D$，令：
+\begin{equation}\nonumber
+X = A^{(1)} D B^{(1)},
+\end{equation}
+则满足：
+\begin{equation}\nonumber
+AXB = D.
+\end{equation}</p>
+</li>
+<li>
+<p><strong>$\Leftarrow$ 方向</strong>：若 $AXB = D$ 有解，则：
+\begin{equation}\nonumber
+D = AXB = AA^{(1)} AXB B^{(1)} B = AA^{(1)} D B^{(1)} B.
+\end{equation}</p>
+</li>
+</ul>
+<p>证明通解公式：</p>
+<p>首先易证 $(2)$ 满足 $AXB = D$。</p>
+<p>其次，设 $X$ 是 $AXB = D$ 的任意解，则可表为：
+\begin{equation}\nonumber
+X = A^{(1)} D B^{(1)} + X - A^{(1)} A X B B^{(1)}.
+\end{equation}</p>
+<p>故 $X$ 仍为 $(2)$ 的形式，从而 $(2)$ 为 $AXB = D$ 的通解。</p>
+<h3 id="推论-1-1">推论 1
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，$A^{(1)} \in A{1}$，则：
+\begin{equation}\nonumber
+A{1} = { A^{(1)} + Z - A^{(1)} A Z A A^{(1)} \mid Z \in \mathbb{C}^{n \times m} \text{ 任意} }.
+\end{equation}</p>
+<p>证明：
+在 <strong>定理 1</strong> 中，取 $D = A$，则 $AXA = A$ 的通解为：
+\begin{equation}\nonumber
+X = A^{(1)} A A^{(1)} + Y - A^{(1)} A Y A A^{(1)},
+\end{equation}
+其中 $Y \in \mathbb{C}^{n \times m}$。</p>
+<p>令：
+\begin{equation}\nonumber
+Y = A^{(1)} + Z,
+\end{equation}
+即得证。</p>
+<h3 id="推论-2"><strong>推论 2</strong>
+</h3><p>方程组：
+\begin{equation}\nonumber
+Ax = b
+\end{equation}
+<strong>相容的充要条件</strong>是：
+\begin{equation}\nonumber
+AA^{(1)} b = b.
+\end{equation}
+其<strong>通解</strong>为：
+\begin{equation}\nonumber
+x = A^{(1)} b + (I - A^{(1)} A) y, \quad y \in \mathbb{C}^{n} \text{ 任意}.
+\end{equation}</p>
+<p><strong>证明：</strong>
+在 <strong>定理 1</strong> 中，取：</p>
+<ul>
+<li>$D = b \in \mathbb{C}^{m}$，</li>
+<li>$B = I$，</li>
+</ul>
+<p>即得证。</p>
+<ul>
+<li><strong>注 1</strong>：因为 $A^+ \in A{1}$，故当 $Ax = b$ <strong>相容</strong>时，通解可写为：
+\begin{equation}\nonumber
+x = A^+ b + (I - A^+ A) y, \quad y \in \mathbb{C}^{n}.
+\end{equation}</li>
+</ul>
+<p>由此可断言：
+\begin{equation}\nonumber
+\text{相容方程组 } Ax = b \text{ 的解唯一} \quad \Longleftrightarrow \quad A \text{ 列满秩}.
+\end{equation}</p>
+<ul>
+<li>注 2：
+当 $b = 0$ 时，齐次方程：
+\begin{equation}\nonumber
+Ax = 0
+\end{equation}
+<strong>总有解</strong>，其通解为：
+\begin{equation}\nonumber
+x = (I - A^+ A) y, \quad y \in \mathbb{C}^n \text{ 任意}.
+\end{equation}</li>
+</ul>
+<hr>
+<h3 id="初等等解法">初等等解法：
+</h3><p>下面给出 $A{1}$ 的一个初等等解法：</p>
+<h3 id="定理-2-2">定理 2
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，$P, Q$ 分别是 $m$ 阶和 $n$ 阶<strong>可逆矩阵</strong>。</p>
+<p>若 $PAQ$ 具有如下分块形式：</p>
+<div>
+\begin{equation}\nonumber
+PAQ =
+\begin{bmatrix}
+I_r & 0 \\
+0 & 0
+\end{bmatrix},
+\end{equation}
+</div>
+则：
+<div>
+\begin{equation}\nonumber
+A\{1\} = \left\{ Q
+\begin{bmatrix}
+I_r & X_{12} \\
+X_{21} & X_{22}
+\end{bmatrix}
+P \mid X_{ij} \text{ 为适当阶数的任意矩阵} \right\}.
+\end{equation}
+</div>
+<p>注 1：
+<strong>特别地</strong>，当 $A$ 为 <strong>$n$ 阶可逆矩阵</strong> 时，$PAQ = I_n$，此时：
+\begin{equation}\nonumber
+A{1} = {Q I_n P} = {QP} = {A^{-1}}.
+\end{equation}</p>
+<p>即 $A{1}$ <strong>中只有唯一的逆矩阵</strong> $A^{-1}$。</p>
+<p>注 2：
+<strong>由定理 2 知</strong>，对于：</p>
+<div>
+\begin{equation}\nonumber
+\begin{bmatrix}
+A & I_m \\
+I_n &
+\end{bmatrix}
+\quad \xrightarrow{\text{初等变换}} \quad
+\begin{bmatrix}
+PAQ & P \\
+Q & 
+\end{bmatrix}
+=
+\begin{bmatrix}
+I_r & 0 & P \\
+0 & 0 & 0 \\
+& & Q
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>例 1：
+设：</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 0 & -1 & 1 \\
+0 & 2 & 2 & 2 \\
+-1 & 4 & 5 & 3
+\end{bmatrix},
+\end{equation}
+</div>
+求 $A\{1\}$。
+<p><strong>解：</strong>
+由初等变换：</p>
+<div>
+\begin{equation}\nonumber
+\begin{bmatrix} A & I_4 \\ I_4 & 0 \end{bmatrix}
+\quad \xrightarrow{\text{初等变换}} \quad
+\begin{bmatrix} I_2 & 0 & P \\ 0 & 0 & 0 \\ & & Q \end{bmatrix}.
+\end{equation}
+</div>
+其中：
+<div>
+\begin{equation}\nonumber
+P =
+\begin{bmatrix}
+1 & 0 & 0 \\
+1 & 1/2 & 0 \\
+1 & -2 & 1
+\end{bmatrix},
+\quad
+Q =
+\begin{bmatrix}
+1 & 0 & 1 & -1 \\
+0 & 1 & -1 & -1 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>因此，$PAQ = \begin{bmatrix} I_2 &amp; 0 \ 0 &amp; 0 \end{bmatrix}$，所以：</p>
+<div>
+\begin{equation}\nonumber
+A\{1\} = \left\{ Q
+\begin{bmatrix}
+I_2 & X_{12} \\
+X_{21} & X_{22}
+\end{bmatrix}
+P \mid X_{ij} \text{ 为适当阶数的任意矩阵} \right\}.
+\end{equation}
+</div>
+<p>取 $X_{ij} = 0$，得 $A$ 的一个 ${1}$ 逆：</p>
+<div>
+\begin{equation}\nonumber
+A^{(1)} = Q
+\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix} P
+=
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1/2 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+\in A\{1\}.
+\end{equation}
+</div>
+<p>例 2：
+求解线性方程组：
+\begin{equation}\nonumber
+\begin{cases}
+x_1 + 2x_2 - x_3 = 1, \</p>
+<ul>
+<li>x_2 + 2x_3 = 2.
+\end{cases}
+\end{equation}</li>
+</ul>
+<p><strong>解：</strong>
+方程组 $Ax = b$，其中：</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 2 & -1 \\
+0 & -1 & 2
+\end{bmatrix},
+\quad
+b =
+\begin{bmatrix}
+1 \\
+2
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>由于：
+\begin{equation}\nonumber
+r(A) = r(A, b) = 2,
+\end{equation}
+故方程组 <strong>相容</strong>，通解为：
+\begin{equation}\nonumber
+x = A^+ b + (I - A^+ A) y, \quad y \in \mathbb{C}^3.
+\end{equation}</p>
+<p>因为 $A$ <strong>行满秩</strong>，所以：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = A^H (AA^H)^{-1}.
+\end{equation}
+</div>
+<p>计算：</p>
+<div>
+\begin{equation}\nonumber
+A^H A =
+\begin{bmatrix}
+1 & 2 & -1 \\
+0 & -1 & 2
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 \\
+2 & -1 \\
+-1 & 2
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 2 & -1 \\
+2 & 4 & -2 \\
+-1 & -2 & 1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>取逆：</p>
+<div>
+\begin{equation}\nonumber
+(A^H A)^{-1} =
+\frac{1}{14}
+\begin{bmatrix}
+5 & 4 \\
+6 & 2 \\
+3 & 8
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>所以：</p>
+<div>
+\begin{equation}\nonumber
+A^+ =
+\frac{1}{14}
+\begin{bmatrix}
+5 & 4 \\
+6 & 2 \\
+3 & 8
+\end{bmatrix}.
+\end{equation}
+</div>
+<p><strong>通解表达式：</strong></p>
+<div>
+\begin{equation}\nonumber
+x = A^+ b + (I - A^+ A) y.
+\end{equation}
+</div>
+<p>计算：</p>
+<div>
+\begin{equation}\nonumber
+A^+ b =
+\frac{1}{14}
+\begin{bmatrix}
+13 \\
+10 \\
+19
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>而：</p>
+<div>
+\begin{equation}\nonumber
+I - A^+ A =
+\frac{1}{14}
+\begin{bmatrix}
+9 & -6 & -3 \\
+-6 & 4 & 2 \\
+-3 & 2 & 1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>因此：</p>
+<div>
+\begin{equation}\nonumber
+x =
+\frac{1}{14}
+\begin{bmatrix}
+13 \\
+10 \\
+19
+\end{bmatrix}
++
+\frac{1}{14}
+\begin{bmatrix}
+9 & -6 & -3 \\
+-6 & 4 & 2 \\
+-3 & 2 & 1
+\end{bmatrix}
+\begin{bmatrix}
+c_1 \\
+c_2 \\
+c_3
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>其中 $c_i$ 为 <strong>任意常数</strong>。</p>
+<hr>
+<h2 id="二相容线性方程组的极小范数解与-a14"><strong>二、相容线性方程组的极小范数解与 $A^{(1,4)}$</strong>
+</h2><p>我们先来确定集合 $A^{(1,4)}$：</p>
+<h3 id="引理-1"><strong>引理 1</strong>
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，则：
+\begin{equation}\nonumber
+A^{(1,4)} = \lbrace X \in \mathbb{C}^{m \times n} \mid XA = A^{(1,4)} A \rbrace,
+\end{equation}
+即 $A^{(1,4)}$ 是由矩阵方程 $XA = A^{(1,4)} A$ 的所有解构成，其中 $A^{(1,4)} \in A^{(1,4)}$。</p>
+<p><strong>证明</strong>
+设 $X$ 满足方程：
+\begin{equation}\nonumber
+XA = A^{(1,4)} A.
+\end{equation}
+则：
+\begin{equation}\nonumber
+AXA = AA^{(1,4)} A = A.
+\end{equation}</p>
+<p>又因：
+\begin{equation}\nonumber
+(XA)^{H} = (A^{(1,4)} A)^{H} = A^{(1,4)} A = XA,
+\end{equation}
+所以：
+\begin{equation}\nonumber
+X \in A^{(1,4)}.
+\end{equation}</p>
+<p><strong>反之</strong>，若：
+\begin{equation}\nonumber
+X \in A^{(1,4)},
+\end{equation}
+则：
+\begin{equation}\nonumber
+A^{(1,4)} A = A^{(1,4)} (AXA) = (A^{(1,4)} A)^{H} (XA)^{H}.
+\end{equation}</p>
+<p>进一步推导：
+\begin{equation}\nonumber
+(A^{(1,4)} A)^{H} X^{H} = A^{H} X^{H} = (XA)^{H} = XA.
+\end{equation}</p>
+<p>由 <strong>引理 1</strong> 和 <strong>上一节定理 1</strong>，可得 $A^{(1,4)}$ 的通式。</p>
+<hr>
+<h3 id="定理-3-1"><strong>定理 3</strong>
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，$A^{(1,4)} \in A^{(1,4)}$，则：
+\begin{equation}\nonumber
+A^{(1,4)} = \lbrace A^{(1,4)} + Z(I - AA^{(1,4)}) \mid Z \in \mathbb{C}^{n \times m} \rbrace.
+\end{equation}</p>
+<p><strong>证明</strong>
+在 <strong>定理 1</strong> 中，取：
+\begin{equation}\nonumber
+D = A^{(1,4)} A, \quad B = A, \quad A = I,
+\end{equation}
+则方程：
+\begin{equation}\nonumber
+XA = A^{(1,4)} A
+\end{equation}
+的通解为：
+\begin{equation}\nonumber
+X = A^{(1,4)} AA^{(1,4)} + Y - YAA^{(1,4)},
+\end{equation}
+其中 $Y \in \mathbb{C}^{m \times n}$。</p>
+<p>令：
+\begin{equation}\nonumber
+Y = A^{(1,4)} + Z,
+\end{equation}
+即得所求结论。</p>
+<hr>
+<h3 id="定理-4"><strong>定理 4</strong>
+</h3><p>设 $A^{(1,4)} \in A^{(1,4)}$，则 $A^{(1,4)} b$ 都是相容方程组：
+\begin{equation}\nonumber
+Ax = b
+\end{equation}
+的极小范数解，且 $Ax = b$ 的极小范数解是唯一的。</p>
+<p><strong>证明</strong>
+线性方程组 $Ax = b$ 的任意解 $x$ 可表示为：
+\begin{equation}\nonumber
+x = A^{(1,4)} b + (I - A^{(1,4)} A) y.
+\end{equation}</p>
+<p>令 $b = Ax_0$（总存在这样的 $x_0$，因为 $Ax = b$ 有解），则：
+\begin{equation}\nonumber
+\left( (I - A^{(1,4)} A) y, A^{(1,4)} b \right)
+= (A^{(1,4)} b)^{H} (I - A^{(1,4)} A) y
+= (A^{(1,4)} A x_0)^{H} (I - A^{(1,4)} A) y
+= x_0^{H} (A^{(1,4)} A)^{H} (I - A^{(1,4)} A) y.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+= x_0^{H} (A^{(1,4)} A) (I - A^{(1,4)} A) y
+= x_0^{H} A^{(1,4)} A - A^{(1,4)} A A^{(1,4)} A) y
+= x_0^{H} A^{(1,4)} A - A^{(1,4)} A) y = 0.
+\end{equation}</p>
+<p>因此 $A^{(1,4)} b \perp (I - A^{(1,4)} A) y$，从而：
+\begin{equation}\nonumber
+|x|^2 = | A^{(1,4)} b |^2 + |(I - A^{(1,4)} A) y|^2 \geq |A^{(1,4)} b|^2.
+\end{equation}</p>
+<p>由此得出 $A^{(1,4)} b$ 为 $Ax = b$ 的极小范数解。</p>
+<p><strong>唯一性证明</strong>
+设 $x_1$ 也是 $Ax = b$ 的极小范数解，则：
+\begin{equation}\nonumber
+|x_1|^2 = |A^{(1,4)} b|^2.
+\end{equation}</p>
+<p>由通解定义可知，存在 $y_1$ 使得：
+\begin{equation}\nonumber
+x_1 = A^{(1,4)} b + (I - A^{(1,4)} A) y_1.
+\end{equation}</p>
+<p>\begin{equation}\nonumber
+|x_1|^2 = |A^{(1,4)} b|^2 + |(I - A^{(1,4)} A) y_1|^2.
+\end{equation}</p>
+<p>故有：
+\begin{equation}\nonumber
+(I - A^{(1,4)} A) y_1 = 0,
+\end{equation}</p>
+<p>从而：
+\begin{equation}\nonumber
+x_1 = A^{(1,4)} b.
+\end{equation}</p>
+<p><strong>注</strong>
+此结论说明，对相容方程 $Ax = b$，$A^{(1,4)}$ 可能有无穷多个，但其中任一 $A^{(1,4)}$，$A^{(1,4)} b$ 总是不变的，且为 $Ax = b$ 的唯一极小范数解。</p>
+<h3 id="定理-5"><strong>定理 5</strong>
+</h3><p>设 $X \in \mathbb{C}^{n \times m}$，对任意的 $b \in \mathbb{C}^{m}$，$Xb$ 都为相容方程组 $Ax = b$ 的极小范数解，则必有 $X \in A^{(1,4)}$。</p>
+<h3 id="证明"><strong>证明</strong>
+</h3><p>由<strong>定理 4</strong> 证明知：
+\begin{equation}\nonumber
+Xb = A^{(1,4)} b, \quad \forall b \in \mathbb{C}^{m}.
+\end{equation}</p>
+<p>取 $X$ 为 $A$ 的各列，得：
+\begin{equation}\nonumber
+XA = A^{(1,4)} A.
+\end{equation}</p>
+<p>由<strong>引理 1</strong> 知：
+\begin{equation}\nonumber
+X \in A^{(1,4)}.
+\end{equation}</p>
+<p><strong>例 3</strong>
+求 $Ax = b$ 的极小范数解，其中：
+\begin{equation}\nonumber
+A =
+\begin{pmatrix}
+1 &amp; 2 &amp; -1 \
+0 &amp; -1 &amp; 2
+\end{pmatrix}, \quad
+b =
+\begin{pmatrix}
+1 \
+2
+\end{pmatrix}.
+\end{equation}</p>
+<p><strong>解</strong>
+由 $\operatorname{rank}(A) = \operatorname{rank}(A, b) = 2$，知方程组相容。由<strong>例 2</strong> 知：</p>
+<p>\begin{equation}\nonumber
+A^{+} = \frac{1}{14}
+\begin{pmatrix}
+5 &amp; 4 \
+6 &amp; 2 \
+3 &amp; 8
+\end{pmatrix}.
+\end{equation}</p>
+<p>从而极小范数解为：
+\begin{equation}\nonumber
+x = A^{+} b = \frac{1}{14}
+\begin{pmatrix}
+5 &amp; 4 \
+6 &amp; 2 \
+3 &amp; 8
+\end{pmatrix}
+\begin{pmatrix}
+1 \
+2
+\end{pmatrix}
+= \frac{1}{14}
+\begin{pmatrix}
+13 \
+10 \
+19
+\end{pmatrix}.
+\end{equation}</p>
+<hr>
+<h2 id="三不相容线性方程组的最小二乘解与-a13"><strong>三、不相容线性方程组的最小二乘解与 $A^{(1,3)}$</strong>
+</h2><p>当 $Ax = b$ 不相容时，即没有通常意义下的解，此时我们需要求出 $x$ 使 $|Ax - b|$ 为极小，称满足此要求的 $x$ 为不相容方程组 $Ax = b$ 的<strong>最小二乘解</strong>。我们将看到此类解与 $A^{(1,3)}$ 有密切关系，我们先介绍一个引理。</p>
+<h3 id="引理-2"><strong>引理 2</strong>
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，$A^{(1,3)} \in A^{(1,3)}$，则：
+\begin{equation}\nonumber
+A^{(1,3)} = {X \in \mathbb{C}^{m \times n} \mid AX = AA^{(1,3)}},
+\end{equation}
+即 $A^{(1,3)}$ 由矩阵方程 $AX = AA^{(1,3)}$ 的所有解构成。</p>
+<p><strong>证明</strong>
+设 $X$ 满足方程 $AX = AA^{(1,3)}$，则
+\begin{equation}\nonumber
+AXA = AA^{(1,3)} A = A,
+\end{equation}
+\begin{equation}\nonumber
+(AX)^H = (AA^{(1,3)})^H = AA^{(1,3)} = AX,
+\end{equation}
+所以 $X \in A^{(1,3)}$。</p>
+<p>反之，若 $X \in A^{(1,3)}$，则
+\begin{equation}\nonumber
+AA^{(1,3)} = (AXA)A^{(1,3)} = (AX)^H (AA^{(1,3)})^H,
+\end{equation}
+\begin{equation}\nonumber
+= X^H A^H (AA^{(1,3)})^H = X^H (AA^{(1,3)})^H = X^H A^H = (AX)^H = AX。
+\end{equation}</p>
+<h3 id="定理-6">定理 6
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，$A^{(1,3)} \in A^{\lbrace1,3\rbrace}$，则</p>
+<p>\begin{equation}\nonumber
+A^{\lbrace1,3\rbrace} = \lbrace A^{(1,3)} + (I - A^{(1,3)}A)Z \mid Z \in \mathbb{C}^{n \times m} \rbrace.
+\end{equation}</p>
+<p>证明</p>
+<p>定理 1 中，取 $D = AA^{(1,3)}$，$B = I$，则方程</p>
+<p>\begin{equation}\nonumber
+AX = AA^{(1,3)}
+\end{equation}</p>
+<p>的通解为</p>
+<p>\begin{equation}\nonumber
+X = A^{(1,3)}AA^{(1,3)} + Y - A^{(1,3)}AY, \quad Y \in \mathbb{C}^{n \times m}.
+\end{equation}</p>
+<p>令 $Y = A^{(1,3)} + Z$ 即可。</p>
+<hr>
+<p>下面我们将建立不相容方程组 $Ax = b$ 的最小二乘解与 $A^{(1,3)}$ 的关系。</p>
+<h3 id="定理-7">定理 7
+</h3><p>设 $A^{(1,3)} \in A^{\lbrace1,3\rbrace}$，则 $A^{(1,3)} b$ 都是不相容方程组 $Ax = b$ 的最小二乘解。</p>
+<p>证明</p>
+<p>由
+\begin{equation}\nonumber
+Ax - b = (Ax - AA^{(1,3)}b) + (AA^{(1,3)}b - b),
+\end{equation}
+而
+\begin{equation}\nonumber
+(Ax - AA^{(1,3)}b, AA^{(1,3)}b - b)
+\end{equation}
+\begin{equation}\nonumber
+= (AA^{(1,3)}b - b)^H (Ax - AA^{(1,3)}b)
+\end{equation}
+\begin{equation}\nonumber
+= (b^H (AA^{(1,3)})^H - b^H)(Ax - AA^{(1,3)}b)
+\end{equation}
+\begin{equation}\nonumber
+= (b^H AA^{(1,3)} - b^H)(Ax - AA^{(1,3)}b)
+\end{equation}
+\begin{equation}\nonumber
+= b^H AA^{(1,3)} Ax - b^H AA^{(1,3)} b - b^H Ax + b^H AA^{(1,3)} b
+\end{equation}
+\begin{equation}\nonumber
+= b^H Ax - b^H AA^{(1,3)} b - b^H Ax + b^H AA^{(1,3)} b = 0.
+\end{equation}</p>
+<p>所以 $Ax - AA^{(1,3)}b \perp AA^{(1,3)}b - b$，因此</p>
+<p>\begin{equation}\nonumber
+|Ax - b|^2 = |Ax - AA^{(1,3)}b|^2 + |AA^{(1,3)}b - b|^2
+\end{equation}
+\begin{equation}\nonumber
+\geq |AA^{(1,3)}b - b|^2, \quad \forall x \in \mathbb{C}^n.
+\end{equation}</p>
+<p>从而 $A^{(1,3)}b$ 为不相容方程 $Ax = b$ 的最小二乘解。</p>
+<p>一般来说，不相容方程 $Ax = b$ 的最小二乘解并不唯一，可进一步证明以下定理：</p>
+<h3 id="定理-8">定理 8
+</h3><p>$x \in \mathbb{C}^n$ 是不相容方程组 $Ax = b$ 的最小二乘解 $\Leftrightarrow$ $x$ 是方程组 $Ax = AA^{(1,3)}b$ 的解。</p>
+<p>证明
+由定理 7 的证明知</p>
+<p>\begin{equation}\nonumber
+|Ax - b|^2 = |Ax - AA^{(1,3)}b|^2 + |AA^{(1,3)}b - b|^2
+\end{equation}
+\begin{equation}\nonumber
+\geq |AA^{(1,3)}b - b|^2, \quad \forall x \in \mathbb{C}^n.
+\end{equation}</p>
+<p>故若 $x_0$ 是 $Ax = b$ 的最小二乘解，则有</p>
+<p>\begin{equation}\nonumber
+|Ax_0 - b|^2 = |AA^{(1,3)}b - b|^2.
+\end{equation}</p>
+<p>从而</p>
+<p>\begin{equation}\nonumber
+|Ax_0 - AA^{(1,3)}b|^2 = 0,
+\end{equation}</p>
+<p>所以 $Ax_0 = AA^{(1,3)}b$，即 $x_0$ 是方程 $Ax = AA^{(1,3)}b$ 的解。从反之亦然。</p>
+<h3 id="定理-9">定理 9
+</h3><p>不相容方程组 $Ax = b$ 的最小二乘解的通式为：</p>
+<p>\begin{equation}\nonumber
+x = A^{(1,3)}b + (I - A^{(1,3)}A)y, \quad \forall y \in \mathbb{C}^n.
+\end{equation}</p>
+<p>证明
+由定理 8 知，$x$ 是不相容方程 $Ax = b$ 的最小二乘解 $\Leftrightarrow$ $x$ 是方程组</p>
+<p>\begin{equation}\nonumber
+Ax = AA^{(1,3)}b
+\end{equation}</p>
+<p>的解 $\Leftrightarrow$ $x$ 是方程组</p>
+<p>\begin{equation}\nonumber
+A(x - A^{(1,3)}b) = 0
+\end{equation}</p>
+<p>的解。</p>
+<p>由定理 1 的推论 2 知，该方程的通解为</p>
+<p>\begin{equation}\nonumber
+x - A^{(1,3)}b = (I - A^{(1,3)}A)y,
+\end{equation}</p>
+<p>即</p>
+<p>\begin{equation}\nonumber
+x = A^{(1,3)}b + (I - A^{(1,3)}A)y, \quad \forall y \in \mathbb{C}^n.
+\end{equation}</p>
+<h3 id="推论">推论
+</h3><p>对于不相容方程组 $Ax = b$ 的最小二乘解是唯一的 $\Leftrightarrow$ $A$ 是列满秩的。</p>
+<p>证明
+最小二乘解的通解公式为：</p>
+<p>\begin{equation}\nonumber
+x = A^{(1,3)}b + (I - A^{(1,3)}A)y, \quad \forall y \in \mathbb{C}^n.
+\end{equation}</p>
+<p>当 $A$ 列满秩时，存在 $K$ 使得</p>
+<p>\begin{equation}\nonumber
+KA = I_n.
+\end{equation}</p>
+<p>（可取 $K = (A^H A)^{-1} A^H = A^{(1,3)}$）</p>
+<p>则有</p>
+<p>\begin{equation}\nonumber
+A^{(1,3)} A = I_n,
+\end{equation}</p>
+<p>所以 $x = A^{(1,3)}b$ 唯一。</p>
+<p>反之，由通式知，若最小二乘解唯一，必有</p>
+<p>\begin{equation}\nonumber
+A^{(1,3)} A = I_n.
+\end{equation}</p>
+<p>故 $n = r(A^{(1,3)} A) \leq r(A) \leq n$，所以 $r(A) = n$，即 $A$ 列满秩。</p>
+<p>注：
+若 $A$ 列满秩，则 $A^{(1,3)} = A^+$。若 $A$ 行满秩，则 $A^{(1,4)} = A^+$。</p>
+<p>由于 $A^+$ 是唯一的，所以 $x = A^+ b$ 是唯一的最小二乘解。</p>
+<p>例 4
+求不相容方程组</p>
+<p>\begin{equation}\nonumber
+\begin{cases}
+x_1 + 2x_2 = 1 \
+2x_1 + x_2 = 0 \
+x_1 + x_2 = 0
+\end{cases}
+\end{equation}</p>
+<p>的最小二乘解。</p>
+<p>解：
+设方程组为 $Ax = b$，其中</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 2 \\
+2 & 1 \\
+1 & 1
+\end{bmatrix}, \quad
+b =
+\begin{bmatrix}
+1 \\
+0 \\
+0
+\end{bmatrix}, \quad
+x =
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>由于 $r(A) = 2, r(A, b) = 3$，故不相容。因 $A$ 是列满秩的，所以</p>
+<p>计算广义逆矩阵：</p>
+<div>
+\begin{equation}\nonumber
+A^+ = (A^H A)^{-1} A^H =
+\left(
+\begin{bmatrix}
+1 & 2 \\
+2 & 1 \\
+1 & 1
+\end{bmatrix}^T
+\begin{bmatrix}
+1 & 2 \\
+2 & 1 \\
+1 & 1
+\end{bmatrix}
+\right)^{-1}
+\begin{bmatrix}
+1 & 2 \\
+2 & 1 \\
+1 & 1
+\end{bmatrix}^T.
+\end{equation}
+</div>
+<p>计算 $(A^H A)$：</p>
+<div>
+\begin{equation}\nonumber
+A^H A =
+\begin{bmatrix}
+6 & 5 \\
+5 & 6
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>求逆：</p>
+<div>
+\begin{equation}\nonumber
+(A^H A)^{-1} =
+\frac{1}{11}
+\begin{bmatrix}
+-4 & 7 \\
+7 & -4
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>计算 $A^+$：</p>
+<div>
+\begin{equation}\nonumber
+A^+ =
+\frac{1}{11}
+\begin{bmatrix}
+-4 & 7 \\
+7 & -4
+\end{bmatrix}
+\begin{bmatrix}
+1 & 2 \\
+2 & 1 \\
+1 & 1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>因此，唯一的最小二乘解为</p>
+<div>
+\begin{equation}\nonumber
+x = A^+ b =
+\frac{1}{11}
+\begin{bmatrix}
+-4 & 7 \\
+7 & -4
+\end{bmatrix}
+\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}
+=
+\frac{1}{11}
+\begin{bmatrix}
+-4 \\
+7
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>即</p>
+<p>\begin{equation}\nonumber
+x_1 = \frac{-4}{11}, \quad x_2 = \frac{7}{11}.
+\end{equation}</p>
+<h2 id="四不相容方程组的极小范数最小二乘解与-a">四、不相容方程组的极小范数最小二乘解与 $A^+$
+</h2><p>一般的，最小二乘解并不唯一，通常把范数最小的一个称为 $Ax = b$ 的<strong>极小范数最小二乘解</strong>（最佳逼近解）。我们将看到，这样的解不仅唯一，且可由 $A^+$ 表出。</p>
+<p>我们先介绍一个引理：</p>
+<h3 id="引理-3">引理 3
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，则</p>
+<p>\begin{equation}\nonumber
+A^+ = A^{(1,4)} AA^{(1,3)}.
+\end{equation}</p>
+<p>（Urquhart）</p>
+<p>证明
+直接验证其满足四个 <strong>Penrose 方程</strong>。</p>
+<h3 id="定理-10">定理 10
+</h3><p>设 $A \in \mathbb{C}^{m \times n}$，$b \in \mathbb{C}^{m}$，则 $x = A^+ b$ 是不相容方程组 $Ax = b$ 的<strong>唯一极小最小二乘解</strong>。</p>
+<p>反之，设 $X \in \mathbb{C}^{n \times m}$，若 $\forall b \in \mathbb{C}^{m}$，$x = Xb$ 为不相容方程组 $Ax = b$ 的<strong>唯一极小最小二乘解</strong>，则 $X = A^+$。</p>
+<p>证明
+取 $A^{(1,3)} \in A^{\lbrace 1,3 \rbrace}$，由定理 8 知 $Ax = b$ 的唯一<strong>极小最小二乘解</strong>就是 $Ax = AA^{(1,3)}b$ 的<strong>极小范数解</strong>。</p>
+<p>从而又由定理 4 知其唯一的极小范数解为：</p>
+<p>\begin{equation}\nonumber
+x = A^{(1,4)} AA^{(1,3)} b = A^+ b.
+\end{equation}
+（引理 3）</p>
+<p>反之，若 $\forall b \in \mathbb{C}^{m}$，$x = Xb$ 为不相容方程组 $Ax = b$ 的唯一极小最小二乘解，由唯一性知：</p>
+<p>\begin{equation}\nonumber
+Xb = A^+ b.
+\end{equation}</p>
+<p>取 $b_i = \varepsilon_i, (1 \leq i \leq m)$，则：</p>
+<p>\begin{equation}\nonumber
+X \varepsilon_i = A^+ \varepsilon_i.
+\end{equation}</p>
+<p>所以：</p>
+<p>\begin{equation}\nonumber
+X = A^+.
+\end{equation}</p>
+<hr>
+<h2 id="总结">总结
+</h2><p>由于 $A^+ \in A^{\lbrace 1 \rbrace}$，$A^+ \in A^{\lbrace 1,3 \rbrace}$，$A^+ \in A^{\lbrace 1,4 \rbrace}$，故总结有下表：</p>
+<p>\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$Ax = b$ 相容 &amp; $Ax = b$ 不相容 \
+\hline
+$AA^+ b = b$ &amp; $AA^+ b \neq b$ \
+\hline
+解唯一 $\Leftrightarrow A$ 列满秩 &amp; 最小二乘解唯一 $\Leftrightarrow A$ 列满秩 \
+\hline
+解的通式： &amp; 最小二乘解的通式： \
+$x = A^+ b + (I - A^+ A)y$ &amp; $x = A^+ b + (I - A^+ A)y$ \
+\hline
+唯一的极小范数解： &amp; 唯一的极小最小二乘解： \
+$x = A^+ b$ &amp; $x = A^+ b$ \
+\hline
+\end{tabular}
+\end{center}</p>
+<p>关于 $x = A^+ b$ 的唯一性有表：</p>
+<p>\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$Ax = b$ &amp; 相容 &amp; 不相容 \
+\hline
+$A$ 列满秩 &amp; 唯一解 &amp; 唯一最小二乘解 \
+\hline
+$A$ 非列满秩 &amp; 唯一极小范数解 &amp; 唯一极小最小二乘解 \
+\hline
+\end{tabular}
+\end{center}</p>
+<p><strong>注：</strong> 给定方程 $Ax = b$，只要计算 $A^+$，则 $A^+ b$ 便给出方程的各种意义下的解。</p>
+<h3 id="例-5">例 5
+</h3><p>设</p>
+<div>
+\begin{equation}\nonumber
+A =
+\begin{bmatrix}
+1 & 0 & -1 & 1 \\
+0 & 2 & 2 & 2 \\
+-1 & 4 & 5 & 3
+\end{bmatrix}, \quad
+b =
+\begin{bmatrix}
+4 \\
+-2 \\
+-2
+\end{bmatrix}.
+\end{equation}
+</div>
+<ol>
+<li>用广义逆矩阵方法判断方程组 $Ax = b$ 是否相容。</li>
+<li>求 $Ax = b$ 的极小范数解或极小最小二乘解。</li>
+</ol>
+<p>解
+$A$ 的满秩分解为：</p>
+<div>
+\begin{equation}\nonumber
+A = BC =
+\begin{bmatrix}
+1 & 0 \\
+0 & 2 \\
+-1 & 4
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & -1 & 1 \\
+0 & 1 & 1 & 1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>故</p>
+<div>
+\begin{equation}\nonumber
+A^+ = C^H (CC^H)^{-1} (B^H B)^{-1} B^H =
+\frac{1}{18}
+\begin{bmatrix}
+5 & 2 & -1 \\
+1 & 1 & 1 \\
+-4 & -1 & 2 \\
+6 & 3 & 0
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>由于</p>
+<div>
+\begin{equation}\nonumber
+A A^+ b =
+\begin{bmatrix}
+3 \\
+0 \\
+-3
+\end{bmatrix}
+\neq b,
+\end{equation}
+</div>
+<p>所以 $Ax = b$ <strong>不相容</strong>，因此它的极小最小二乘解为</p>
+<div>
+\begin{equation}\nonumber
+x_0 = A^+ b =
+\begin{bmatrix}
+0 \\
+1 \\
+0 \\
+-1
+\end{bmatrix}.
+\end{equation}
+</div>
+<p>例 6：证明下列等式</p>
+<p>(1) 证明 $AX = AA^+ \iff A^H AX = A^H$。</p>
+<p>(2) 证明 $XA = A^+ A \iff XAA^H = A^H$。</p>
+<p>证明：
+(1) 由于 $AX = AA^+$，两边取共轭转置得：</p>
+<p>\begin{equation}\nonumber
+(AH AX)^H = (AA^+)^H = A^H (AA^+)^H = A^H.
+\end{equation}</p>
+<p>又因为：</p>
+<p>\begin{equation}\nonumber
+(AA^+)^H = (AA^+)^H = A^H,
+\end{equation}</p>
+<p>所以有 $A^H AX = A^H$。</p>
+<p>再由 $A^H AX = A^H$，可得：</p>
+<p>\begin{equation}\nonumber
+AX = A^H A X = A^H A A^+ = A^H A^H AX = A^+ A^H A X.
+\end{equation}</p>
+<p>又因：</p>
+<p>\begin{equation}\nonumber
+(AA^+)^H = AA^+,
+\end{equation}</p>
+<p>所以 $AX = AA^+$。</p>
+<p>同理可证 (2)。</p>
+<p>例 7：唯一广义逆的条件</p>
+<p>(1) 若 $A$ <strong>列满秩</strong>，则 $A^{(1,3)} = A^+$（唯一）。</p>
+<p>(2) 若 $A^T$ <strong>行满秩</strong>，则 $A^{(1,4)} = A^+$（唯一）。</p>
+<p>证明：
+(1) 由于 $A$ 列满秩，满足：</p>
+<p>\begin{equation}\nonumber
+A^H A = I.
+\end{equation}</p>
+<p>（因为 $A^+ = (A^H A)^{-1} A^H$）</p>
+<p>设 $X \in A^{(1,3)}$，则：</p>
+<p>\begin{equation}\nonumber
+AXA = A.
+\end{equation}</p>
+<p>两边左乘 $A^+$ 得：</p>
+<p>\begin{equation}\nonumber
+A^+ (AXA) = A^+ A.
+\end{equation}</p>
+<p>因为：</p>
+<p>\begin{equation}\nonumber
+A^+ A = I,
+\end{equation}</p>
+<p>所以：</p>
+<p>\begin{equation}\nonumber
+XA = I.
+\end{equation}</p>
+<p>又因为：</p>
+<p>\begin{equation}\nonumber
+(XA)^H = XA, \quad \text{且} \quad XAX = X,
+\end{equation}</p>
+<p>所以 $X$ 满足四个 <strong>Penrose 方程</strong>，即 $X = A^+$。</p>
+<p>证明：
+(2) 由于 $A$ <strong>行满秩</strong>，满足：</p>
+<p>\begin{equation}\nonumber
+AA^+ = I.
+\end{equation}</p>
+<p>（因为 $A^+ = A^H (AA^H)^{-1}$）</p>
+<p>设 $X \in A^{(1,4)}$，则：</p>
+<p>\begin{equation}\nonumber
+AXA = A.
+\end{equation}</p>
+<p>两边右乘 $A^+$ 得：</p>
+<p>\begin{equation}\nonumber
+(AXA) A^+ = AA^+.
+\end{equation}</p>
+<p>因为：</p>
+<p>\begin{equation}\nonumber
+AA^+ = I,
+\end{equation}</p>
+<p>所以：</p>
+<p>\begin{equation}\nonumber
+AX = I.
+\end{equation}</p>
+<p>又因为：</p>
+<p>\begin{equation}\nonumber
+(AX)^H = AX, \quad \text{且} \quad XAX = X,
+\end{equation}</p>
+<p>所以 $X$ 满足四个 <strong>Penrose 方程</strong>，即 $X = A^+$。</p>
+<p>例 8</p>
+<ol>
+<li>$X = (A^H A)^{-A^H} \in A\lbrace 1,3 \rbrace$。</li>
+<li>$X = A^H (AA^H)^{-} \in A\lbrace 1,4 \rbrace$。</li>
+</ol>
+<p>明：
+(1) 因为
+\begin{equation}\nonumber
+A\lbrace 1,3 \rbrace = \lbrace X | A^H A X = A^H \rbrace
+\end{equation}
+且 $A^H A X = A^H$ 相容（因为 $A^H$ 是特解），
+\begin{equation}\nonumber
+\Rightarrow \text{必存在特解 } X = (A^H A)^{-} A^H \text{ 使得 } A^H A X = A^H
+\end{equation}
+\begin{equation}\nonumber
+\Rightarrow X = (A^H A)^{-} A^H \in \lbrace X | A^H A X = A^H \rbrace = A\lbrace 1,3 \rbrace
+\end{equation}</p>
+<p>回顾定理（Penrose 定理）
+设 $A \in \mathbb{C}^{m \times n}$，$B \in \mathbb{C}^{p \times q}$，$D \in \mathbb{C}^{m \times q}$，则矩阵方程 $AXB = D$ 相容的充要条件是：
+\begin{equation}\nonumber
+A A^{(1)} D B^{(1)} B = D
+\end{equation}
+其中 $A^{(1)} \in A\lbrace 1 \rbrace$，$B^{(1)} \in B\lbrace 1 \rbrace$。</p>
+<p>此时方程组的通解为：
+\begin{equation}\nonumber
+X = A^{(1)} D B^{(1)} + Y - A^{(1)} A Y B B^{(1)}
+\end{equation}
+其中 $Y \in \mathbb{C}^{n \times q}$ 为任意。</p>
+<p>同理可证 (2)。</p>
+<p>例 9：
+若值域 $R(A) = R(B)$，则存在 $P, Q$ 使得：
+\begin{equation}\nonumber
+B = AP, \quad A = BQ
+\end{equation}</p>
+<p>证明：</p>
+<p><strong>法一</strong>：由条件知 $B$ 中各列都可由 $A$ 中的列表出，$\Rightarrow B = AP$，同理 $A = BQ$。</p>
+<p><strong>法二</strong>：
+\begin{equation}\nonumber
+R(A) = \lbrace AX | X \in \mathbb{C}^n \rbrace, \quad R(B) = \lbrace BX | X \in \mathbb{C}^n \rbrace
+\end{equation}</p>
+<p>因为 $R(A) = R(B)$，所以 $\forall x \in \mathbb{C}^n$，存在 $y \in \mathbb{C}^n$ 使得 $AX = By$。</p>
+<p>取 $\mathbb{C}^n$ 中的标准正交基 $e_1, \ldots, e_n$，存在 $y_1, \ldots, y_n$ 使得：
+\begin{equation}\nonumber
+Ae_k = B y_k \Rightarrow A(e_1, \ldots, e_n) = B(y_1, \ldots, y_n) \Rightarrow A I = B Q
+\end{equation}</p>
+<p>注：
+若核空间 $N(A) = N(B)$，则存在 $P, Q$ 使得：
+\begin{equation}\nonumber
+B = P A, \quad A = Q B
+\end{equation}</p>
+<p>注：
+(1) $r(A^+) = r(A) = r(A^+ A) = r(A A^+)$</p>
+<p><strong>证明</strong>：因为 $A = AA^+ A$，所以：
+\begin{equation}\nonumber
+r(A) = r(AA^+) \leq r(A^+ A) \leq r(A)
+\end{equation}</p>
+<p>故相等成立。</p>
+<p>注：
+(2) $R(A) = R(AA^+)$，$R(A^+) = R(A^+ A)$</p>
+<hr>
+<p>例 10：
+若：
+\begin{equation}\nonumber
+A^+ = A \iff (A^2)^H = A^2, \quad (A^2)^2 = A^2, \quad \text{且 } r(A^2) = r(A)
+\end{equation}</p>
+<p>证明：
+只需证明充分性，我们只需证明四个 Penrose 方程成立。</p>
+<p>由 $A^2 x = A (A x) \in R(A) \Rightarrow R(A^2) \subseteq R(A)$；</p>
+<p>又因为 $r(A^2) = r(A) = r(R(A)) = R(A) \Rightarrow R(A^2) = R(A)$</p>
+<p>由 $A^2 = A^4$ 得：
+\begin{equation}\nonumber
+A^2 Q = A^2 (A^2 Q) = A^3 = A A^2
+\end{equation}</p>
+<p>由 $(A^2)^H = A^2$，则第三、四个方程成立。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%9F%A9%E9%98%B5%E8%AE%BA/">矩阵论</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Example Person
+    </section>
+    
+    <section class="powerby">
+        
+            guilonglgl@gmail.com <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
