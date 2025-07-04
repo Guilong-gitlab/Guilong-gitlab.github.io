@@ -8,21 +8,29 @@
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
         <lastBuildDate>Fri, 04 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/tags/unitree/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>宇树开源代码解析：Python-SDK开发G1</title>
-        <link>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1/</link>
+        <title>宇树开源代码解析：Python-SDK开发G1底层逻辑</title>
+        <link>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</link>
         <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1/</guid>
-        <description>&lt;h1 id=&#34;g1程序内容解读&#34;&gt;G1程序内容解读
-&lt;/h1&gt;&lt;h2 id=&#34;low_level-代码解读&#34;&gt;low_level 代码解读
-&lt;/h2&gt;&lt;p&gt;g1_low_level_example 是底层的测试例子，这个例子也很简单，下面只有3个类，分别是&lt;/p&gt;
+        <guid>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</guid>
+        <description>&lt;h1 id=&#34;high_level-代码解读&#34;&gt;high_level 代码解读
+&lt;/h1&gt;</description>
+        </item>
+        <item>
+        <title>宇树开源代码解析：Python-SDK开发G1底层逻辑</title>
+        <link>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</link>
+        <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</guid>
+        <description>&lt;h1 id=&#34;low_level-代码解读&#34;&gt;low_level 代码解读
+&lt;/h1&gt;&lt;p&gt;g1_low_level_example 是底层的测试例子，这个例子也很简单，下面只有3个类，分别是&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;G1JointIndex&lt;/li&gt;
 &lt;li&gt;Mode&lt;/li&gt;
 &lt;li&gt;Custom&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;核心模块部分&#34;&gt;核心模块部分
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;h2 id=&#34;核心模块部分&#34;&gt;核心模块部分
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
@@ -58,9 +66,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LowCmdWrite&lt;/span&gt;(self):          &lt;span style=&#34;color:#75715e&#34;&gt;# 核心控制逻辑&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;逐步解析&#34;&gt;逐步解析
-&lt;/h3&gt;&lt;h4 id=&#34;unitree-sdk核心通信组件&#34;&gt;Unitree SDK核心通信组件
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;/div&gt;&lt;h2 id=&#34;逐步解析&#34;&gt;逐步解析
+&lt;/h2&gt;&lt;h3 id=&#34;unitree-sdk核心通信组件&#34;&gt;Unitree SDK核心通信组件
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
@@ -78,8 +86,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; unitree_sdk2py.core.channel &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; ChannelFactoryInitialize
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;机器人数据结构定义&#34;&gt;机器人数据结构定义
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;/div&gt;&lt;h3 id=&#34;机器人数据结构定义&#34;&gt;机器人数据结构定义
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
@@ -101,8 +109,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; unitree_sdk2py.idl.unitree_hg.msg.dds_ &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; LowState_
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;工具类组件&#34;&gt;工具类组件
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;/div&gt;&lt;h3 id=&#34;工具类组件&#34;&gt;工具类组件
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
@@ -120,8 +128,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; unitree_sdk2py.comm.motion_switcher.motion_switcher_client &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; MotionSwitcherClient
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;机器人参数定义&#34;&gt;机器人参数定义
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;/div&gt;&lt;h3 id=&#34;机器人参数定义&#34;&gt;机器人参数定义
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
@@ -165,8 +173,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;]
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;g1jointindex类&#34;&gt;G1JointIndex类
-&lt;/h4&gt;&lt;p&gt;G1JointIndex类的功能是为Unitree G1机器人的29个电机关节提供统一的索引编号，同时其支持两种控制模式（PR模式/AB模式）的别名映射&lt;/p&gt;
+&lt;/div&gt;&lt;h3 id=&#34;g1jointindex类&#34;&gt;G1JointIndex类
+&lt;/h3&gt;&lt;p&gt;G1JointIndex类的功能是为Unitree G1机器人的29个电机关节提供统一的索引编号，同时其支持两种控制模式（PR模式/AB模式）的别名映射&lt;/p&gt;
 &lt;p&gt;腿部关节定义&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -258,8 +266,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RightWristYaw &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;28&lt;/span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;# 右腕偏航（23自由度版本无效）&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;mode&#34;&gt;Mode
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;/div&gt;&lt;h3 id=&#34;mode&#34;&gt;Mode
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
@@ -271,8 +279,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    AB &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 协同控制A/B关节（将两个关节运动耦合），快速步态生成（如奔跑、跳跃）&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;custom类&#34;&gt;Custom类
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;/div&gt;&lt;h3 id=&#34;custom类&#34;&gt;Custom类
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
@@ -712,17 +720,7 @@ A[创建Custom对象] &amp;ndash;&amp;gt; B[Init初始化]
 B &amp;ndash;&amp;gt; C[Start启动线程]
 C &amp;ndash;&amp;gt; D[运行主循环]
 D &amp;ndash;&amp;gt;|异常| E[自动调用析构]&lt;/p&gt;
-&lt;h2 id=&#34;high-level-代码解读&#34;&gt;high-level 代码解读
-&lt;/h2&gt;&lt;h2 id=&#34;audio-代码解读&#34;&gt;audio 代码解读
-&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
+</description>
         </item>
         <item>
         <title>宇树开源代码解析：Python-SDK开发Go2</title>
