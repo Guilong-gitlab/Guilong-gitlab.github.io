@@ -7,7 +7,35 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Thu, 10 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 04 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>宇树开源代码解析0：文件及文档介绍</title>
+        <link>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%900%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D/</link>
+        <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%900%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D/</guid>
+        <description>&lt;h1 id=&#34;部分开源代码的文件介绍&#34;&gt;部分开源代码的文件介绍
+&lt;/h1&gt;&lt;p&gt;&lt;em&gt;注&lt;/em&gt;：宇树科技产品种类很多，本文作者主要关注内容为GO2和G1两个系列的机器人代码&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unitree_guide-main：宇树科技出版的书籍《四足机器人控制算法&amp;ndash;建模、控制与实践》的配套开源控制算法工程。通过该程序包，可以学习机器人关节电机控制方法，同时也可以学习简单的足式机器人力控算法。该工程包含了仿真与实际两种开发环境，并且可通过命令实现二者之间的切换。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unitree_IL_lerobot-main:宇树开源的基于LeRobot的机器人巨神智能/模仿学习框架，支持模仿学习算法（如DT、ACT等），适配宇树人形机器人G1、机械臂Z1和灵巧手Dex3等硬件。本人只关注G1相关内容。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unitree_mujoco-main:基于宇树SDK2和mujuco开发的模拟器。使用者可以通过unitree_sdk2、unitree_ros2和unitree_sdk2_python开发的程序集成到这个模拟器环境当中。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unitree_rl_gym-main:宇树强化学习实现的仓库，支持Go2、H1、H1_2 和 G1。这是作者本人关注的重点内容，本人想要从事的研究就是利用强化学习对G1进行二次开发。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unitree_ros2-master:ROS2环境下开发Go2、B2的机器人功能包（接口与unitree_sdk2保持一致）。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unitree_ros-master:用于宇树机器人的ROS仿真包，包含宇树所有机器人的urdf文件，可通过该包中获取宇树机器人的质量、惯量、力矩等信息。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unitree_sdk2_python-master:SDK2的python接口，用于开发Go2、B2、H1和G1机器人。这是作者本人关注的重点之一，上面说了本人想要在G1上运行强化学习算法，但底层必须掌握SDK开发才能继续学习。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unitree_sdk2-main:用于开发Go2、B2和H1机器人的SDK包，(功能与unitree_legged_sdk功能类似，只是适配的机器人不同)。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;UnitreecameraSDK-main: GO1机器人相机SDK例程。（本人想要研究Go2、尤其是G1的相机，但是宇树目前没有开源G1的相机的例程，所以对Go1的先参考一下，掌握后研究G1的相机。。）&lt;/p&gt;&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>VsCode配置XeLatex</title>
         <link>https://Guilong-gitlab.github.io/p/vscode%E9%85%8D%E7%BD%AExelatex/</link>
         <pubDate>Thu, 10 Apr 2025 00:00:00 +0000</pubDate>
@@ -1776,6 +1804,14 @@ $$</description>
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
+        </item>
+        <item>
+        <title></title>
+        <link>https://Guilong-gitlab.github.io/p/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://Guilong-gitlab.github.io/p/</guid>
+        <description></description>
         </item>
         <item>
         <title>关于</title>
