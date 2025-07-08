@@ -13,15 +13,6 @@
         <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
         
         <guid>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</guid>
-        <description>&lt;h1 id=&#34;high_level-代码解读&#34;&gt;high_level 代码解读
-&lt;/h1&gt;</description>
-        </item>
-        <item>
-        <title>宇树开源代码解析：Python-SDK开发G1底层逻辑</title>
-        <link>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</link>
-        <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/</guid>
         <description>&lt;h1 id=&#34;low_level-代码解读&#34;&gt;low_level 代码解读
 &lt;/h1&gt;&lt;p&gt;g1_low_level_example 是底层的测试例子，这个例子也很简单，下面只有3个类，分别是&lt;/p&gt;
 &lt;ul&gt;
@@ -389,23 +380,14 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;关于模式状态检查与释放的内容跟可由以下图进行解释，当其他程序异常退出未释放控制权时，此循环可强制回收控制&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;graph LR
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  A[开始] --&amp;gt; B{CheckMode}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  B --&amp;gt;|有控制者| C[ReleaseMode]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  C --&amp;gt; B
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  B --&amp;gt;|无控制者| D[继续初始化]
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+graph LR
+  A[开始] --&gt; B{CheckMode}
+  B --&gt;|有控制者| C[ReleaseMode]
+  C --&gt; B
+  B --&gt;|无控制者| D[继续初始化]
 &lt;/div&gt;
-&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
@@ -527,12 +509,14 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;[&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ctime()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;] RPY: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;rpy[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.2f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;° &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;rpy[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.2f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;° &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;rpy[&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;.2f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;°&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;sequenceDiagram
-机器人控制器-&amp;raquo;+控制程序: 发送LowState_(500Hz)
-控制程序-&amp;raquo;+安全系统: 检查mode_machine
-安全系统&amp;ndash;&amp;raquo;-控制程序: 允许/拒绝控制
-控制程序-&amp;raquo;+执行器: 计算下一周期指令
-执行器-&amp;raquo;-机器人控制器: 发送LowCmd_&lt;/p&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+sequenceDiagram
+    机器人控制器-&gt;&gt;+控制程序: 发送LowState_(500Hz)
+    控制程序-&gt;&gt;+安全系统: 检查mode_machine
+    安全系统--&gt;&gt;-控制程序: 允许/拒绝控制
+    控制程序-&gt;&gt;+执行器: 计算下一周期指令
+    执行器-&gt;&gt;-机器人控制器: 发送LowCmd_
+&lt;/div&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
@@ -657,16 +641,18 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lowcmd_publisher_&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;Write(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;low_cmd)  &lt;span style=&#34;color:#75715e&#34;&gt;# 发送指令&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;graph TD
-A[开始] &amp;ndash;&amp;gt; B{time_ &amp;lt; duration_?}
-B &amp;ndash;&amp;gt;|是| C[阶段1:零位归零]
-B &amp;ndash;&amp;gt;|否| D{time_&amp;lt;2*duration_?}
-D &amp;ndash;&amp;gt;|是| E[阶段2:PR模式摆动]
-D &amp;ndash;&amp;gt;|否| F[阶段3:AB模式摆动]
-C &amp;ndash;&amp;gt; G[发送指令]
-E &amp;ndash;&amp;gt; G
-F &amp;ndash;&amp;gt; G
-G &amp;ndash;&amp;gt; H[等待下一个周期]&lt;/p&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+graph TD
+    A[开始] --&gt; B{time_ &lt; duration_?}
+    B --&gt;|是| C[阶段1:零位归零]
+    B --&gt;|否| D{time_&lt;2*duration_?}
+    D --&gt;|是| E[阶段2:PR模式摆动]
+    D --&gt;|否| F[阶段3:AB模式摆动]
+    C --&gt; G[发送指令]
+    E --&gt; G
+    F --&gt; G
+    G --&gt; H[等待下一个周期]
+&lt;/div&gt;
 &lt;p&gt;主运行文件&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -726,12 +712,22 @@ G &amp;ndash;&amp;gt; H[等待下一个周期]&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;安全停止中...&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;graph LR
-A[创建Custom对象] &amp;ndash;&amp;gt; B[Init初始化]
-B &amp;ndash;&amp;gt; C[Start启动线程]
-C &amp;ndash;&amp;gt; D[运行主循环]
-D &amp;ndash;&amp;gt;|异常| E[自动调用析构]&lt;/p&gt;
-</description>
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+graph LR
+  A[创建Custom对象] --&gt; B[Init初始化]
+  B --&gt; C[Start启动线程]
+  C --&gt; D[运行主循环]
+  D --&gt;|异常| E[自动调用析构]
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>宇树开源代码解析：Python-SDK开发G1顶层案例</title>
+        <link>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E9%A1%B6%E5%B1%82%E6%A1%88%E4%BE%8B/</link>
+        <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E9%A1%B6%E5%B1%82%E6%A1%88%E4%BE%8B/</guid>
+        <description>&lt;h1 id=&#34;high_level-代码解读&#34;&gt;high_level 代码解读
+&lt;/h1&gt;</description>
         </item>
         <item>
         <title>宇树开源代码解析0：文件及文档介绍</title>
