@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="high_level 代码解读 ">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="解析顶层example中的g1_arm_action_example文件">
 <title>宇树开源代码解析：Python-SDK开发G1顶层案例</title>
 
 <link rel='canonical' href='https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E9%A1%B6%E5%B1%82%E6%A1%88%E4%BE%8B/'>
 
 <link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="宇树开源代码解析：Python-SDK开发G1顶层案例">
-<meta property='og:description' content="high_level 代码解读 ">
+<meta property='og:description' content="解析顶层example中的g1_arm_action_example文件">
 <meta property='og:url' content='https://Guilong-gitlab.github.io/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E9%A1%B6%E5%B1%82%E6%A1%88%E4%BE%8B/'>
 <meta property='og:site_name' content='刘贵泷的个人网页'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='unitree' /><meta property='article:tag' content='G1' /><meta property='article:published_time' content='2025-07-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-04T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="宇树开源代码解析：Python-SDK开发G1顶层案例">
-<meta name="twitter:description" content="high_level 代码解读 ">
+<meta name="twitter:description" content="解析顶层example中的g1_arm_action_example文件">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script>
   mermaid.initialize({ startOnLoad: true });
@@ -290,7 +290,46 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#主要功能概述">主要功能概述：</a></li>
+    <li><a href="#引入pyhton包">引入pyhton包</a></li>
+    <li><a href="#类的定义">类的定义</a>
+      <ol>
+        <li><a href="#testoption">TestOption</a></li>
+        <li><a href="#userinterface">UserInterface</a></li>
+      </ol>
+    </li>
+    <li><a href="#main文件">main文件</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -304,6 +343,10 @@
             <a href="/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90python-sdk%E5%BC%80%E5%8F%91g1%E9%A1%B6%E5%B1%82%E6%A1%88%E4%BE%8B/">宇树开源代码解析：Python-SDK开发G1顶层案例</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            解析顶层example中的g1_arm_action_example文件
+        </h3>
         
     </div>
 
@@ -338,7 +381,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -354,7 +397,458 @@
     
     
     <h1 id="high_level-代码解读">high_level 代码解读
-</h1>
+</h1><p>这个脚本演示了如何使用Unitree SDK控制机器人臂的动作。它通过终端提供一个用户界面，允许用户选择不同的预定义动作来控制机器人的臂部。用户可以输入动作的名称或ID，机器人将执行相应的臂部动作。可执行的动作包括“握手”、“击掌”、“拥抱”、“鼓掌”、“心形手势”、“亲吻”等，每个动作对应一个特定的臂部动作。</p>
+<h2 id="主要功能概述">主要功能概述：
+</h2><ol>
+<li><strong>TestOption</strong>：脚本通过<code>TestOption</code>类定义了不同的机器人臂动作，每个动作都有一个<code>name</code>（名称）和<code>id</code>（编号）。</li>
+<li><strong>用户界面</strong>：终端界面允许用户输入动作的名称或ID。如果输入有效，机器人将执行对应的动作。</li>
+<li><strong>机器人动作执行</strong>：一旦选择了有效的动作，脚本通过<code>G1ArmActionClient</code>与机器人臂进行通信，执行相应的动作。</li>
+<li><strong>持续循环</strong>：脚本在循环中运行，允许用户不断输入不同的动作命令，并让机器人执行相应的动作。</li>
+</ol>
+<h2 id="引入pyhton包">引入pyhton包
+</h2><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 导入time模块，用于处理时间相关的操作</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 导入sys模块，用于处理与Python解释器相关的参数</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 从unitree_sdk2py库中导入ChannelSubscriber和ChannelFactoryInitialize类</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ChannelSubscriber用于订阅通信通道，ChannelFactoryInitialize用于初始化通信通道</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> unitree_sdk2py.core.channel <span style="color:#f92672">import</span> ChannelSubscriber, ChannelFactoryInitialize
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 导入G1ArmActionClient类，用于控制机器人臂部动作</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> unitree_sdk2py.g1.arm.g1_arm_action_client <span style="color:#f92672">import</span> G1ArmActionClient
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 导入action_map字典，包含机器人臂部动作名称与对应操作的映射关系</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> unitree_sdk2py.g1.arm.g1_arm_action_client <span style="color:#f92672">import</span> action_map
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 导入dataclass装饰器，用于简化数据类的创建</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> dataclasses <span style="color:#f92672">import</span> dataclass
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="类的定义">类的定义
+</h2><h3 id="testoption">TestOption
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 使用dataclass装饰器定义一个数据类TestOption，包含两个字段：name（动作名称）和id（动作ID）</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@dataclass</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestOption</span>:
+</span></span><span style="display:flex;"><span>    name: str  <span style="color:#75715e"># 动作名称</span>
+</span></span><span style="display:flex;"><span>    id: int    <span style="color:#75715e"># 动作ID</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里提一下 @dataclass 这个装饰器，他的作用是简化类的定义，当一些类的定义比较简单的时候就不需要进行复杂的初始化等python语言的撰写，其写法等价于</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestOption</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, name, id):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>id <span style="color:#f92672">=</span> id
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__repr__</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;TestOption(name=</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">, id=</span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>id<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__eq__</span>(self, other):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>name <span style="color:#f92672">==</span> other<span style="color:#f92672">.</span>name <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> other<span style="color:#f92672">.</span>id
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接着我们定义都有哪些可以选择的动作以及其对应的id号</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 创建一个包含不同动作选项的列表，每个选项是一个TestOption实例</span>
+</span></span><span style="display:flex;"><span>option_list <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;release arm&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>),     <span style="color:#75715e"># 释放手臂</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;shake hand&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>),      <span style="color:#75715e"># 握手</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;high five&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>),      <span style="color:#75715e"># 击掌</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hug&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>),            <span style="color:#75715e"># 拥抱</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;high wave&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>),      <span style="color:#75715e"># 高举手</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;clap&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>),           <span style="color:#75715e"># 鼓掌</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;face wave&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>),      <span style="color:#75715e"># 面部挥手</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left kiss&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>),      <span style="color:#75715e"># 左侧亲吻</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;heart&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>),          <span style="color:#75715e"># 心形手势</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;right heart&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">9</span>),    <span style="color:#75715e"># 右侧心形手势</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hands up&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>),      <span style="color:#75715e"># 举手</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;x-ray&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">11</span>),         <span style="color:#75715e"># X光动作</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;right hand up&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">12</span>), <span style="color:#75715e"># 右手举起</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;reject&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">13</span>),        <span style="color:#75715e"># 拒绝动作</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;right kiss&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>),    <span style="color:#75715e"># 右侧亲吻</span>
+</span></span><span style="display:flex;"><span>    TestOption(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;two-hand kiss&#34;</span>, id<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>), <span style="color:#75715e"># 双手亲吻</span>
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="userinterface">UserInterface
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 定义用户交互界面类</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserInterface</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 初始化方法</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>test_option_ <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>  <span style="color:#75715e"># 初始化时没有选择的测试选项</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 将输入的字符串转换为整数，如果无法转换，则返回 None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">convert_to_int</span>(self, input_str):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> int(input_str)  <span style="color:#75715e"># 尝试将字符串转换为整数</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:  <span style="color:#75715e"># 如果转换失败（值错误），返回 None</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 终端交互方法</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">terminal_handle</span>(self):
+</span></span><span style="display:flex;"><span>        input_str <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter id or name: </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)  <span style="color:#75715e"># 提示用户输入动作的 ID 或名称</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 如果用户输入 &#34;list&#34;，则列出所有的测试选项</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> input_str <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;list&#34;</span>:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>test_option_<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>  <span style="color:#75715e"># 重置选择的动作名称</span>
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>test_option_<span style="color:#f92672">.</span>id <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>  <span style="color:#75715e"># 重置选择的动作ID</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 列出所有选项</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> option <span style="color:#f92672">in</span> option_list:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>option<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">, id: </span><span style="color:#e6db74">{</span>option<span style="color:#f92672">.</span>id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 检查用户输入的名称或 ID 是否与某个选项匹配</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> option <span style="color:#f92672">in</span> option_list:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 如果输入的是动作名称，或者输入的是动作 ID</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> input_str <span style="color:#f92672">==</span> option<span style="color:#f92672">.</span>name <span style="color:#f92672">or</span> self<span style="color:#f92672">.</span>convert_to_int(input_str) <span style="color:#f92672">==</span> option<span style="color:#f92672">.</span>id:
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># 找到匹配的选项后，更新 test_option_</span>
+</span></span><span style="display:flex;"><span>                self<span style="color:#f92672">.</span>test_option_<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> option<span style="color:#f92672">.</span>name
+</span></span><span style="display:flex;"><span>                self<span style="color:#f92672">.</span>test_option_<span style="color:#f92672">.</span>id <span style="color:#f92672">=</span> option<span style="color:#f92672">.</span>id
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e"># 显示选中的测试选项</span>
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Test: </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>test_option_<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">, test_id: </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>test_option_<span style="color:#f92672">.</span>id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 如果没有找到匹配的选项</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;No matching test option found.&#34;</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="main文件">main文件
+</h2><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    <span style="color:#75715e"># 如果命令行参数数量小于 2，说明用户没有输入网络接口参数</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(sys<span style="color:#f92672">.</span>argv) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 提示用户正确的脚本使用方法</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Usage: python3 </span><span style="color:#e6db74">{</span>sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74"> networkInterface&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 程序以错误码 -1 退出</span>
+</span></span><span style="display:flex;"><span>        sys<span style="color:#f92672">.</span>exit(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 提醒用户，在运行这个示例之前，确保机器人周围没有障碍物，避免发生碰撞</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;WARNING: Please ensure there are no obstacles around the robot while running this example.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 等待用户按下回车键再继续执行，给用户一个准备时间</span>
+</span></span><span style="display:flex;"><span>    input(<span style="color:#e6db74">&#34;Press Enter to continue...&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 使用用户输入的网络接口名初始化通信通道</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># sys.argv[1] 就是命令行传入的网络接口，比如 &#34;eth0&#34;</span>
+</span></span><span style="display:flex;"><span>    ChannelFactoryInitialize(<span style="color:#ae81ff">0</span>, sys<span style="color:#f92672">.</span>argv[<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 创建一个 TestOption 实例，用于存储当前选中的动作（初始为空）</span>
+</span></span><span style="display:flex;"><span>    test_option <span style="color:#f92672">=</span> TestOption(name<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, id<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 创建用户交互界面对象</span>
+</span></span><span style="display:flex;"><span>    user_interface <span style="color:#f92672">=</span> UserInterface()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 将 test_option 对象赋值给用户交互界面，用于在交互过程中记录用户的选择</span>
+</span></span><span style="display:flex;"><span>    user_interface<span style="color:#f92672">.</span>test_option_ <span style="color:#f92672">=</span> test_option
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 创建 G1ArmActionClient 对象，用于与机器人手臂通信和控制动作</span>
+</span></span><span style="display:flex;"><span>    armAction_client <span style="color:#f92672">=</span> G1ArmActionClient()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 设置超时时间为 10 秒，避免操作长时间无响应</span>
+</span></span><span style="display:flex;"><span>    armAction_client<span style="color:#f92672">.</span>SetTimeout(<span style="color:#ae81ff">10.0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 初始化 armAction_client，建立与机器人手臂的通信</span>
+</span></span><span style="display:flex;"><span>    armAction_client<span style="color:#f92672">.</span>Init()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># （以下两行被注释掉）可以用来获取并打印机器人手臂支持的所有动作列表</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># actionList = armAction_client.GetActionList()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># print(&#34;actionList\n&#34;,actionList)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>后面就是根据输入选择具体执行的代码了，这个就不用每一行都解释了。</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 提示用户，可以输入 &#34;list&#34; 命令来查看所有支持的动作</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Input </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">list</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74"> to list all test option ...&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        user_interface<span style="color:#f92672">.</span>terminal_handle()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Updated Test Option: Name = </span><span style="color:#e6db74">{</span>test_option<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">, ID = </span><span style="color:#e6db74">{</span>test_option<span style="color:#f92672">.</span>id<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;shake hand&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;high five&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;hug&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;high wave&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;clap&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">6</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;face wave&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;left kiss&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;heart&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">9</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;right heart&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;hands up&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">11</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;x-ray&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">12</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;right hand up&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">13</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;reject&#34;</span>))
+</span></span><span style="display:flex;"><span>            time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;release arm&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">14</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;right kiss&#34;</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> test_option<span style="color:#f92672">.</span>id <span style="color:#f92672">==</span> <span style="color:#ae81ff">15</span>:
+</span></span><span style="display:flex;"><span>            armAction_client<span style="color:#f92672">.</span>ExecuteAction(action_map<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;two-hand kiss&#34;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="mermaid">
+graph TD
+    A[程序开始] --> B{参数数量 >= 2?}
+    B -- 否 --> C[打印用法提示 Usage...]
+    C --> D[退出程序 sys.exit(-1)]
+    B -- 是 --> E[打印警告: 确保周围无障碍]
+    E --> F[等待用户按回车继续]
+    F --> G[初始化通道 ChannelFactoryInitialize]
+    G --> H[创建 TestOption 对象]
+    H --> I[创建 UserInterface 对象]
+    I --> J[将 test_option 分配给 UserInterface]
+    J --> K[创建 G1ArmActionClient 客户端]
+    K --> L[设置超时 10 秒]
+    L --> M[初始化 armAction_client]
+    M --> N[提示用户可输入 list 查看所有动作]
+</div>
 </section>
 
 

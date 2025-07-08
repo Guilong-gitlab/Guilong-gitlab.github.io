@@ -899,6 +899,7 @@ sequenceDiagram
     控制程序->>+执行器: 计算下一周期指令
     执行器->>-机器人控制器: 发送LowCmd_
 </div>
+<p>下面的内容就是该底层example要测试的东西，</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -1023,7 +1024,8 @@ sequenceDiagram
 </span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>lowcmd_publisher_<span style="color:#f92672">.</span>Write(self<span style="color:#f92672">.</span>low_cmd)  <span style="color:#75715e"># 发送指令</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><div class="mermaid">
+</div><p>将上述代码可以总结为如下的流程图</p>
+<div class="mermaid">
 graph TD
     A[开始] --> B{time_ < duration_?}
     B -->|是| C[阶段1:零位归零]
