@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="从头搭建一个符合自己需求的使用宇树G1进行训练的仿真场景">
+<title>从零开始搭建仿真机器人仿真0：isaaclab</title>
+
+<link rel='canonical' href='https://Guilong-gitlab.github.io/p/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%BB%BF%E7%9C%9F%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F0isaaclab/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="从零开始搭建仿真机器人仿真0：isaaclab">
+<meta property='og:description' content="从头搭建一个符合自己需求的使用宇树G1进行训练的仿真场景">
+<meta property='og:url' content='https://Guilong-gitlab.github.io/p/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%BB%BF%E7%9C%9F%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F0isaaclab/'>
+<meta property='og:site_name' content='刘贵泷的个人网页'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='宇树科技' /><meta property='article:tag' content='G1' /><meta property='article:published_time' content='2025-07-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-04T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="从零开始搭建仿真机器人仿真0：isaaclab">
+<meta name="twitter:description" content="从头搭建一个符合自己需求的使用宇树G1进行训练的仿真场景">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/image/avatar_hu_5fc70999b694beba.png" width="300"
+                            height="294" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">刘贵泷的个人网页</a></h1>
+            <h2 class="site-description">个人主页</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://bilibili.com'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>友情链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://Guilong-gitlab.github.io/en/" >English</option>
+                                
+                                    <option value="https://Guilong-gitlab.github.io/" selected>中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#-模块一环境初始化基础设施层">📦 模块一：环境初始化（基础设施层）</a>
+      <ol>
+        <li><a href="#11-路径配置告诉python去哪里找代码">1.1 路径配置（告诉Python去哪里找代码）</a></li>
+        <li><a href="#12-启动仿真应用打开摄像机">1.2 启动仿真应用（打开&quot;摄像机&quot;）</a></li>
+        <li><a href="#13-导入功能模块准备工具箱">1.3 导入功能模块（准备工具箱）</a></li>
+      </ol>
+    </li>
+    <li><a href="#-模块二场景搭建创建世界">🏗️ 模块二：场景搭建（创建世界）</a>
+      <ol>
+        <li><a href="#-发现规律所有场景物体的添加都遵循同一个三步模式">🔑 发现规律：所有场景物体的添加都遵循<strong>同一个三步模式</strong></a></li>
+        <li><a href="#规律应用示例1添加地面">规律应用示例1：添加地面</a></li>
+        <li><a href="#规律应用示例2添加灯光">规律应用示例2：添加灯光</a></li>
+        <li><a href="#规律应用示例3添加标记方块">规律应用示例3：添加标记方块</a></li>
+      </ol>
+    </li>
+    <li><a href="#-模块三实体加载机器人的特殊性">🤖 模块三：实体加载（机器人的特殊性）</a></li>
+    <li><a href="#-模块四执行循环让时间流动">🎬 模块四：执行循环（让时间流动）</a>
+      <ol>
+        <li><a href="#41-重置场景">4.1 重置场景</a></li>
+        <li><a href="#42-设置相机视角">4.2 设置相机视角</a></li>
+        <li><a href="#43-主循环核心中的核心">4.3 主循环（核心中的核心）</a></li>
+      </ol>
+    </li>
+    <li><a href="#-完整逻辑结构图带数据流">📊 完整逻辑结构图（带数据流）</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%BB%BF%E7%9C%9F%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F0isaaclab/">从零开始搭建仿真机器人仿真0：isaaclab</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            从头搭建一个符合自己需求的使用宇树G1进行训练的仿真场景
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-07-04</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 12 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="isaac的安装与配置">ISAAC的安装与配置
+</h1><p>首先需要在ubuntu系统单重完整的安装isaacsim和isaaclab仿真平台，具体安装方式请参考其他教程。</p>
+<h1 id="宇树的支持文件">宇树的支持文件
+</h1><p>首先从宇树那git到两个仓库来提供我们的支撑程序。
+分别是宇树的isaaclab支撑文件</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git clone https://github.com/unitreerobotics/unitree_sim_isaaclab.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>和宇树提供的的基于lab的强化学习训练程序</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>git clone https://github.com/unitreerobotics/unitree_rl_lab.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>目前任务如何让机器人走起来以及后续机器的行走是与此相关的。</p>
+<p>其实也得考虑一个问题，就是做机器人导航算法的很多，他们是如何让机器人走起来的呢？</p>
+<h1 id="如何搭建一个场景">如何搭建一个场景
+</h1><p>想象你要<strong>拍摄一个机器人广告视频</strong>：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>拍视频的步骤</th>
+          <th>代码对应的操作</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>架设摄像机</td>
+          <td>启动仿真应用（AppLauncher）</td>
+      </tr>
+      <tr>
+          <td>搭建摄影棚</td>
+          <td>创建仿真环境（SimulationContext）</td>
+      </tr>
+      <tr>
+          <td>铺地板</td>
+          <td>添加地面（GroundPlaneCfg）</td>
+      </tr>
+      <tr>
+          <td>打灯光</td>
+          <td>添加灯光（DomeLightCfg）</td>
+      </tr>
+      <tr>
+          <td>放道具（起点/终点标记）</td>
+          <td>添加标记方块（CuboidCfg）</td>
+      </tr>
+      <tr>
+          <td>请演员（机器人）进场</td>
+          <td>加载机器人（Articulation）</td>
+      </tr>
+      <tr>
+          <td>调整机位</td>
+          <td>设置相机视角（set_camera_view）</td>
+      </tr>
+      <tr>
+          <td>开始录制</td>
+          <td>进入仿真主循环（while&hellip;sim.step）</td>
+      </tr>
+      <tr>
+          <td>我先把一个简单的场景搭建出来的效果放在下面然后我们再去不断的解析。</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># g1_scene_demo_simple.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;/home/guilong/Desktop/unitree/unitree_sim_isaaclab&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab.app <span style="color:#f92672">import</span> AppLauncher
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> argparse
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>parser <span style="color:#f92672">=</span> argparse<span style="color:#f92672">.</span>ArgumentParser()
+</span></span><span style="display:flex;"><span>AppLauncher<span style="color:#f92672">.</span>add_app_launcher_args(parser)
+</span></span><span style="display:flex;"><span>args_cli <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse_args()
+</span></span><span style="display:flex;"><span>app_launcher <span style="color:#f92672">=</span> AppLauncher(args_cli)
+</span></span><span style="display:flex;"><span>simulation_app <span style="color:#f92672">=</span> app_launcher<span style="color:#f92672">.</span>app
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> isaaclab.sim <span style="color:#66d9ef">as</span> sim_utils
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab.sim <span style="color:#f92672">import</span> SimulationContext
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab.assets <span style="color:#f92672">import</span> Articulation
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> robots.unitree <span style="color:#f92672">import</span> G129_CFG_WITH_DEX1_WHOLEBODY
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 创建仿真</span>
+</span></span><span style="display:flex;"><span>sim <span style="color:#f92672">=</span> SimulationContext()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加地面</span>
+</span></span><span style="display:flex;"><span>ground_cfg <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>GroundPlaneCfg()
+</span></span><span style="display:flex;"><span>ground_cfg<span style="color:#f92672">.</span>func(<span style="color:#e6db74">&#34;/World/Ground&#34;</span>, ground_cfg)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加简单的光源 - 只用 DomeLight</span>
+</span></span><span style="display:flex;"><span>dome_cfg <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>DomeLightCfg(intensity<span style="color:#f92672">=</span><span style="color:#ae81ff">400.0</span>)
+</span></span><span style="display:flex;"><span>dome_cfg<span style="color:#f92672">.</span>func(<span style="color:#e6db74">&#34;/World/DomeLight&#34;</span>, dome_cfg)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加标记点</span>
+</span></span><span style="display:flex;"><span>start_cfg <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>CuboidCfg()
+</span></span><span style="display:flex;"><span>start_cfg<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.05</span>)
+</span></span><span style="display:flex;"><span>start_cfg<span style="color:#f92672">.</span>visual_material <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>PreviewSurfaceCfg(diffuse_color<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">0.0</span>))
+</span></span><span style="display:flex;"><span>start_cfg<span style="color:#f92672">.</span>func(<span style="color:#e6db74">&#34;/World/Start&#34;</span>, start_cfg, translation<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.025</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>goal_cfg <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>CuboidCfg()
+</span></span><span style="display:flex;"><span>goal_cfg<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.05</span>)
+</span></span><span style="display:flex;"><span>goal_cfg<span style="color:#f92672">.</span>visual_material <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>PreviewSurfaceCfg(diffuse_color<span style="color:#f92672">=</span>(<span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">0.0</span>))
+</span></span><span style="display:flex;"><span>goal_cfg<span style="color:#f92672">.</span>func(<span style="color:#e6db74">&#34;/World/Goal&#34;</span>, goal_cfg, translation<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">3.0</span>, <span style="color:#ae81ff">0.025</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 配置机器人</span>
+</span></span><span style="display:flex;"><span>G129_CFG_WITH_DEX1_WHOLEBODY<span style="color:#f92672">.</span>prim_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/World/G1&#34;</span>
+</span></span><span style="display:flex;"><span>robot <span style="color:#f92672">=</span> Articulation(cfg<span style="color:#f92672">=</span>G129_CFG_WITH_DEX1_WHOLEBODY)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 相机</span>
+</span></span><span style="display:flex;"><span>sim<span style="color:#f92672">.</span>set_camera_view(eye<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">3.0</span>), target<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.8</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 运行</span>
+</span></span><span style="display:flex;"><span>sim<span style="color:#f92672">.</span>reset()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;仿真运行中... 按 Ctrl+C 退出&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> simulation_app<span style="color:#f92672">.</span>is_running():
+</span></span><span style="display:flex;"><span>    sim<span style="color:#f92672">.</span>step()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>simulation_app<span style="color:#f92672">.</span>close()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│  模块一：环境初始化（第1-30行）                             │
+</span></span><span style="display:flex;"><span>│  - 添加路径、启动应用、导入模块                             │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>                          ↓
+</span></span><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│  模块二：场景搭建（第32-60行）                              │
+</span></span><span style="display:flex;"><span>│  - 地面、灯光、标记物（同类操作：创建配置 → 调用func）         │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>                          ↓
+</span></span><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│  模块三：实体加载（第62-68行）                              │
+</span></span><span style="display:flex;"><span>│  - 机器人（特殊操作：Articulation + 配置文件）               │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>                          ↓
+</span></span><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│  模块四：执行循环（第70-80行）                              │
+</span></span><span style="display:flex;"><span>│  - 重置、相机、主循环                                      │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────┘
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="-模块一环境初始化基础设施层">📦 模块一：环境初始化（基础设施层）
+</h2><h3 id="11-路径配置告诉python去哪里找代码">1.1 路径配置（告诉Python去哪里找代码）
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;/home/guilong/Desktop/unitree/unitree_sim_isaaclab&#34;</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>🔑 核心概念</strong>：<code>sys.path</code> 是Python的&quot;寻路地图&quot;</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 类比理解</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;C:/python标准库&#34;</span>, <span style="color:#e6db74">&#34;C:/我自己的项目&#34;</span>, <span style="color:#f92672">...</span>]  <span style="color:#75715e"># 默认路径</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#34;/我的机器人代码&#34;</span>)  <span style="color:#75715e"># 添加自定义路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加后，Python就能找到：robots.unitree 这个模块，此外这个设置是python路径的常用设置，常用python的朋友应该对这个很熟悉了</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="12-启动仿真应用打开摄像机">1.2 启动仿真应用（打开&quot;摄像机&quot;）
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab.app <span style="color:#f92672">import</span> AppLauncher
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> argparse
+</span></span><span style="display:flex;"><span>parser <span style="color:#f92672">=</span> argparse<span style="color:#f92672">.</span>ArgumentParser()              <span style="color:#75715e"># 创建参数容器</span>
+</span></span><span style="display:flex;"><span>AppLauncher<span style="color:#f92672">.</span>add_app_launcher_args(parser)       <span style="color:#75715e"># 往容器里装参数</span>
+</span></span><span style="display:flex;"><span>args_cli <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse_args()                  <span style="color:#75715e"># 解析命令行输入</span>
+</span></span><span style="display:flex;"><span>app_launcher <span style="color:#f92672">=</span> AppLauncher(args_cli)            <span style="color:#75715e"># 用参数启动器</span>
+</span></span><span style="display:flex;"><span>simulation_app <span style="color:#f92672">=</span> app_launcher<span style="color:#f92672">.</span>app               <span style="color:#75715e"># 拿到应用对象</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>🔑 核心概念</strong>：这就像打开一个游戏，你可以通过命令行参数决定：</p>
+<ul>
+<li>是否全屏（<code>--fullscreen</code>）</li>
+<li>窗口多大（<code>--width 1280</code>）</li>
+<li>是否显示（<code>--headless</code>）</li>
+</ul>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 命令行示例</span>
+</span></span><span style="display:flex;"><span>python 我的仿真.py --headless          <span style="color:#75715e"># 不显示窗口（服务器运行）</span>
+</span></span><span style="display:flex;"><span>python 我的仿真.py --width <span style="color:#ae81ff">1920</span>        <span style="color:#75715e"># 设置窗口宽度</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>AppLauncher</code> 是 Isaac Lab 用来<strong>启动仿真应用程序</strong>的工具。它背后是 NVIDIA Omniverse Kit，这是一个复杂的图形引擎。
+<strong>参数的作用</strong>：告诉 Omniverse Kit 如何启动：</p>
+<ul>
+<li>要不要显示窗口？</li>
+<li>窗口显示多大？</li>
+<li>渲染质量如何？</li>
+<li>网络端口是多少？</li>
+</ul>
+<hr>
+<p>📋 完整参数列表（按类别分组）
+一、窗口显示相关</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>类型</th>
+          <th>默认值</th>
+          <th>说明</th>
+          <th>使用示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--headless</code></td>
+          <td>标志</td>
+          <td>False</td>
+          <td>无头模式（不显示窗口，适合服务器运行）</td>
+          <td><code>--headless</code></td>
+      </tr>
+      <tr>
+          <td><code>--window_width</code></td>
+          <td>整数</td>
+          <td>1280</td>
+          <td>窗口宽度（像素）</td>
+          <td><code>--window_width 1920</code></td>
+      </tr>
+      <tr>
+          <td><code>--window_height</code></td>
+          <td>整数</td>
+          <td>720</td>
+          <td>窗口高度（像素）</td>
+          <td><code>--window_height 1080</code></td>
+      </tr>
+      <tr>
+          <td><code>--fullscreen</code></td>
+          <td>标志</td>
+          <td>False</td>
+          <td>全屏模式</td>
+          <td><code>--fullscreen</code></td>
+      </tr>
+      <tr>
+          <td><code>--hidpi</code></td>
+          <td>标志</td>
+          <td>False</td>
+          <td>启用高DPI支持（Retina屏幕）</td>
+          <td><code>--hidpi</code></td>
+      </tr>
+      <tr>
+          <td>二、渲染质量相关</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>类型</th>
+          <th>默认值</th>
+          <th>说明</th>
+          <th>使用示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--renderer</code></td>
+          <td>字符串</td>
+          <td>&ldquo;RayTraced&rdquo;</td>
+          <td>渲染器类型：<code>&quot;RayTraced&quot;</code>（光线追踪）或 <code>&quot;Rasterized&quot;</code>（光栅化）</td>
+          <td><code>--renderer Rasterized</code></td>
+      </tr>
+      <tr>
+          <td><code>--samples_per_pixel</code></td>
+          <td>整数</td>
+          <td>32</td>
+          <td>每像素采样数（越高画质越好，越卡）</td>
+          <td><code>--samples_per_pixel 64</code></td>
+      </tr>
+      <tr>
+          <td><code>--max_ray_depth</code></td>
+          <td>整数</td>
+          <td>4</td>
+          <td>光线追踪最大反弹次数</td>
+          <td><code>--max_ray_depth 8</code></td>
+      </tr>
+      <tr>
+          <td>三、性能相关</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>类型</th>
+          <th>默认值</th>
+          <th>说明</th>
+          <th>使用示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--max_frames</code></td>
+          <td>整数</td>
+          <td>无限制</td>
+          <td>最多渲染多少帧后自动退出</td>
+          <td><code>--max_frames 1000</code></td>
+      </tr>
+      <tr>
+          <td><code>--fps_limit</code></td>
+          <td>整数</td>
+          <td>60</td>
+          <td>限制帧率上限</td>
+          <td><code>--fps_limit 30</code></td>
+      </tr>
+      <tr>
+          <td>四、调试相关</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>类型</th>
+          <th>默认值</th>
+          <th>说明</th>
+          <th>使用示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--verbose</code></td>
+          <td>标志</td>
+          <td>False</td>
+          <td>输出详细日志</td>
+          <td><code>--verbose</code></td>
+      </tr>
+      <tr>
+          <td><code>--debug</code></td>
+          <td>标志</td>
+          <td>False</td>
+          <td>启用调试模式</td>
+          <td><code>--debug</code></td>
+      </tr>
+      <tr>
+          <td><code>--log_level</code></td>
+          <td>字符串</td>
+          <td>&ldquo;info&rdquo;</td>
+          <td>日志级别：<code>&quot;debug&quot;</code>, <code>&quot;info&quot;</code>, <code>&quot;warning&quot;</code>, <code>&quot;error&quot;</code></td>
+          <td><code>--log_level debug</code></td>
+      </tr>
+      <tr>
+          <td>五、网络相关</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>类型</th>
+          <th>默认值</th>
+          <th>说明</th>
+          <th>使用示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--port</code></td>
+          <td>整数</td>
+          <td>8211</td>
+          <td>WebSocket 通信端口</td>
+          <td><code>--port 9000</code></td>
+      </tr>
+      <tr>
+          <td><code>--livestream</code></td>
+          <td>标志</td>
+          <td>False</td>
+          <td>启用实时流</td>
+          <td><code>--livestream</code></td>
+      </tr>
+      <tr>
+          <td>命令行使用方式</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 方式1：单个参数</span>
+</span></span><span style="display:flex;"><span>python my_simulation.py --headless
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式2：多个参数组合</span>
+</span></span><span style="display:flex;"><span>python my_simulation.py --headless --window_width <span style="color:#ae81ff">800</span> --window_height <span style="color:#ae81ff">600</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式3：带值的参数</span>
+</span></span><span style="display:flex;"><span>python my_simulation.py --renderer Rasterized --samples_per_pixel <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 方式4：查看所有可用参数</span>
+</span></span><span style="display:flex;"><span>python my_simulation.py --help
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-导入功能模块准备工具箱">1.3 导入功能模块（准备工具箱）
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> isaaclab.sim <span style="color:#66d9ef">as</span> sim_utils                     <span style="color:#75715e"># 工具包（地面、灯光、方块）</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab.sim <span style="color:#f92672">import</span> SimulationContext           <span style="color:#75715e"># 环境管理器</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab.assets <span style="color:#f92672">import</span> Articulation             <span style="color:#75715e"># 机器人加载器</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> robots.unitree <span style="color:#f92672">import</span> G129_CFG_WITH_DEX1_WHOLEBODY  <span style="color:#75715e"># 机器人配置文件</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>🔑 核心概念</strong>：区分&quot;工具&quot;和&quot;具体物体&quot;</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>导入内容</th>
+          <th>类型</th>
+          <th>类比</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sim_utils</code></td>
+          <td>工具箱</td>
+          <td>锤子、螺丝刀（创造物体的工具）</td>
+      </tr>
+      <tr>
+          <td><code>SimulationContext</code></td>
+          <td>场地</td>
+          <td>整个摄影棚</td>
+      </tr>
+      <tr>
+          <td><code>Articulation</code></td>
+          <td>加载器</td>
+          <td>专门负责让机器人进场的工人</td>
+      </tr>
+      <tr>
+          <td><code>配置文件</code></td>
+          <td>说明书</td>
+          <td>机器人长什么样、怎么动</td>
+      </tr>
+      <tr>
+          <td>常用的isaac功能包</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>子模块</th>
+          <th>用途</th>
+          <th>常用内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>isaaclab.sim</code></td>
+          <td>仿真基础</td>
+          <td><code>SimulationContext</code>, <code>GroundPlaneCfg</code>, <code>DomeLightCfg</code></td>
+      </tr>
+      <tr>
+          <td><code>isaaclab.assets</code></td>
+          <td>资产管理</td>
+          <td><code>Articulation</code>（机器人）, <code>RigidObject</code>（刚体）</td>
+      </tr>
+      <tr>
+          <td><code>isaaclab.envs</code></td>
+          <td>环境定义</td>
+          <td><code>ManagerBasedEnv</code>, <code>DirectRLEnv</code></td>
+      </tr>
+      <tr>
+          <td><code>isaaclab.sensors</code></td>
+          <td>传感器</td>
+          <td><code>TiledCameraCfg</code>, <code>RayCasterCfg</code></td>
+      </tr>
+      <tr>
+          <td><code>isaaclab.terrains</code></td>
+          <td>地形系统</td>
+          <td><code>TerrainImporterCfg</code>, <code>HeightField</code></td>
+      </tr>
+      <tr>
+          <td><code>isaaclab.managers</code></td>
+          <td>管理器</td>
+          <td><code>ObservationManager</code>, <code>ActionManager</code>, <code>EventManager</code></td>
+      </tr>
+      <tr>
+          <td><code>isaaclab.markers</code></td>
+          <td>可视化标记</td>
+          <td>调试用的箭头、圆圈等</td>
+      </tr>
+      <tr>
+          <td><code>isaaclab.utils</code></td>
+          <td>工具函数</td>
+          <td>各种辅助函数</td>
+      </tr>
+      <tr>
+          <td><code>isaaclab_assets</code> — 资产定义包</td>
+          <td></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><strong>一句话理解</strong>：存放<strong>机器人和物体的配置文件</strong>的&quot;仓库&quot;</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 导入方式示例</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab_assets <span style="color:#f92672">import</span> GO2_CFG           <span style="color:#75715e"># 宇树 Go2 机器狗配置</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab_assets <span style="color:#f92672">import</span> FRANKA_PANDA_CFG  <span style="color:#75715e"># Franka 机械臂配置</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab_assets <span style="color:#f92672">import</span> ANYMAL_C_CFG      <span style="color:#75715e"># ANYmal 四足机器人配置</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab_assets <span style="color:#f92672">import</span> UNITREE_H1_CFG    <span style="color:#75715e"># 宇树 H1 人形机器人配置</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>包含的内容</strong>：</p>
+<ul>
+<li>机器人的 URDF 路径</li>
+<li>关节初始位置</li>
+<li>刚体属性（质量、惯性）</li>
+<li>碰撞和视觉网格
+<strong>为什么独立出来？</strong> 让你可以添加自己的机器人模型，而不用修改核心代码。</li>
+</ul>
+<p><code>isaaclab_tasks</code> — 任务环境包
+<strong>一句话理解</strong>：预先定义好的<strong>训练任务集合</strong></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 导入方式示例</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> isaaclab_tasks <span style="color:#f92672">import</span> ManagerBasedRLEnvCfg
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者通过名称调用（不直接 import）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 环境名称如：Isaac-Velocity-Flat-Anymal-C-v0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>包含的任务类型</strong>：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>类别</th>
+          <th>任务示例</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>四足机器人</strong></td>
+          <td><code>Isaac-Velocity-Flat-Unitree-Go2-v0</code></td>
+          <td>Go2 在平地上行走</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>Isaac-Velocity-Rough-Anymal-C-v0</code></td>
+          <td>ANYmal 在复杂地形行走</td>
+      </tr>
+      <tr>
+          <td><strong>人形机器人</strong></td>
+          <td><code>Isaac-Velocity-Flat-H1-v0</code></td>
+          <td>宇树 H1 双足行走</td>
+      </tr>
+      <tr>
+          <td><strong>机械臂</strong></td>
+          <td><code>Isaac-Reach-Franka-v0</code></td>
+          <td>Franka 机械臂到达目标</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>Isaac-Lift-Cube-Franka-v0</code></td>
+          <td>Franka 抓取立方体</td>
+      </tr>
+      <tr>
+          <td><strong>经典控制</strong></td>
+          <td><code>Isaac-Cartpole-v0</code></td>
+          <td>倒立摆平衡</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><code>Isaac-Ant-v0</code></td>
+          <td>蚂蚁形机器人移动</td>
+      </tr>
+      <tr>
+          <td><strong>如何查看所有可用任务？</strong></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./isaaclab.sh -p scripts/environments/list_envs.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="-模块二场景搭建创建世界">🏗️ 模块二：场景搭建（创建世界）
+</h2><h3 id="-发现规律所有场景物体的添加都遵循同一个三步模式">🔑 发现规律：所有场景物体的添加都遵循<strong>同一个三步模式</strong>
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 模式模板（所有物体通用）</span>
+</span></span><span style="display:flex;"><span>物体_cfg <span style="color:#f92672">=</span> 某种物体Cfg()           <span style="color:#75715e"># 第1步：创建配置对象</span>
+</span></span><span style="display:flex;"><span>物体_cfg<span style="color:#f92672">.</span>属性 <span style="color:#f92672">=</span> 值                 <span style="color:#75715e"># 第2步：设置属性（可选）</span>
+</span></span><span style="display:flex;"><span>物体_cfg<span style="color:#f92672">.</span>func(路径, 物体_cfg, 位置) <span style="color:#75715e"># 第3步：调用func添加到场景</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="规律应用示例1添加地面">规律应用示例1：添加地面
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>ground_cfg <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>GroundPlaneCfg()           <span style="color:#75715e"># 第1步：创建地面配置</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 第2步：地面没有额外属性需要设置（使用默认值）</span>
+</span></span><span style="display:flex;"><span>ground_cfg<span style="color:#f92672">.</span>func(<span style="color:#e6db74">&#34;/World/Ground&#34;</span>, ground_cfg)      <span style="color:#75715e"># 第3步：添加到场景</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="规律应用示例2添加灯光">规律应用示例2：添加灯光
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dome_cfg <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>DomeLightCfg()               <span style="color:#75715e"># 第1步：创建灯光配置</span>
+</span></span><span style="display:flex;"><span>dome_cfg<span style="color:#f92672">.</span>intensity <span style="color:#f92672">=</span> <span style="color:#ae81ff">400.0</span>                        <span style="color:#75715e"># 第2步：设置灯光强度</span>
+</span></span><span style="display:flex;"><span>dome_cfg<span style="color:#f92672">.</span>func(<span style="color:#e6db74">&#34;/World/DomeLight&#34;</span>, dome_cfg)       <span style="color:#75715e"># 第3步：添加到场景</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="规律应用示例3添加标记方块">规律应用示例3：添加标记方块
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>start_cfg <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>CuboidCfg()                 <span style="color:#75715e"># 第1步：创建立方体配置</span>
+</span></span><span style="display:flex;"><span>start_cfg<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.4</span>, <span style="color:#ae81ff">0.05</span>)                 <span style="color:#75715e"># 第2步：设置大小</span>
+</span></span><span style="display:flex;"><span>start_cfg<span style="color:#f92672">.</span>visual_material <span style="color:#f92672">=</span> sim_utils<span style="color:#f92672">.</span>PreviewSurfaceCfg(
+</span></span><span style="display:flex;"><span>    diffuse_color<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">0.0</span>)                 <span style="color:#75715e"># 第2步：设置绿色材质</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>start_cfg<span style="color:#f92672">.</span>func(<span style="color:#e6db74">&#34;/World/Start&#34;</span>, start_cfg, 
+</span></span><span style="display:flex;"><span>               translation<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.025</span>))     <span style="color:#75715e"># 第3步：指定位置添加</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="-模块三实体加载机器人的特殊性">🤖 模块三：实体加载（机器人的特殊性）
+</h2><p>机器人的加载<strong>不是</strong>三步模式，因为它更复杂：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 机器人加载的两步模式</span>
+</span></span><span style="display:flex;"><span>G129_CFG_WITH_DEX1_WHOLEBODY<span style="color:#f92672">.</span>prim_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/World/G1&#34;</span>  <span style="color:#75715e"># 第1步：告诉机器人在哪</span>
+</span></span><span style="display:flex;"><span>robot <span style="color:#f92672">=</span> Articulation(cfg<span style="color:#f92672">=</span>G129_CFG_WITH_DEX1_WHOLEBODY)  <span style="color:#75715e"># 第2步：创建机器人</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>为什么不同？</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>对比项</th>
+          <th>简单物体（方块/灯光）</th>
+          <th>复杂物体（机器人）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>数据结构</td>
+          <td>单个刚体</td>
+          <td>多个关节连接的刚体树</td>
+      </tr>
+      <tr>
+          <td>配置文件</td>
+          <td>几行代码</td>
+          <td>整个URDF文件</td>
+      </tr>
+      <tr>
+          <td>添加方式</td>
+          <td><code>cfg.func()</code></td>
+          <td><code>Articulation(cfg=...)</code></td>
+      </tr>
+      <tr>
+          <td>后续操作</td>
+          <td>静态展示</td>
+          <td>需要控制关节运动</td>
+      </tr>
+      <tr>
+          <td><strong>🔑 核心概念</strong>：<code>Articulation</code> = 关节体 = 多个刚体通过关节连接</td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>机器人结构示例：
+</span></span><span style="display:flex;"><span>      基座（躯干）
+</span></span><span style="display:flex;"><span>      ├── 左大腿（旋转关节）
+</span></span><span style="display:flex;"><span>      │     └── 左小腿（旋转关节）
+</span></span><span style="display:flex;"><span>      │           └── 左脚（固定关节）
+</span></span><span style="display:flex;"><span>      └── 右大腿
+</span></span><span style="display:flex;"><span>            └── ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="-模块四执行循环让时间流动">🎬 模块四：执行循环（让时间流动）
+</h2><h3 id="41-重置场景">4.1 重置场景
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sim<span style="color:#f92672">.</span>reset()  <span style="color:#75715e"># 回到初始状态</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><code>reset()</code> 做了什么？</strong></p>
+<ul>
+<li>时间归零（回到t=0时刻）</li>
+<li>机器人回到初始姿态</li>
+<li>清空所有速度、加速度</li>
+</ul>
+<h3 id="42-设置相机视角">4.2 设置相机视角
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>sim<span style="color:#f92672">.</span>set_camera_view(eye<span style="color:#f92672">=</span>(<span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">4.0</span>, <span style="color:#ae81ff">3.0</span>), target<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.8</span>))
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>参数理解</strong>：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># eye = 相机位置（你在哪）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># target = 相机看向的点（你看哪）</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 数学理解：向量 target - eye 就是视线方向</span>
+</span></span><span style="display:flex;"><span>视线方向 <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span><span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">0</span><span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">0.8</span><span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>) <span style="color:#f92672">=</span> (<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2.2</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="43-主循环核心中的核心">4.3 主循环（核心中的核心）
+</h3><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> simulation_app<span style="color:#f92672">.</span>is_running():  <span style="color:#75715e"># 只要窗口没关</span>
+</span></span><span style="display:flex;"><span>    sim<span style="color:#f92672">.</span>step()                      <span style="color:#75715e"># 往前走一小步</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>🔑 核心概念</strong>：仿真 = 时间离散化</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 现实世界（连续）</span>
+</span></span><span style="display:flex;"><span>时间: <span style="color:#ae81ff">0</span>s <span style="color:#f92672">-----&gt;</span> <span style="color:#ae81ff">0.1</span>s <span style="color:#f92672">-----&gt;</span> <span style="color:#ae81ff">0.2</span>s <span style="color:#f92672">-----&gt;</span> <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 仿真世界（离散）</span>
+</span></span><span style="display:flex;"><span>时间: step0 <span style="color:#960050;background-color:#1e0010">→</span> step1 <span style="color:#960050;background-color:#1e0010">→</span> step2 <span style="color:#960050;background-color:#1e0010">→</span> step3 <span style="color:#960050;background-color:#1e0010">→</span> <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#960050;background-color:#1e0010">↑</span>       <span style="color:#960050;background-color:#1e0010">↑</span>       <span style="color:#960050;background-color:#1e0010">↑</span>       <span style="color:#960050;background-color:#1e0010">↑</span>
+</span></span><span style="display:flex;"><span>    sim<span style="color:#f92672">.</span>step() 每秒60次
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><code>sim.step()</code> 内部做了什么？</strong></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>┌─────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│  sim.step() 的5个阶段                        │
+</span></span><span style="display:flex;"><span>├─────────────────────────────────────────────┤
+</span></span><span style="display:flex;"><span>│ 1. 物理计算：解动力学方程，更新位置/速度       │
+</span></span><span style="display:flex;"><span>│ 2. 碰撞检测：检查物体是否穿透                 │
+</span></span><span style="display:flex;"><span>│ 3. 关节控制：应用PID/力矩指令                 │
+</span></span><span style="display:flex;"><span>│ 4. 传感器更新：IMU/相机/激光雷达读数          │
+</span></span><span style="display:flex;"><span>│ 5. 图形渲染：刷新显示画面                    │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────┘
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="-完整逻辑结构图带数据流">📊 完整逻辑结构图（带数据流）
+</h2><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">70
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│                        程序启动                                  │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>                                │
+</span></span><span style="display:flex;"><span>                                ▼
+</span></span><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│ 模块一：环境初始化                                                │
+</span></span><span style="display:flex;"><span>│ ┌──────────────┐    ┌──────────────┐    ┌──────────────┐        │
+</span></span><span style="display:flex;"><span>│ │ 添加路径      │ → │ 启动应用      │ → │ 导入模块      │        │
+</span></span><span style="display:flex;"><span>│ │ sys.path     │    │ AppLauncher  │    │ import...    │        │
+</span></span><span style="display:flex;"><span>│ └──────────────┘    └──────────────┘    └──────────────┘        │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>                                │
+</span></span><span style="display:flex;"><span>                                ▼
+</span></span><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│ 模块二：场景搭建                                                  │
+</span></span><span style="display:flex;"><span>│                                                               │
+</span></span><span style="display:flex;"><span>│  ┌─────────────┐                                               │
+</span></span><span style="display:flex;"><span>│  │ 创建SimulationContext ──────────────────────────┐          │
+</span></span><span style="display:flex;"><span>│  └─────────────┘                                   │          │
+</span></span><span style="display:flex;"><span>│         │                                          │          │
+</span></span><span style="display:flex;"><span>│         ▼                                          ▼          │
+</span></span><span style="display:flex;"><span>│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │
+</span></span><span style="display:flex;"><span>│  │ 地面 Ground │  │ 灯光 Dome   │  │ 标记 Cuboid │          │
+</span></span><span style="display:flex;"><span>│  │             │  │             │  │  (起点/终点) │          │
+</span></span><span style="display:flex;"><span>│  └─────────────┘  └─────────────┘  └─────────────┘          │
+</span></span><span style="display:flex;"><span>│         │                │                │                  │
+</span></span><span style="display:flex;"><span>│         └────────────────┼────────────────┘                  │
+</span></span><span style="display:flex;"><span>│                          │                                    │
+</span></span><span style="display:flex;"><span>│                          ▼                                    │
+</span></span><span style="display:flex;"><span>│                  都添加到 &#34;/World&#34; 下                          │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>                                │
+</span></span><span style="display:flex;"><span>                                ▼
+</span></span><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│ 模块三：实体加载                                                  │
+</span></span><span style="display:flex;"><span>│                                                               │
+</span></span><span style="display:flex;"><span>│  ┌─────────────────────────────────────────────────────┐      │
+</span></span><span style="display:flex;"><span>│  │ 配置文件 G129_CFG_WITH_DEX1_WHOLEBODY                │      │
+</span></span><span style="display:flex;"><span>│  │         │                                           │      │
+</span></span><span style="display:flex;"><span>│  │         ▼                                           │      │
+</span></span><span style="display:flex;"><span>│  │ 设置 prim_path = &#34;/World/G1&#34;                        │      │
+</span></span><span style="display:flex;"><span>│  │         │                                           │      │
+</span></span><span style="display:flex;"><span>│  │         ▼                                           │      │
+</span></span><span style="display:flex;"><span>│  │ Articulation(cfg=...) → robot 对象                  │      │
+</span></span><span style="display:flex;"><span>│  └─────────────────────────────────────────────────────┘      │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────────────┘
+</span></span><span style="display:flex;"><span>                                │
+</span></span><span style="display:flex;"><span>                                ▼
+</span></span><span style="display:flex;"><span>┌─────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│ 模块四：执行循环                                                  │
+</span></span><span style="display:flex;"><span>│                                                               │
+</span></span><span style="display:flex;"><span>│  sim.reset() ──→ 设置相机 ──→ while循环                         │
+</span></span><span style="display:flex;"><span>│                                    │                          │
+</span></span><span style="display:flex;"><span>│                                    ▼                          │
+</span></span><span style="display:flex;"><span>│                            ┌───────────────┐                  │
+</span></span><span style="display:flex;"><span>│                            │ sim.step()    │                  │
+</span></span><span style="display:flex;"><span>│                            │ 物理+渲染+控制 │                  │
+</span></span><span style="display:flex;"><span>│                            └───────────────┘                  │
+</span></span><span style="display:flex;"><span>│                                    │                          │
+</span></span><span style="display:flex;"><span>│                                    ▼                          │
+</span></span><span style="display:flex;"><span>│                            simulation_app.is_running()?       │
+</span></span><span style="display:flex;"><span>│                                    │                          │
+</span></span><span style="display:flex;"><span>│                         ┌──────────┴──────────┐               │
+</span></span><span style="display:flex;"><span>│                         │                     │               │
+</span></span><span style="display:flex;"><span>│                        Yes                    No              │
+</span></span><span style="display:flex;"><span>│                         │                     │               │
+</span></span><span style="display:flex;"><span>│                         └──→ 继续循环        simulation_app.close()
+</span></span><span style="display:flex;"><span>│                                                              │
+</span></span><span style="display:flex;"><span>└─────────────────────────────────────────────────────────────────┘
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="如何让场景中的机器人动起来">如何让场景中的机器人动起来
+</h1><h1 id="如何通过路径规划控制机器人的运动路径">如何通过路径规划控制机器人的运动路径
+</h1><h1 id="如何添加障碍物静态动态">如何添加障碍物（静态、动态）
+</h1><h1 id="如何添加仿真场景的人">如何添加仿真场景的“人”
+</h1><h1 id="纯导航算法当中如何实现的机器人的移动和规划">纯导航算法当中如何实现的机器人的移动和规划
+</h1><h1 id="如何将自己的算法导入机器人的控制当中">如何将自己的算法导入机器人的控制当中
+</h1><h1 id="如何让场景中的机器人动起来-1">如何让场景中的机器人动起来
+</h1><h1 id="如何通过路径规划控制机器人的运动路径-1">如何通过路径规划控制机器人的运动路径
+</h1><h1 id="如何添加障碍物静态动态-1">如何添加障碍物（静态、动态）
+</h1><h1 id="如何添加仿真场景的人-1">如何添加仿真场景的“人”
+</h1><h1 id="纯导航算法当中如何实现的机器人的移动和规划-1">纯导航算法当中如何实现的机器人的移动和规划
+</h1><h1 id="如何将自己的算法导入机器人的控制当中-1">如何将自己的算法导入机器人的控制当中
+</h1>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%AE%87%E6%A0%91%E7%A7%91%E6%8A%80/">宇树科技</a>
+        
+            <a href="/tags/g1/">G1</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%BB%BF%E7%9C%9F%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%BB%BF%E7%9C%9F1ros/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从零开始搭建仿真机器人仿真1：ROS</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/%E5%AE%87%E6%A0%91%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%900%E6%96%87%E4%BB%B6%E5%8F%8A%E6%96%87%E6%A1%A3%E4%BB%8B%E7%BB%8D/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">宇树开源代码解析0：文件及文档介绍</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Example Person
+    </section>
+    
+    <section class="powerby">
+        
+            guilonglgl@gmail.com <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
