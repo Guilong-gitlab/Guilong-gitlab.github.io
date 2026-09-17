@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MathJax on 刘贵泷的个人网页</title><link>https://Guilong-gitlab.github.io/tags/mathjax/</link><description>Recent content in MathJax on 刘贵泷的个人网页</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Guilong Liu</copyright><lastBuildDate>Thu, 17 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/tags/mathjax/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo 建站（三）：用 MathJax 实现公式编号与引用</title><link>https://Guilong-gitlab.github.io/p/hugo-mathjax/</link><pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/hugo-mathjax/</guid><description>&lt;p>需要在博客中使用 &lt;code>\label&lt;/code>、&lt;code>\eqref&lt;/code> 和自动编号时，可以使用 MathJax。本文以本站包含的 Stack 模板结构和 MathJax 3 为例；下面是配置步骤，只有完成模板接入后才会渲染公式。&lt;/p>
+&lt;h2 id="1-避免同时启用两套公式渲染器">1. 避免同时启用两套公式渲染器
+&lt;/h2>&lt;p>本站的 Stack 主题通过 &lt;code>math&lt;/code> 参数加载 KaTeX。使用本文方案的文章保留 &lt;code>math: false&lt;/code>，另设 &lt;code>mathjax: true&lt;/code>，由自定义模板决定是否加载 MathJax。两套渲染器不要同时处理同一篇正文。&lt;/p>
+&lt;h2 id="2-使用主题提供的自定义入口">2. 使用主题提供的自定义入口
+&lt;/h2>&lt;p>在站点根目录新建 &lt;code>layouts/partials/head/custom.html&lt;/code>。本站主题的 &lt;code>head/head.html&lt;/code> 已经调用这个入口，不需要复制整份 HTML 文档，也不要在 partial 中重新写 &lt;code>&amp;lt;html&amp;gt;&lt;/code>、&lt;code>&amp;lt;head&amp;gt;&lt;/code> 或 &lt;code>&amp;lt;body&amp;gt;&lt;/code>。&lt;/p>
+&lt;p>写入以下内容；若该文件已有其他设置，将代码合并进去：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>{{ if .Params.mathjax }}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> window.&lt;span style="color:#a6e22e">MathJax&lt;/span> &lt;span style="color:#f92672">=&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">tex&lt;/span>&lt;span style="color:#f92672">:&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">tags&lt;/span>&lt;span style="color:#f92672">:&lt;/span> &lt;span style="color:#e6db74">&amp;#39;ams&amp;#39;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">inlineMath&lt;/span>&lt;span style="color:#f92672">:&lt;/span> [[&lt;span style="color:#e6db74">&amp;#39;\\(&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;\\)&amp;#39;&lt;/span>]],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">displayMath&lt;/span>&lt;span style="color:#f92672">:&lt;/span> [[&lt;span style="color:#e6db74">&amp;#39;$$&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;$$&amp;#39;&lt;/span>], [&lt;span style="color:#e6db74">&amp;#39;\\[&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;\\]&amp;#39;&lt;/span>]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#f92672">script&lt;/span> &lt;span style="color:#a6e22e">defer&lt;/span> &lt;span style="color:#a6e22e">src&lt;/span>&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js&amp;#34;&lt;/span>&amp;gt;&amp;lt;/&lt;span style="color:#f92672">script&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{{ end }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>tags: 'ams'&lt;/code> 为 &lt;code>equation&lt;/code> 等可编号环境生成编号；&lt;code>equation*&lt;/code> 不编号。若希望普通显示公式也自动编号，可以改成 &lt;code>tags: 'all'&lt;/code>。&lt;a class="link" href="https://docs.mathjax.org/en/v3.2/input/tex/eqnumbers.html" target="_blank" rel="noopener"
+>MathJax 公式编号文档&lt;/a> 说明了两者的区别。&lt;/p>
+&lt;h2 id="3-让-markdown-保留公式内容">3. 让 Markdown 保留公式内容
+&lt;/h2>&lt;p>在 &lt;code>hugo.yaml&lt;/code> 的现有 &lt;code>markup.goldmark&lt;/code> 下合并以下设置，不要再创建第二个 &lt;code>markup&lt;/code> 键：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">markup&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">goldmark&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">extensions&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">passthrough&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">delimiters&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">block&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - [&lt;span style="color:#e6db74">&amp;#39;\[&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;\]&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - [&lt;span style="color:#e6db74">&amp;#39;$$&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;$$&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">inline&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - [&lt;span style="color:#e6db74">&amp;#39;\(&amp;#39;&lt;/span>, &lt;span style="color:#e6db74">&amp;#39;\)&amp;#39;&lt;/span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>上面 YAML 单引号字符串中的分隔符各含一个反斜杠，即 &lt;code>'\['&lt;/code>、&lt;code>'\]'&lt;/code>、&lt;code>'\('&lt;/code>、&lt;code>'\)'&lt;/code>。JavaScript 字符串中的反斜杠需要写成两个反斜杠 &lt;code>\\&lt;/code>。本站已有 passthrough 配置，使用时检查现有设置即可。&lt;/p>
+&lt;h2 id="4-在文章中写公式">4. 在文章中写公式
+&lt;/h2>&lt;p>为使用 MathJax 的文章添加：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">math&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">mathjax&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>正文写成下面这样。这里用代码块展示源码；复制到自己的文章时，公式本身不要放在代码围栏内：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-tex" data-lang="tex">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">$$&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>\begin{equation}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>E &lt;span style="color:#f92672">=&lt;/span> mc^&lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>\label{eq:energy}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>\end{equation}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">$$&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>质量与能量的关系见公式 &lt;span style="color:#66d9ef">\eqref&lt;/span>{eq:energy}。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>行内变量可以写成 &lt;span style="color:#e6db74">\(&lt;/span>m&lt;span style="color:#e6db74">\)&lt;/span> 和 &lt;span style="color:#e6db74">\(&lt;/span>c&lt;span style="color:#e6db74">\)&lt;/span>。
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>\label{eq:energy}&lt;/code> 为公式命名，&lt;code>\eqref{eq:energy}&lt;/code> 输出带括号的编号。每个标签在同一页面中必须唯一，普通链接的锚点与公式标签是两套机制。&lt;/p>
+&lt;h2 id="5-检查与排错">5. 检查与排错
+&lt;/h2>&lt;ol>
+&lt;li>运行 &lt;code>hugo server&lt;/code>，查看目标文章，而不是编辑器预览。&lt;/li>
+&lt;li>查看页面源码，确认出现 MathJax 配置和脚本标签。&lt;/li>
+&lt;li>若一直显示 TeX 源码，检查浏览器网络面板中 CDN 是否加载成功。&lt;/li>
+&lt;li>若反斜杠或下划线被改变，检查 passthrough 和公式分隔符。&lt;/li>
+&lt;li>若重复排版或样式冲突，检查该文章是否还启用了 KaTeX。&lt;/li>
+&lt;li>若编号显示 &lt;code>??&lt;/code>，检查标签拼写、重复标签及公式语法。&lt;/li>
+&lt;/ol>
+&lt;p>只有设置 &lt;code>mathjax: true&lt;/code> 的文章会加载这个脚本，普通文章不需要额外下载公式渲染器。Stack 自定义入口说明见 &lt;a class="link" href="https://stack.cai.im/config/header-footer" target="_blank" rel="noopener"
+>Custom Header / Footer&lt;/a>。&lt;/p></description></item></channel></rss>

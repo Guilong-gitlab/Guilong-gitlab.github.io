@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Guilong Liu - Website</title>
-        <link>https://Guilong-gitlab.github.io/en/</link>
-        <description>Recent content on Guilong Liu - Website</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en</language>
-        <copyright>Example Person</copyright><atom:link href="https://Guilong-gitlab.github.io/en/index.xml" rel="self" type="application/rss+xml" />
-    </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Guilong Liu - Website</title><link>https://Guilong-gitlab.github.io/en/</link><description>Recent content on Guilong Liu - Website</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>Guilong Liu</copyright><atom:link href="https://Guilong-gitlab.github.io/en/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://Guilong-gitlab.github.io/en/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/about/</guid><description>&lt;p>I&amp;rsquo;m Guilong Liu. This site collects my learning notes on robotics, simulation, development environments, and technical writing.&lt;/p>
+&lt;h2 id="topics">Topics
+&lt;/h2>&lt;ul>
+&lt;li>Unitree G1, ROS 2, Isaac Lab, MuJoCo, and navigation.&lt;/li>
+&lt;li>Ubuntu and Docker development environments.&lt;/li>
+&lt;li>Hugo, Markdown, and mathematical typesetting.&lt;/li>
+&lt;li>VS Code, XeLaTeX, and Biber.&lt;/li>
+&lt;/ul>
+&lt;p>Most technical articles are written in Chinese. Use the &lt;a class="link" href="https://Guilong-gitlab.github.io/en/guide/" >reading guide&lt;/a> to choose a topic, or switch to Chinese to browse the full article archive.&lt;/p>
+&lt;h2 id="contact">Contact
+&lt;/h2>&lt;p>Email: &lt;a class="link" href="mailto:guilonglgl@gmail.com" >guilonglgl@gmail.com&lt;/a>&lt;/p></description></item><item><title>Archives</title><link>https://Guilong-gitlab.github.io/en/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/archives/</guid><description/></item><item><title>Reading guide</title><link>https://Guilong-gitlab.github.io/en/guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/guide/</guid><description>&lt;p>Most articles are in Chinese. The &lt;a class="link" href="https://Guilong-gitlab.github.io/guide/" >Chinese reading guide&lt;/a> links to every tutorial in the following groups:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Robotics:&lt;/strong> Unitree repositories and SDK, ROS 2 communication, G1 interfaces, MuJoCo, and navigation.&lt;/li>
+&lt;li>&lt;strong>Isaac:&lt;/strong> basic Isaac Lab scenes and the separate Isaac Sim / Humble navigation workflow.&lt;/li>
+&lt;li>&lt;strong>Development:&lt;/strong> Ubuntu installation and Docker for robotics.&lt;/li>
+&lt;li>&lt;strong>Website:&lt;/strong> Hugo with Stack, Markdown, and MathJax.&lt;/li>
+&lt;li>&lt;strong>Writing:&lt;/strong> VS Code with XeLaTeX and Biber.&lt;/li>
+&lt;/ul>
+&lt;p>Choose either the MuJoCo / Jazzy or Isaac Sim / Humble workflow after the ROS fundamentals. Follow each project&amp;rsquo;s environment requirements separately.&lt;/p></description></item><item><title>Resources</title><link>https://Guilong-gitlab.github.io/en/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/links/</guid><description>&lt;p>Documentation grouped by topic. Choose the version that matches your project; individual articles also link to their source repositories.&lt;/p></description></item><item><title>Search</title><link>https://Guilong-gitlab.github.io/en/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/search/</guid><description/></item></channel></rss>

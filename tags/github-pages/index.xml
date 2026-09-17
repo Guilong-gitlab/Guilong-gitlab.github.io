@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GitHub Pages on 刘贵泷的个人网页</title><link>https://Guilong-gitlab.github.io/tags/github-pages/</link><description>Recent content in GitHub Pages on 刘贵泷的个人网页</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Guilong Liu</copyright><lastBuildDate>Thu, 17 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/tags/github-pages/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo 建站（一）：使用 Stack 主题搭建与发布个人网站</title><link>https://Guilong-gitlab.github.io/p/hugo-stack-setup/</link><pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/hugo-stack-setup/</guid><description>&lt;p>本文以本站的 &lt;strong>Hugo + Stack + GitHub Pages&lt;/strong> 为例，按“准备环境 → 本地预览 → 写文章 → 发布”的顺序说明。本站部署工作流固定使用 Hugo Extended &lt;strong>0.147.9&lt;/strong>；复现时先保持版本一致，再单独处理升级。&lt;/p>
+&lt;h2 id="1-准备环境">1. 准备环境
+&lt;/h2>&lt;p>需要 Git 和 Hugo Extended。Windows 可用 Chocolatey 安装 &lt;code>hugo-extended&lt;/code>，Linux 可从 &lt;a class="link" href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener"
+>Hugo Releases&lt;/a> 下载对应系统的 Extended 包。安装后打开新终端检查：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git --version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>输出应含 &lt;code>extended&lt;/code>。本站主题使用 SCSS，普通版 Hugo 不能替代这一版本。使用 VS Code 可以方便地编辑 Markdown；Go 是否必需取决于是否使用 Hugo Modules，不能把它当作所有建站方式的前提。&lt;/p>
+&lt;h2 id="2-已有网站与新建网站">2. 已有网站与新建网站
+&lt;/h2>&lt;h3 id="维护本站">维护本站
+&lt;/h3>&lt;p>进入含有 &lt;code>hugo.yaml&lt;/code> 的仓库根目录，运行：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>hugo server -D
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>打开终端显示的本地地址，通常是 &lt;code>http://localhost:1313/&lt;/code>。修改 &lt;code>content/&lt;/code> 中的文件后观察页面刷新。&lt;code>-D&lt;/code> 用于预览草稿。&lt;/p>
+&lt;h3 id="从零建立新站点">从零建立新站点
+&lt;/h3>&lt;p>以下命令只在创建新网站时运行，不要在已有仓库内重复创建：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>hugo new site my-site --format yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd my-site
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git init
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/CaiJimmy/hugo-theme-stack.git themes/hugo-theme-stack
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将主题的示例配置作为起点，按主题对应版本的说明调整。新主题可能要求不同的 Hugo 版本；主题与 Hugo 应作为一组固定下来。本站已把主题文件放在 &lt;code>themes/hugo-theme-stack/&lt;/code>，维护本站时无需再添加同名子模块。&lt;/p>
+&lt;h2 id="3-认识目录与配置">3. 认识目录与配置
+&lt;/h2>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>路径&lt;/th>
+&lt;th>用途&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>hugo.yaml&lt;/code>&lt;/td>
+&lt;td>站点标题、语言、菜单和主题配置&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>content/post/&lt;/code>&lt;/td>
+&lt;td>正式文章&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>content/page/&lt;/code>&lt;/td>
+&lt;td>关于、阅读导航、搜索和归档&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>assets/&lt;/code>&lt;/td>
+&lt;td>需要 Hugo 处理的图片和样式资源&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>static/&lt;/code>&lt;/td>
+&lt;td>按原路径复制到网站的静态文件&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>themes/hugo-theme-stack/&lt;/code>&lt;/td>
+&lt;td>本站主题&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>.github/workflows/web.yaml&lt;/code>&lt;/td>
+&lt;td>本站自动构建与发布流程&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>public/&lt;/code>&lt;/td>
+&lt;td>构建生成的结果，不在这里编辑原文&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Stack 的最小配置可写成：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">baseURL&lt;/span>: &lt;span style="color:#ae81ff">https://your-account.github.io/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">languageCode&lt;/span>: &lt;span style="color:#ae81ff">zh-cn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">defaultContentLanguage&lt;/span>: &lt;span style="color:#ae81ff">zh-cn&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">hasCJKLanguage&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">我的个人网站&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">theme&lt;/span>: &lt;span style="color:#ae81ff">hugo-theme-stack&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">pagination&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pagerSize&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">params&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">mainSections&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">post&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">article&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">toc&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将 &lt;code>your-account&lt;/code> 换成自己的账号。配置中不要重复定义 &lt;code>pagination&lt;/code>，也不要混入 PaperMod、Ananke 等其他主题的专用字段。&lt;/p>
+&lt;h2 id="4-写第一篇文章">4. 写第一篇文章
+&lt;/h2>&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>hugo new content post/hello.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>文章头部用两个 &lt;code>---&lt;/code> 包住 YAML 信息，正文放在其后：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-markdown" data-lang="markdown">&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>title: 我的第一篇文章
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>date: 2025-02-26
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>description: 记录网站搭建过程。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>draft: false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>categories:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">-&lt;/span> 网站搭建
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tags:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">-&lt;/span> Hugo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>这是一段介绍。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## 操作步骤
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>这里写具体内容。
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>文章页面已经显示标题，正文从二级标题开始即可。&lt;code>draft: true&lt;/code> 的文章只在启用草稿的预览中显示；准备发布时改为 &lt;code>false&lt;/code>。写作格式见 &lt;a class="link" href="https://Guilong-gitlab.github.io/p/hugo-markdown/" >Markdown 排版&lt;/a>。&lt;/p>
+&lt;h2 id="5-本地检查">5. 本地检查
+&lt;/h2>&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>hugo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>先看构建是否报错，再检查首页、文章目录、图片、搜索和手机宽度。若文章没有出现，依次检查草稿标记、发布日期是否在未来、文件位置以及头部格式。线上样式缺失时还要检查 &lt;code>baseURL&lt;/code> 是否与实际访问地址一致。&lt;/p>
+&lt;h2 id="6-发布到-github-pages">6. 发布到 GitHub Pages
+&lt;/h2>&lt;h3 id="本站采用的方式源文件与发布仓库分离">本站采用的方式：源文件与发布仓库分离
+&lt;/h3>&lt;p>本站的 &lt;code>.github/workflows/web.yaml&lt;/code> 在源仓库 &lt;code>main&lt;/code> 分支更新时构建网站，并把 &lt;code>public/&lt;/code> 发布到 &lt;code>Guilong-gitlab/Guilong-gitlab.github.io&lt;/code> 的 &lt;code>main&lt;/code> 分支。它使用仓库 Secret &lt;code>MYWEB_TOKEN&lt;/code> 授权写入目标仓库。令牌只保存在 Secrets 中。&lt;/p>
+&lt;p>发布前确认目标仓库的 Pages 配置使用发布分支的根目录。推送源文件后，在源仓库 Actions 中检查构建与推送结果，再到目标仓库确认 Pages 发布成功。源仓库是否公开与生成网页是否公开是两个独立设置。&lt;/p>
+&lt;h3 id="新网站的另一种方式github-actions-直接部署-pages">新网站的另一种方式：GitHub Actions 直接部署 Pages
+&lt;/h3>&lt;p>若采用 Hugo 官方的 Pages 工作流，在仓库 &lt;code>Settings → Pages&lt;/code> 中选择 &lt;code>GitHub Actions&lt;/code>，并按 &lt;a class="link" href="https://gohugo.io/host-and-deploy/host-on-github-pages/" target="_blank" rel="noopener"
+>Hugo 官方部署说明&lt;/a> 创建工作流。该方式通过 Pages artifact 发布，与本站的跨仓库分支发布流程不同，不要把两套配置直接拼在一起。&lt;/p>
+&lt;p>用户主页仓库通常命名为 &lt;code>账号.github.io&lt;/code>；项目网站则需要在 &lt;code>baseURL&lt;/code> 中包含仓库路径。构建成功但页面仍旧时，先确认部署任务、访问地址和最新提交，再强制刷新浏览器缓存。&lt;/p>
+&lt;h2 id="7-日常维护顺序">7. 日常维护顺序
+&lt;/h2>&lt;ol>
+&lt;li>在 &lt;code>content/&lt;/code> 编辑正文和元信息。&lt;/li>
+&lt;li>用 &lt;code>hugo server -D&lt;/code> 预览草稿。&lt;/li>
+&lt;li>发布文章前改为 &lt;code>draft: false&lt;/code>，用 &lt;code>hugo&lt;/code> 检查正式构建。&lt;/li>
+&lt;li>查看 Git 差异，确认没有把令牌或本地缓存加入提交。&lt;/li>
+&lt;li>提交并推送后查看 Actions 和 Pages 的结果。&lt;/li>
+&lt;/ol>
+&lt;p>主题扩展应优先放在站点根目录的 &lt;code>layouts/&lt;/code> 中覆盖对应模板，这样更容易升级主题。&lt;/p></description></item></channel></rss>
