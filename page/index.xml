@@ -8,9 +8,7 @@
 &lt;/ul>
 &lt;p>可以从 &lt;a class="link" href="https://Guilong-gitlab.github.io/guide/" >阅读导航&lt;/a> 按主题开始，也可以通过归档或搜索查找文章。教程中的环境与参数对应具体项目，复现时请结合文章注明的版本与上游文档。&lt;/p>
 &lt;h2 id="联系方式">联系方式
-&lt;/h2>&lt;p>邮箱：&lt;a class="link" href="mailto:guilonglgl@gmail.com" >guilonglgl@gmail.com&lt;/a>&lt;/p></description></item><item><title>归档</title><link>https://Guilong-gitlab.github.io/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/archives/</guid><description/></item><item><title>世界模型：从起源到方法</title><link>https://Guilong-gitlab.github.io/world-model/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/world-model/</guid><description>&lt;p>这是一份独立的交互式 HTML 教程，内容包括世界模型的基本概念、经典方法、结构图、互动实验和研究资料。&lt;/p>
-&lt;p>打开：&lt;a class="link" href="https://Guilong-gitlab.github.io/world-model/" >进入《世界模型：从起源到方法，一份完整的图解教程》&lt;/a>&lt;/p>
-&lt;p>页面使用独立的 HTML、CSS 和 JavaScript 编写，不经过 Hugo 文章模板渲染。&lt;/p></description></item><item><title>搜索</title><link>https://Guilong-gitlab.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/search/</guid><description/></item><item><title>阅读导航</title><link>https://Guilong-gitlab.github.io/guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/guide/</guid><description>&lt;p>从目标选择阅读路线。G1 的 ROS 基础、MuJoCo 和 Isaac Sim 内容分别组织，避免把不同发行版的命令混用。&lt;/p>
+&lt;/h2>&lt;p>邮箱：&lt;a class="link" href="mailto:guilonglgl@gmail.com" >guilonglgl@gmail.com&lt;/a>&lt;/p></description></item><item><title>归档</title><link>https://Guilong-gitlab.github.io/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/archives/</guid><description/></item><item><title>搜索</title><link>https://Guilong-gitlab.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/search/</guid><description/></item><item><title>阅读导航</title><link>https://Guilong-gitlab.github.io/guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/guide/</guid><description>&lt;p>从目标选择阅读路线。G1 的 ROS 基础、MuJoCo 和 Isaac Sim 内容分别组织，避免把不同发行版的命令混用。&lt;/p>
 &lt;h2 id="机器人学习">机器人学习
 &lt;/h2>&lt;table>
 &lt;thead>
@@ -55,7 +53,7 @@
 &lt;/ul>
 &lt;h3 id="世界模型">世界模型
 &lt;/h3>&lt;ul>
-&lt;li>&lt;a class="link" href="https://Guilong-gitlab.github.io/world-model/" >世界模型：从起源到方法&lt;/a>：独立的交互式 HTML 教程。&lt;/li>
+&lt;li>&lt;a class="link" href="https://Guilong-gitlab.github.io/world-model/" >世界模型：从起源到方法&lt;/a>：直接打开独立的交互式 HTML 教程。&lt;/li>
 &lt;/ul>
 &lt;p>MuJoCo 教程的主分支使用 Jazzy 容器，Isaac Nav 教程使用 Ubuntu 22.04 / Humble。两条路线应分别准备环境，不需要按文章顺序把所有软件装入同一个 Python 环境。&lt;/p>
 &lt;h2 id="开发环境">开发环境
