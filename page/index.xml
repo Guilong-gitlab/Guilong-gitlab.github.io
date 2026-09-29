@@ -1,12 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on 刘贵泷的个人网页</title><link>https://Guilong-gitlab.github.io/page/</link><description>Recent content in Pages on 刘贵泷的个人网页</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Guilong Liu</copyright><atom:link href="https://Guilong-gitlab.github.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>常用资料</title><link>https://Guilong-gitlab.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/links/</guid><description>&lt;p>按主题整理的文档入口。安装和配置时请选择与项目相符的版本；具体文章中还保留了相关仓库链接。&lt;/p></description></item><item><title>关于我</title><link>https://Guilong-gitlab.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/about/</guid><description>&lt;p>你好，我是刘贵泷（Guilong Liu）。这里记录我的机器人学习、仿真实验、开发环境配置和技术写作笔记。&lt;/p>
-&lt;h2 id="这里有哪些内容">这里有哪些内容
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on 刘贵泷的个人网页</title><link>https://Guilong-gitlab.github.io/page/</link><description>Recent content in Pages on 刘贵泷的个人网页</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Guilong Liu</copyright><atom:link href="https://Guilong-gitlab.github.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>常用资料</title><link>https://Guilong-gitlab.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/links/</guid><description>&lt;p>按主题整理的文档入口。安装和配置时请选择与项目相符的版本；具体文章中还保留了相关仓库链接。&lt;/p></description></item><item><title>关于我</title><link>https://Guilong-gitlab.github.io/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/about/</guid><description>&lt;p>你好，我是刘贵泷（Guilong Liu），目前在北京航空航天大学自动化科学与电气工程学院攻读控制科学与工程博士学位。这个主页用于记录机器人、控制、仿真和开发环境方面的学习与研究。&lt;/p>
+&lt;h2 id="基本信息">基本信息
 &lt;/h2>&lt;ul>
-&lt;li>&lt;strong>机器人学习&lt;/strong>：宇树 G1、ROS 2、Isaac Lab、MuJoCo 与导航算法。&lt;/li>
-&lt;li>&lt;strong>开发环境&lt;/strong>：Ubuntu 安装与 Docker 使用。&lt;/li>
-&lt;li>&lt;strong>网站搭建&lt;/strong>：Hugo、Markdown 与网页公式排版。&lt;/li>
-&lt;li>&lt;strong>写作工具&lt;/strong>：VS Code、XeLaTeX 与 Biber。&lt;/li>
+&lt;li>&lt;strong>研究方向&lt;/strong>：非线性自适应控制、多智能体分布式控制、自适应动态规划&lt;/li>
+&lt;li>&lt;strong>当前身份&lt;/strong>：北京航空航天大学控制科学与工程博士研究生（2025.09—至今）&lt;/li>
+&lt;li>&lt;strong>电子邮箱&lt;/strong>：&lt;a class="link" href="mailto:guilonglgl@gmail.com" >guilonglgl@gmail.com&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>可以从 &lt;a class="link" href="https://Guilong-gitlab.github.io/guide/" >阅读导航&lt;/a> 按主题开始，也可以通过归档或搜索查找文章。教程中的环境与参数对应具体项目，复现时请结合文章注明的版本与上游文档。&lt;/p>
+&lt;h2 id="教育经历">教育经历
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>2025.09—至今&lt;/strong>：北京航空航天大学自动化科学与电气工程学院，控制科学与工程，博士研究生&lt;/li>
+&lt;li>&lt;strong>2022.09—2025.07&lt;/strong>：北京科技大学自动化学院，控制工程，硕士&lt;/li>
+&lt;li>&lt;strong>2018.09—2022.07&lt;/strong>：北京科技大学自动化学院，自动化，本科&lt;/li>
+&lt;/ul>
+&lt;h2 id="科研成果">科研成果
+&lt;/h2>&lt;p>已发表或出版 Springer 学术专著 1 部、SCI 论文 9 篇（其中 1 篇为高被引论文）和 EI 论文 3 篇。以下列出代表性成果；链接优先指向出版社或 DOI 官方页面。&lt;/p>
+&lt;h3 id="代表性论文与专著">代表性论文与专著
+&lt;/h3>&lt;ol>
+&lt;li>Yang Y, Liu G, Li Q. &lt;a class="link" href="https://link.springer.com/book/10.1007/978-981-95-4997-9" target="_blank" rel="noopener"
+>Adaptive Nussbaum Design for Nonlinear Dynamical Systems&lt;/a>[M]. Springer Nature Singapore, 2026.&lt;/li>
+&lt;li>Liu G, Yang Y, Zhao X, et al. &lt;a class="link" href="https://doi.org/10.1109/TFUZZ.2024.3361178" target="_blank" rel="noopener"
+>Adaptive Fuzzy Practical Bipartite Synchronization for Multi-Agent Systems With Intermittent Feedback Under Multiple Unknown Control Directions&lt;/a>[J]. IEEE Transactions on Fuzzy Systems, 2024, 32(5): 3211–3225.（SCI 一区，高被引论文）&lt;/li>
+&lt;li>Liu G, Yang Y, Gao W, et al. &lt;a class="link" href="https://doi.org/10.1109/TCYB.2025.3558642" target="_blank" rel="noopener"
+>Adaptive Nussbaum Design for Nonholonomic Systems With Asymptotic Stabilization Against False Data Injection&lt;/a>[J]. IEEE Transactions on Cybernetics, 2025, 55(11): 5189–5201.&lt;/li>
+&lt;li>Yang Y, Liu G, Li Q, et al. &lt;a class="link" href="https://doi.org/10.1016/j.fss.2023.108767" target="_blank" rel="noopener"
+>Multiple Adaptive Fuzzy Nussbaum-Type Functions Design for Stochastic Nonlinear Systems With Fixed-Time Performance&lt;/a>[J]. Fuzzy Sets and Systems, 2024, 476: 108767.&lt;/li>
+&lt;li>Yang Y, Liu G, Xie W, et al. &lt;a class="link" href="https://doi.org/10.1109/TSMC.2025.3595570" target="_blank" rel="noopener"
+>Asymptotic Event-Based Tracking Design for Nonlinear Systems Under Multiple Unknown Control Directions&lt;/a>[J]. IEEE Transactions on Systems, Man, and Cybernetics: Systems, 2025, 55(11): 7604–7616.&lt;/li>
+&lt;li>Liu G, Yang Y, Zhao X, et al. &lt;a class="link" href="https://doi.org/10.1109/TCSII.2023.3340911" target="_blank" rel="noopener"
+>Novel Nussbaum Design for Nonlinear Systems With Unknown Switching Control Directions&lt;/a>[J]. IEEE Transactions on Circuits and Systems II: Express Briefs, 2024, 71(4): 2244–2248.&lt;/li>
+&lt;li>Liu G, Yang Y, Ding D W, et al. &lt;a class="link" href="https://doi.org/10.1016/j.neucom.2023.126278" target="_blank" rel="noopener"
+>Adaptive Event-Based Fixed-Time Tracking Design for Strict-Feedback Nonlinear Systems With Unknown Control Coefficients&lt;/a>[J]. Neurocomputing, 2023, 541: 126278.&lt;/li>
+&lt;/ol>
+&lt;h2 id="荣誉奖励">荣誉奖励
+&lt;/h2>&lt;ul>
+&lt;li>研究生国家奖学金、北京地区高等学校优秀毕业生&lt;/li>
+&lt;li>北京科技大学十佳学术之星、自动化学院院长奖章&lt;/li>
+&lt;li>永钢奖学金、一等学业奖学金（两次）&lt;/li>
+&lt;li>优秀三好研究生（三次）、本科人民三等奖学金、三好学生&lt;/li>
+&lt;/ul>
+&lt;h2 id="专业技能">专业技能
+&lt;/h2>&lt;ul>
+&lt;li>CET-6（491 分）&lt;/li>
+&lt;li>Python、MATLAB&lt;/li>
+&lt;li>ROS 2 与机器人仿真开发&lt;/li>
+&lt;/ul>
+&lt;h2 id="实习经历">实习经历
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>2021.07—2021.09｜北京三快在线科技有限公司（美团）｜飞控导航算法实习生&lt;/strong>：学习飞控导航系统，参与无人机动力系统测试，并使用 MATLAB/Simulink 进行算法验证与调试。&lt;/li>
+&lt;li>&lt;strong>2024.03—2024.12｜国网上海能源互联网研究院有限公司｜创新发展研究中心实习生&lt;/strong>：参与农村场景分布式储能系统研究与测算，以及光储荷协同系统设计。&lt;/li>
+&lt;li>&lt;strong>2025.07—2025.09｜宇树科技股份有限公司｜算法技术岗实习生&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="学术主页">学术主页
+&lt;/h2>&lt;p>&lt;a class="link" href="https://scholar.google.com.hk/citations?user=Dai82bQAAAAJ&amp;amp;hl=zh-CN" target="_blank" rel="noopener"
+>Google Scholar&lt;/a>&lt;/p>
 &lt;h2 id="联系方式">联系方式
 &lt;/h2>&lt;p>邮箱：&lt;a class="link" href="mailto:guilonglgl@gmail.com" >guilonglgl@gmail.com&lt;/a>&lt;/p></description></item><item><title>归档</title><link>https://Guilong-gitlab.github.io/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/archives/</guid><description/></item><item><title>搜索</title><link>https://Guilong-gitlab.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/search/</guid><description/></item><item><title>阅读导航</title><link>https://Guilong-gitlab.github.io/guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/guide/</guid><description>&lt;p>从目标选择阅读路线。G1 的 ROS 基础、MuJoCo 和 Isaac Sim 内容分别组织，避免把不同发行版的命令混用。&lt;/p>
 &lt;h2 id="机器人学习">机器人学习

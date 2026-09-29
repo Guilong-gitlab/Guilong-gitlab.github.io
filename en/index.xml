@@ -1,12 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Guilong Liu - Website</title><link>https://Guilong-gitlab.github.io/en/</link><description>Recent content on Guilong Liu - Website</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>Guilong Liu</copyright><atom:link href="https://Guilong-gitlab.github.io/en/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://Guilong-gitlab.github.io/en/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/about/</guid><description>&lt;p>I&amp;rsquo;m Guilong Liu. This site collects my learning notes on robotics, simulation, development environments, and technical writing.&lt;/p>
-&lt;h2 id="topics">Topics
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Guilong Liu - Website</title><link>https://Guilong-gitlab.github.io/en/</link><description>Recent content on Guilong Liu - Website</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>Guilong Liu</copyright><atom:link href="https://Guilong-gitlab.github.io/en/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://Guilong-gitlab.github.io/en/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/about/</guid><description>&lt;p>I&amp;rsquo;m Guilong Liu, a PhD student in Control Science and Engineering at Beihang University. This site collects my notes on robotics, control, simulation, and development tools.&lt;/p>
+&lt;h2 id="research">Research
+&lt;/h2>&lt;p>My research interests include nonlinear adaptive control, distributed control of multi-agent systems, and adaptive dynamic programming.&lt;/p>
+&lt;h2 id="education">Education
 &lt;/h2>&lt;ul>
-&lt;li>Unitree G1, ROS 2, Isaac Lab, MuJoCo, and navigation.&lt;/li>
-&lt;li>Ubuntu and Docker development environments.&lt;/li>
-&lt;li>Hugo, Markdown, and mathematical typesetting.&lt;/li>
-&lt;li>VS Code, XeLaTeX, and Biber.&lt;/li>
+&lt;li>&lt;strong>2025.09–present&lt;/strong> — PhD in Control Science and Engineering, Beihang University&lt;/li>
+&lt;li>&lt;strong>2022.09–2025.07&lt;/strong> — M.E. in Control Engineering, University of Science and Technology Beijing&lt;/li>
+&lt;li>&lt;strong>2018.09–2022.07&lt;/strong> — B.E. in Automation, University of Science and Technology Beijing&lt;/li>
 &lt;/ul>
-&lt;p>Most technical articles are written in Chinese. Use the &lt;a class="link" href="https://Guilong-gitlab.github.io/en/guide/" >reading guide&lt;/a> to choose a topic, or switch to Chinese to browse the full article archive.&lt;/p>
+&lt;h2 id="selected-publications">Selected publications
+&lt;/h2>&lt;p>The &lt;a class="link" href="../" >Chinese version&lt;/a> lists my complete publication record and links to publisher or DOI pages where available.&lt;/p>
+&lt;h2 id="internships">Internships
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>2021.07–2021.09&lt;/strong> — Flight Control and Navigation Algorithm Intern, Meituan&lt;/li>
+&lt;li>&lt;strong>2024.03–2024.12&lt;/strong> — Innovation Development Research Center Intern, State Grid Shanghai Energy Internet Research Institute&lt;/li>
+&lt;li>&lt;strong>2025.07–2025.09&lt;/strong> — Algorithm Engineering Intern, Unitree Robotics&lt;/li>
+&lt;/ul>
+&lt;h2 id="academic-profile">Academic profile
+&lt;/h2>&lt;p>&lt;a class="link" href="https://scholar.google.com.hk/citations?user=Dai82bQAAAAJ&amp;amp;hl=zh-CN" target="_blank" rel="noopener"
+>Google Scholar&lt;/a>&lt;/p>
 &lt;h2 id="contact">Contact
 &lt;/h2>&lt;p>Email: &lt;a class="link" href="mailto:guilonglgl@gmail.com" >guilonglgl@gmail.com&lt;/a>&lt;/p></description></item><item><title>Archives</title><link>https://Guilong-gitlab.github.io/en/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/archives/</guid><description/></item><item><title>Reading guide</title><link>https://Guilong-gitlab.github.io/en/guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/en/guide/</guid><description>&lt;p>Most articles are in Chinese. The &lt;a class="link" href="https://Guilong-gitlab.github.io/guide/" >Chinese reading guide&lt;/a> links to every tutorial in the following groups:&lt;/p>
 &lt;ul>
