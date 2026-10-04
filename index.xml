@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>刘贵泷的个人网页</title><link>https://Guilong-gitlab.github.io/</link><description>Recent content on 刘贵泷的个人网页</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Guilong Liu</copyright><lastBuildDate>Sat, 03 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>LeetCode 35：搜索插入位置</title><link>https://Guilong-gitlab.github.io/p/leetcode-35%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/</link><pubDate>Sat, 03 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-35%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/</guid><description>&lt;h2 id="题目">题目
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>刘贵泷的个人网页</title><link>https://Guilong-gitlab.github.io/</link><description>Recent content on 刘贵泷的个人网页</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Guilong Liu</copyright><lastBuildDate>Sat, 03 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>LeetCode 35：搜索插入位置</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-35/</link><pubDate>Sat, 03 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-35/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>给定一个&lt;strong>升序排列&lt;/strong>的数组 &lt;code>nums&lt;/code> 和一个目标值 &lt;code>target&lt;/code>：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 &lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -2020,7 +2020,7 @@ Big-O 中通常不写底数：&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>一句话总结：
-&lt;strong>我的线性扫描方法虽然能找到插入位置，但时间复杂度为 O(n)，不符合题目要求；利用数组已经有序这一条件，可以使用二分查找，每次排除一半搜索范围，将时间复杂度降低到 O(log n)，如果最终没有找到 target，此时的 left 就是 target 应该插入的位置。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 58：最后一个单词的长度</title><link>https://Guilong-gitlab.github.io/p/leetcode-58%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E9%95%BF%E5%BA%A6/</link><pubDate>Sat, 03 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-58%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E7%9A%84%E9%95%BF%E5%BA%A6/</guid><description>&lt;h2 id="题目">题目
+&lt;strong>我的线性扫描方法虽然能找到插入位置，但时间复杂度为 O(n)，不符合题目要求；利用数组已经有序这一条件，可以使用二分查找，每次排除一半搜索范围，将时间复杂度降低到 O(log n)，如果最终没有找到 target，此时的 left 就是 target 应该插入的位置。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 58：最后一个单词的长度</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-58/</link><pubDate>Sat, 03 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-58/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>给定一个字符串 &lt;code>s&lt;/code>，其中包含若干个由空格分隔的单词，返回&lt;strong>最后一个单词的长度&lt;/strong>。
 单词是指：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -3498,7 +3498,7 @@ Big-O 中通常不写底数：&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>一句话总结：
-&lt;strong>寻找字符串最后一个单词时，可以直接从字符串末尾向前扫描，先跳过末尾空格，再统计连续非空格字符的数量；整个过程中每个相关字符最多被扫描一次，因此时间复杂度为 O(n)，额外空间复杂度为 O(1)。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 27：移除元素</title><link>https://Guilong-gitlab.github.io/p/leetcode-27%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</link><pubDate>Fri, 02 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-27%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</guid><description>&lt;h2 id="题目">题目
+&lt;strong>寻找字符串最后一个单词时，可以直接从字符串末尾向前扫描，先跳过末尾空格，再统计连续非空格字符的数量；整个过程中每个相关字符最多被扫描一次，因此时间复杂度为 O(n)，额外空间复杂度为 O(1)。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 27：移除元素</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-27/</link><pubDate>Fri, 02 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-27/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>给定一个数组 &lt;code>nums&lt;/code> 和一个值 &lt;code>val&lt;/code>，原地移除所有数值等于 &lt;code>val&lt;/code> 的元素，并返回 &lt;code>nums&lt;/code> 中与 &lt;code>val&lt;/code> 不同的元素数量。
 假设不等于 &lt;code>val&lt;/code> 的元素数量为 &lt;code>k&lt;/code>，处理以后只要求：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -4947,7 +4947,7 @@ Big-O 中通常不写底数：&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>一句话总结：
-&lt;strong>原地移除元素不需要真的删除数组元素，可以让快指针遍历原数组，让慢指针把需要保留的元素依次覆盖到数组前面；每个元素只检查一次，所以时间复杂度为 O(n)，只使用固定数量的指针变量，所以额外空间复杂度为 O(1)。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 28：找出字符串中第一个匹配项的下标</title><link>https://Guilong-gitlab.github.io/p/leetcode-28%E6%89%BE%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8C%B9%E9%85%8D%E9%A1%B9%E7%9A%84%E4%B8%8B%E6%A0%87/</link><pubDate>Fri, 02 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-28%E6%89%BE%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8C%B9%E9%85%8D%E9%A1%B9%E7%9A%84%E4%B8%8B%E6%A0%87/</guid><description>&lt;h2 id="题目">题目
+&lt;strong>原地移除元素不需要真的删除数组元素，可以让快指针遍历原数组，让慢指针把需要保留的元素依次覆盖到数组前面；每个元素只检查一次，所以时间复杂度为 O(n)，只使用固定数量的指针变量，所以额外空间复杂度为 O(1)。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 28：找出字符串中第一个匹配项的下标</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-28/</link><pubDate>Fri, 02 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-28/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>给定两个字符串 &lt;code>haystack&lt;/code> 和 &lt;code>needle&lt;/code>，在 &lt;code>haystack&lt;/code> 中找出 &lt;code>needle&lt;/code> 第一次出现的下标。如果 &lt;code>needle&lt;/code> 不是 &lt;code>haystack&lt;/code> 的一部分，则返回 &lt;code>-1&lt;/code>。
 题目链接：&lt;a class="link" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/" target="_blank" rel="noopener"
 >LeetCode 28：找出字符串中第一个匹配项的下标&lt;/a>
@@ -6676,7 +6676,7 @@ Python 的 &lt;code>range()&lt;/code> 不包含右端点，所以应该写：&lt
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>一句话总结：
-&lt;strong>我的修改后答案已经正确，本质上属于 O(nm) 的暴力字符串匹配；标准暴力法可以进一步简化代码，而 KMP 通过记录模式串自身的前后缀信息避免重复匹配，可以把最坏时间复杂度进一步降低到 O(n+m)。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 21：合并两个有序链表</title><link>https://Guilong-gitlab.github.io/p/leetcode-21%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-21%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/</guid><description>&lt;h2 id="题目">题目
+&lt;strong>我的修改后答案已经正确，本质上属于 O(nm) 的暴力字符串匹配；标准暴力法可以进一步简化代码，而 KMP 通过记录模式串自身的前后缀信息避免重复匹配，可以把最坏时间复杂度进一步降低到 O(n+m)。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 21：合并两个有序链表</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-21/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-21/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>将两个升序链表合并为一个新的&lt;strong>升序链表&lt;/strong>并返回。新链表由给定两个链表中的所有节点组成。
 题目链接：&lt;a class="link" href="https://leetcode.cn/problems/merge-two-sorted-lists/" target="_blank" rel="noopener"
 >LeetCode 21：合并两个有序链表&lt;/a>
@@ -8241,7 +8241,7 @@ Python 的 &lt;code>range()&lt;/code> 不包含右端点，所以应该写：&lt
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>一句话总结：
-&lt;strong>合并两个有序链表时，用两个指针分别指向两个链表的当前节点，每次选择较小节点接入结果链表；两个链表各自最多遍历一次，因此时间复杂度为 O(m+n)，额外空间复杂度为 O(1)。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 26：删除有序数组中的重复项</title><link>https://Guilong-gitlab.github.io/p/leetcode-26%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-26%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/</guid><description>&lt;h2 id="题目">题目
+&lt;strong>合并两个有序链表时，用两个指针分别指向两个链表的当前节点，每次选择较小节点接入结果链表；两个链表各自最多遍历一次，因此时间复杂度为 O(m+n)，额外空间复杂度为 O(1)。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 26：删除有序数组中的重复项</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-26/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-26/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>给定一个&lt;strong>非严格递增排列&lt;/strong>的数组 &lt;code>nums&lt;/code>，原地删除重复出现的元素，使每个元素只出现一次，并返回删除后唯一元素的数量 &lt;code>k&lt;/code>。
 去重以后：&lt;/p>
 &lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -12298,7 +12298,7 @@ Python 会创建一个新的列表来保存这些元素。
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>判断环
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这些可以随着具体 LeetCode 题目再逐个加入笔记，而不是现在一次把所有算法都背下来。&lt;/p></description></item><item><title>LeetCode 14：最长公共前缀</title><link>https://Guilong-gitlab.github.io/p/leetcode-14%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</link><pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-14%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</guid><description>&lt;h2 id="题目">题目
+&lt;/div>&lt;p>这些可以随着具体 LeetCode 题目再逐个加入笔记，而不是现在一次把所有算法都背下来。&lt;/p></description></item><item><title>LeetCode 14：最长公共前缀</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-14/</link><pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-14/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>编写一个函数来查找字符串数组中的最长公共前缀。
 如果不存在公共前缀，返回空字符串 &lt;code>&amp;quot;&amp;quot;&lt;/code>。
 题目链接：&lt;a class="link" href="https://leetcode.cn/problems/longest-common-prefix/" target="_blank" rel="noopener"
@@ -13603,7 +13603,7 @@ Python 会创建一个新的列表来保存这些元素。
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>一句话总结：
-&lt;strong>最长公共前缀可以逐列比较所有字符串，只要某个字符串已经结束，或者当前位置字符不同，那么当前位置之前的部分就是最长公共前缀。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 20：有效的括号</title><link>https://Guilong-gitlab.github.io/p/leetcode-20%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</link><pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-20%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</guid><description>&lt;h2 id="题目">题目
+&lt;strong>最长公共前缀可以逐列比较所有字符串，只要某个字符串已经结束，或者当前位置字符不同，那么当前位置之前的部分就是最长公共前缀。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 20：有效的括号</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-20/</link><pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-20/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>给定一个只包括 &lt;code>'('&lt;/code>、&lt;code>')'&lt;/code>、&lt;code>'{'&lt;/code>、&lt;code>'}'&lt;/code>、&lt;code>'['&lt;/code>、&lt;code>']'&lt;/code> 的字符串 &lt;code>s&lt;/code>，判断字符串是否有效。
 有效字符串需要满足：&lt;/p>
 &lt;ol>
@@ -15299,7 +15299,7 @@ Python 会创建一个新的列表来保存这些元素。
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>一句话总结：
-&lt;strong>当问题要求“最后出现的内容最先处理”时，要想到栈；有效括号问题就是把左括号压入栈，遇到右括号时取出最近的左括号进行匹配。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 13：罗马数字转整数</title><link>https://Guilong-gitlab.github.io/p/leetcode-13%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/</link><pubDate>Tue, 29 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-13%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/</guid><description>&lt;h2 id="题目">题目
+&lt;strong>当问题要求“最后出现的内容最先处理”时，要想到栈；有效括号问题就是把左括号压入栈，遇到右括号时取出最近的左括号进行匹配。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 13：罗马数字转整数</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-13/</link><pubDate>Tue, 29 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-13/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>罗马数字包含以下七种字符：&lt;/p>
 &lt;table>
 &lt;thead>
@@ -16375,7 +16375,7 @@ Python 会创建一个新的列表来保存这些元素。
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>一句话总结：&lt;/p>
-&lt;p>&lt;strong>罗马数字转整数的关键是用字典建立字符与数值的对应关系，并发现统一规律：当前数字小于右边数字时做减法，否则做加法。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 9：回文数</title><link>https://Guilong-gitlab.github.io/p/leetcode-9%E5%9B%9E%E6%96%87%E6%95%B0/</link><pubDate>Tue, 29 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-9%E5%9B%9E%E6%96%87%E6%95%B0/</guid><description>&lt;h2 id="题目">题目
+&lt;p>&lt;strong>罗马数字转整数的关键是用字典建立字符与数值的对应关系，并发现统一规律：当前数字小于右边数字时做减法，否则做加法。&lt;/strong>&lt;/p></description></item><item><title>LeetCode 9：回文数</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-9-palindrome-number/</link><pubDate>Tue, 29 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-9-palindrome-number/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>给你一个整数 &lt;code>x&lt;/code>，如果 &lt;code>x&lt;/code> 是一个回文整数，返回 &lt;code>True&lt;/code>，否则返回 &lt;code>False&lt;/code>。&lt;/p>
 &lt;p>回文数就是从左往右读和从右往左读完全一样的整数。&lt;/p>
 &lt;p>题目链接：&lt;a class="link" href="https://leetcode.cn/problems/palindrome-number/" target="_blank" rel="noopener"

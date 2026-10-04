@@ -2356,7 +2356,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>判断环
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>这些可以随着具体 LeetCode 题目再逐个加入笔记，而不是现在一次把所有算法都背下来。&lt;/p></description></item><item><title>LeetCode 20：有效的括号</title><link>https://Guilong-gitlab.github.io/p/leetcode-20%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</link><pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/leetcode-20%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</guid><description>&lt;h2 id="题目">题目
+&lt;/div>&lt;p>这些可以随着具体 LeetCode 题目再逐个加入笔记，而不是现在一次把所有算法都背下来。&lt;/p></description></item><item><title>LeetCode 20：有效的括号</title><link>https://Guilong-gitlab.github.io/leetcode/leetcode-20/</link><pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/leetcode/leetcode-20/</guid><description>&lt;h2 id="题目">题目
 &lt;/h2>&lt;p>给定一个只包括 &lt;code>'('&lt;/code>、&lt;code>')'&lt;/code>、&lt;code>'{'&lt;/code>、&lt;code>'}'&lt;/code>、&lt;code>'['&lt;/code>、&lt;code>']'&lt;/code> 的字符串 &lt;code>s&lt;/code>，判断字符串是否有效。
 有效字符串需要满足：&lt;/p>
 &lt;ol>
