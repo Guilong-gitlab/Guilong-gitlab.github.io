@@ -1,4 +1,469 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 刘贵泷的个人网页</title><link>https://Guilong-gitlab.github.io/post/</link><description>Recent content in Posts on 刘贵泷的个人网页</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Guilong Liu</copyright><lastBuildDate>Thu, 01 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Python 编程基础操作：栈与链表</title><link>https://Guilong-gitlab.github.io/p/python-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%A0%88%E4%B8%8E%E9%93%BE%E8%A1%A8/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/python-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%A0%88%E4%B8%8E%E9%93%BE%E8%A1%A8/</guid><description>&lt;h1 id="栈stack">栈（Stack）
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 刘贵泷的个人网页</title><link>https://Guilong-gitlab.github.io/post/</link><description>Recent content in Posts on 刘贵泷的个人网页</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>Guilong Liu</copyright><lastBuildDate>Wed, 07 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://Guilong-gitlab.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>基础算法精讲 27 集：从双指针到单调队列</title><link>https://Guilong-gitlab.github.io/p/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E7%B2%BE%E8%AE%B2-27-%E9%9B%86%E4%BB%8E%E5%8F%8C%E6%8C%87%E9%92%88%E5%88%B0%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</link><pubDate>Wed, 07 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E7%B2%BE%E8%AE%B2-27-%E9%9B%86%E4%BB%8E%E5%8F%8C%E6%8C%87%E9%92%88%E5%88%B0%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</guid><description>&lt;p>原视频系列：&lt;a class="link" href="https://space.bilibili.com/206214/channel/seriesdetail?sid=630775" target="_blank" rel="noopener"
+>基础算法精讲&lt;/a>。当前链接对应第 9 集“二叉树与递归：深入理解”。本笔记按照系列公开目录和配套题目整理，重点是帮助自己复习，不是视频逐字稿。&lt;/p>
+&lt;h2 id="怎么使用这份笔记">怎么使用这份笔记
+&lt;/h2>&lt;p>每一类算法先回答三个问题：&lt;/p>
+&lt;ol>
+&lt;li>它解决什么类型的问题？&lt;/li>
+&lt;li>为什么这个指针、状态或不变量可以这样移动？&lt;/li>
+&lt;li>什么时候应该停止、更新答案或恢复现场？&lt;/li>
+&lt;/ol>
+&lt;p>不要先背代码。先画出数组、窗口、链表或树，再说明每个变量代表什么。&lt;/p>
+&lt;h2 id="27-集总览">27 集总览
+&lt;/h2>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: right">集数&lt;/th>
+&lt;th>主题&lt;/th>
+&lt;th>需要掌握的模型&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: right">01&lt;/td>
+&lt;td>相向双指针 1&lt;/td>
+&lt;td>有序数组中从两端逼近、去重与三数之和&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">02&lt;/td>
+&lt;td>相向双指针 2&lt;/td>
+&lt;td>面积、前后缀和与两端移动&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">03&lt;/td>
+&lt;td>滑动窗口&lt;/td>
+&lt;td>维护满足条件的最长、最短或计数区间&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">04&lt;/td>
+&lt;td>二分查找&lt;/td>
+&lt;td>在单调区间中寻找第一个满足条件的位置&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">05&lt;/td>
+&lt;td>二分查找变形&lt;/td>
+&lt;td>峰值、旋转数组和二分答案&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">06&lt;/td>
+&lt;td>链表反转&lt;/td>
+&lt;td>保存后继、反转箭头、移动两个指针&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">07&lt;/td>
+&lt;td>链表快慢指针&lt;/td>
+&lt;td>中点、环、相遇和前后指针&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">08&lt;/td>
+&lt;td>链表删除&lt;/td>
+&lt;td>虚拟头节点、删除倒数第 k 个、跳过节点&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">09&lt;/td>
+&lt;td>二叉树与递归：深入理解&lt;/td>
+&lt;td>递归定义、终止条件、子问题返回值&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">10&lt;/td>
+&lt;td>二叉树与递归：灵活运用&lt;/td>
+&lt;td>同一棵树上的不同信息传递方式&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">11&lt;/td>
+&lt;td>二叉树遍历&lt;/td>
+&lt;td>前序、中序、后序与递归/迭代转换&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">12&lt;/td>
+&lt;td>最近公共祖先&lt;/td>
+&lt;td>从子树向上汇总目标节点信息&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">13&lt;/td>
+&lt;td>二叉树 BFS&lt;/td>
+&lt;td>队列、层序遍历、层号与树宽&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">14&lt;/td>
+&lt;td>回溯：子集型&lt;/td>
+&lt;td>每个元素选或不选，撤销选择&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">15&lt;/td>
+&lt;td>回溯：组合型与剪枝&lt;/td>
+&lt;td>从起点向后选，避免重复和无效分支&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">16&lt;/td>
+&lt;td>回溯：排列型&lt;/td>
+&lt;td>使用状态记录元素是否已经使用&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">17&lt;/td>
+&lt;td>动态规划入门&lt;/td>
+&lt;td>记忆化搜索与递推的对应关系&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">18&lt;/td>
+&lt;td>0-1 背包与完全背包&lt;/td>
+&lt;td>物品、容量、选取次数和遍历顺序&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">19&lt;/td>
+&lt;td>最长公共子序列&lt;/td>
+&lt;td>两个序列的前缀状态与相等/不等转移&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">20&lt;/td>
+&lt;td>最长递增子序列&lt;/td>
+&lt;td>DP、贪心和维护最小结尾值&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">21&lt;/td>
+&lt;td>状态机 DP：股票&lt;/td>
+&lt;td>持有、卖出、冷冻期和手续费状态&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">22&lt;/td>
+&lt;td>区间 DP&lt;/td>
+&lt;td>从短区间推到长区间，枚举最后一次合并&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">23&lt;/td>
+&lt;td>树形 DP：直径&lt;/td>
+&lt;td>后序计算子树高度，再更新全局答案&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">24&lt;/td>
+&lt;td>树形 DP：最大独立集&lt;/td>
+&lt;td>节点选/不选与子节点状态互斥&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">25&lt;/td>
+&lt;td>树形 DP：最小支配集&lt;/td>
+&lt;td>设计覆盖状态，再从子树合并&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">26&lt;/td>
+&lt;td>单调栈&lt;/td>
+&lt;td>维护单调性，寻找下一个更大/更小元素&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: right">27&lt;/td>
+&lt;td>单调队列&lt;/td>
+&lt;td>在滑动窗口中维护最大值或最小值&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="一双指针与滑动窗口">一、双指针与滑动窗口
+&lt;/h2>&lt;h3 id="01-相向双指针两数之和与三数之和">01 相向双指针：两数之和与三数之和
+&lt;/h3>&lt;p>适用条件通常是数组已经排序，或者可以先排序。用 &lt;code>left&lt;/code> 和 &lt;code>right&lt;/code> 指向区间两端：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>left, right &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, len(nums) &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> left &lt;span style="color:#f92672">&amp;lt;&lt;/span> right:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> total &lt;span style="color:#f92672">=&lt;/span> nums[left] &lt;span style="color:#f92672">+&lt;/span> nums[right]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> total &lt;span style="color:#f92672">==&lt;/span> target:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> [left, right]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> total &lt;span style="color:#f92672">&amp;lt;&lt;/span> target:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> left &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> right &lt;span style="color:#f92672">-=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>核心不变量是：当和太小时，移动右指针只会让和更小，所以只能增加 &lt;code>left&lt;/code>；当和太大时，只能减少 &lt;code>right&lt;/code>。三数之和是在外层固定一个数，内层继续使用双指针，并处理重复值。&lt;/p>
+&lt;p>易错点：排序后原下标会变化；跳过重复值时要区分“固定数重复”和“双指针重复”。&lt;/p>
+&lt;h3 id="02-相向双指针盛最多水与接雨水">02 相向双指针：盛最多水与接雨水
+&lt;/h3>&lt;p>盛最多水的容器用两端围成区间，面积是：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>(right - left) × min(height[left], height[right])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>每次移动较短的一边，因为移动较长的一边只会缩短宽度，短板仍然限制高度。接雨水可以用前后缀最大值、双指针或单调栈，关键是理解当前位置能接的水由左右两侧最高点中的较小值决定。&lt;/p>
+&lt;h3 id="03-滑动窗口">03 滑动窗口
+&lt;/h3>&lt;p>滑动窗口维护连续子数组或子串：右指针扩大窗口，条件不满足时左指针收缩窗口。&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>left &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> right, x &lt;span style="color:#f92672">in&lt;/span> enumerate(nums):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> add(x)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> &lt;span style="color:#f92672">not&lt;/span> valid():
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> remove(nums[left])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> left &lt;span style="color:#f92672">+=&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> update_answer(left, right)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>要先明确窗口性质：求最长通常在窗口合法时更新，求最短通常在窗口刚刚合法时反复收缩。常见题型包括无重复最长子串、最小覆盖子串和“最多 K 个”的最长区间。&lt;/p>
+&lt;h2 id="二二分查找">二、二分查找
+&lt;/h2>&lt;h3 id="04-二分查找">04 二分查找
+&lt;/h3>&lt;p>二分不是“看到有序数组就套模板”，而是要找到一个单调判断函数：左边不满足，右边满足，或者反过来。推荐统一写成寻找第一个满足条件的位置：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>left, right &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>, n
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> left &lt;span style="color:#f92672">&amp;lt;&lt;/span> right:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mid &lt;span style="color:#f92672">=&lt;/span> (left &lt;span style="color:#f92672">+&lt;/span> right) &lt;span style="color:#f92672">//&lt;/span> &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> check(mid):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> right &lt;span style="color:#f92672">=&lt;/span> mid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">else&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> left &lt;span style="color:#f92672">=&lt;/span> mid &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">return&lt;/span> left
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这里使用左闭右开区间 &lt;code>[left, right)&lt;/code>，循环结束时 &lt;code>left == right&lt;/code>。写代码前要先回答：&lt;code>check(mid)&lt;/code> 表示什么？答案是否具有单调性？没有单调性就不能直接二分。&lt;/p>
+&lt;h3 id="05-二分变形">05 二分变形
+&lt;/h3>&lt;p>寻找峰值、旋转排序数组和二分答案都可以转化为“判断中点属于哪一侧”。二分答案时不是在数组下标上二分，而是在答案范围上二分，并写一个 &lt;code>check(answer)&lt;/code> 判断这个答案是否可行。&lt;/p>
+&lt;p>易错点：&lt;code>left&lt;/code>、&lt;code>right&lt;/code> 的开闭范围必须和返回值一致；每次更新都必须排除 &lt;code>mid&lt;/code> 或保留 &lt;code>mid&lt;/code>，不能让区间不变。&lt;/p>
+&lt;h2 id="三链表">三、链表
+&lt;/h2>&lt;h3 id="06-链表反转">06 链表反转
+&lt;/h3>&lt;p>反转链表的固定顺序是：先保存后继，再反向连接，再移动指针。&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>prev &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cur &lt;span style="color:#f92672">=&lt;/span> head
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">while&lt;/span> cur:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> next_node &lt;span style="color:#f92672">=&lt;/span> cur&lt;span style="color:#f92672">.&lt;/span>next
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur&lt;span style="color:#f92672">.&lt;/span>next &lt;span style="color:#f92672">=&lt;/span> prev
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prev &lt;span style="color:#f92672">=&lt;/span> cur
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur &lt;span style="color:#f92672">=&lt;/span> next_node
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">return&lt;/span> prev
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="07-快慢指针">07 快慢指针
+&lt;/h3>&lt;p>&lt;code>slow&lt;/code> 每次走一步，&lt;code>fast&lt;/code> 每次走两步，可以找中点、判断环和定位环入口。快慢指针的本质是用不同速度制造相对位移；判断环时，若存在环，两者最终会相遇。&lt;/p>
+&lt;h3 id="08-链表删除">08 链表删除
+&lt;/h3>&lt;p>删除链表节点的本质是让前一个节点跳过当前节点。涉及头节点时使用：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>dummy &lt;span style="color:#f92672">=&lt;/span> ListNode(&lt;span style="color:#ae81ff">0&lt;/span>, head)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>删除倒数第 &lt;code>k&lt;/code> 个节点时，让 &lt;code>fast&lt;/code> 先走 &lt;code>k&lt;/code> 步，再同时移动 &lt;code>fast&lt;/code> 和 &lt;code>slow&lt;/code>，当 &lt;code>fast&lt;/code> 到达末尾时，&lt;code>slow&lt;/code> 位于待删除节点的前一个位置。&lt;/p>
+&lt;h2 id="四二叉树与递归">四、二叉树与递归
+&lt;/h2>&lt;h3 id="09-递归的本质">09 递归的本质
+&lt;/h3>&lt;p>写递归函数时只问三件事：当前节点为空时返回什么？当前节点要做什么？子问题返回的结果如何合并？例如求树高：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">maxDepth&lt;/span>(root):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> root &lt;span style="color:#f92672">is&lt;/span> &lt;span style="color:#66d9ef">None&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> left &lt;span style="color:#f92672">=&lt;/span> maxDepth(root&lt;span style="color:#f92672">.&lt;/span>left)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> right &lt;span style="color:#f92672">=&lt;/span> maxDepth(root&lt;span style="color:#f92672">.&lt;/span>right)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> max(left, right) &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>递归调用不是同时发生的魔法，而是每次把当前问题压入调用栈，等左右子树返回后再处理当前节点。&lt;/p>
+&lt;h3 id="10-递归的灵活运用">10 递归的灵活运用
+&lt;/h3>&lt;p>同一棵树可以让递归函数返回布尔值、数量、路径和或节点。关键是先定义函数含义，例如“返回当前子树的最大深度”或“返回当前子树是否平衡”，不要边写边猜返回值。&lt;/p>
+&lt;h3 id="11-前序中序后序">11 前序、中序、后序
+&lt;/h3>&lt;p>三种遍历的区别只在于处理当前节点的时机：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>前序：当前 → 左 → 右
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>中序：左 → 当前 → 右
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>后序：左 → 右 → 当前
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>二叉搜索树的中序遍历会得到升序序列，因此可以用来验证 BST 或寻找第 K 小元素。&lt;/p>
+&lt;h3 id="12-最近公共祖先">12 最近公共祖先
+&lt;/h3>&lt;p>递归从左右子树返回“是否找到目标节点”。如果左右两边都找到，当前节点就是最近公共祖先；如果只有一边找到，就把那一边的结果继续向上返回。&lt;/p>
+&lt;h3 id="13-二叉树-bfs">13 二叉树 BFS
+&lt;/h3>&lt;p>层序遍历使用队列：先记录当前层节点数量，再循环处理这一层，并把下一层节点加入队列。记录层数时，&lt;code>for _ in range(len(queue))&lt;/code> 很重要，因为队列长度会在循环中变化。&lt;/p>
+&lt;h2 id="五回溯">五、回溯
+&lt;/h2>&lt;h3 id="14-子集型回溯">14 子集型回溯
+&lt;/h3>&lt;p>每个元素都有“选”和“不选”两条分支：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">def&lt;/span> &lt;span style="color:#a6e22e">dfs&lt;/span>(i):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ans&lt;span style="color:#f92672">.&lt;/span>append(path[:])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">for&lt;/span> j &lt;span style="color:#f92672">in&lt;/span> range(i, n):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path&lt;span style="color:#f92672">.&lt;/span>append(nums[j])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dfs(j &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path&lt;span style="color:#f92672">.&lt;/span>pop()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>path.pop()&lt;/code> 是撤销选择，保证返回上一层时现场恢复。&lt;/p>
+&lt;h3 id="15-组合型回溯与剪枝">15 组合型回溯与剪枝
+&lt;/h3>&lt;p>组合不考虑顺序，因此递归下一层只能从当前位置之后开始。剪枝的本质是提前判断“剩下的元素不可能得到答案”，从而不再递归。&lt;/p>
+&lt;h3 id="16-排列型回溯">16 排列型回溯
+&lt;/h3>&lt;p>排列需要每一层都可以考虑所有未使用元素，因此通常使用 &lt;code>used&lt;/code> 数组：&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i, x &lt;span style="color:#f92672">in&lt;/span> enumerate(nums):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> used[i]:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> used[i] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">True&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path&lt;span style="color:#f92672">.&lt;/span>append(x)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dfs()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path&lt;span style="color:#f92672">.&lt;/span>pop()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> used[i] &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">False&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="六动态规划">六、动态规划
+&lt;/h2>&lt;h3 id="17-从记忆化搜索到递推">17 从记忆化搜索到递推
+&lt;/h3>&lt;p>动态规划首先要定义状态，再写转移。记忆化搜索是“从大问题递归到小问题并缓存”，递推是“按照依赖顺序从小问题算到大问题”。两者解决的是同一个状态转移关系。&lt;/p>
+&lt;h3 id="18-0-1-背包与完全背包">18 0-1 背包与完全背包
+&lt;/h3>&lt;p>0-1 背包中每件物品最多选一次，容量循环通常从大到小；完全背包中物品可以重复选，容量循环通常从小到大。循环方向实际上是在控制同一件物品能否在本轮再次使用。&lt;/p>
+&lt;h3 id="19-最长公共子序列">19 最长公共子序列
+&lt;/h3>&lt;p>令 &lt;code>dp[i][j]&lt;/code> 表示两个字符串前 &lt;code>i&lt;/code>、前 &lt;code>j&lt;/code> 个字符的答案：如果最后一个字符相等，就从 &lt;code>dp[i-1][j-1]&lt;/code> 转移；否则取删除其中一个字符后的较大值。&lt;/p>
+&lt;h3 id="20-最长递增子序列">20 最长递增子序列
+&lt;/h3>&lt;p>基础 DP 记录每个位置作为结尾的最长长度；更高效的贪心方法维护每个长度对应的最小结尾值，并使用二分查找更新它。这里的数组不是最终序列，而是帮助保持更大的扩展空间。&lt;/p>
+&lt;h3 id="21-状态机-dp股票">21 状态机 DP：股票
+&lt;/h3>&lt;p>把每天的状态拆开，例如持有股票、卖出股票、冷冻期或未持有。每个状态只从允许转移的前一天状态转移，手续费和冷冻期只是改变转移条件。&lt;/p>
+&lt;h3 id="22-区间-dp">22 区间 DP
+&lt;/h3>&lt;p>区间 DP 的状态通常是 &lt;code>dp[left][right]&lt;/code>，按区间长度从短到长计算。枚举最后一次合并的位置 &lt;code>k&lt;/code>，把区间分成 &lt;code>[left, k]&lt;/code> 和 &lt;code>[k+1, right]&lt;/code>。&lt;/p>
+&lt;h2 id="七树形-dp">七、树形 DP
+&lt;/h2>&lt;h3 id="23-树的直径">23 树的直径
+&lt;/h3>&lt;p>后序遍历返回每个节点向下的最大深度，同时用左右子树深度之和更新全局直径。一个函数返回局部信息，另一个变量保存全局答案，是树形 DP 的常见写法。&lt;/p>
+&lt;h3 id="24-最大独立集">24 最大独立集
+&lt;/h3>&lt;p>对每个节点讨论“选当前节点”和“不选当前节点”两种状态。选当前节点时不能选孩子；不选当前节点时孩子可选可不选，取较大值。&lt;/p>
+&lt;h3 id="25-最小支配集">25 最小支配集
+&lt;/h3>&lt;p>这类题的重点是先定义覆盖状态，例如当前节点已被覆盖、当前节点放置监控、当前节点未覆盖。状态定义必须保证父节点能够根据子树状态判断是否需要补救。&lt;/p>
+&lt;h2 id="八单调栈与单调队列">八、单调栈与单调队列
+&lt;/h2>&lt;h3 id="26-单调栈">26 单调栈
+&lt;/h3>&lt;p>单调栈维护栈内元素的单调性。当新元素破坏单调性时，持续弹出元素；每个元素最多入栈一次、出栈一次，因此总复杂度通常是 &lt;code>O(n)&lt;/code>。&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>stack &lt;span style="color:#f92672">=&lt;/span> []
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> i, x &lt;span style="color:#f92672">in&lt;/span> enumerate(nums):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> stack &lt;span style="color:#f92672">and&lt;/span> nums[stack[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]] &lt;span style="color:#f92672">&amp;lt;&lt;/span> x:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> j &lt;span style="color:#f92672">=&lt;/span> stack&lt;span style="color:#f92672">.&lt;/span>pop()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> answer[j] &lt;span style="color:#f92672">=&lt;/span> x
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> stack&lt;span style="color:#f92672">.&lt;/span>append(i)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>栈里通常存下标，而不是只存数值，因为下标可以计算距离、宽度和左右边界。每日温度、下一个更大元素、柱状图最大矩形都属于这一类。&lt;/p>
+&lt;h3 id="27-单调队列">27 单调队列
+&lt;/h3>&lt;p>单调队列用于滑动窗口最值。队列中保存下标，并保证对应值单调；新元素进入时，从队尾删除不可能成为最大值的元素，窗口左边界移动时从队首删除过期下标。&lt;/p>
+&lt;div class="highlight">&lt;div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+&lt;table style="border-spacing:0;padding:0;margin:0;border:0;">&lt;tr>&lt;td style="vertical-align:top;padding:0;margin:0;border:0;">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+&lt;/span>&lt;span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">from&lt;/span> collections &lt;span style="color:#f92672">import&lt;/span> deque
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>q &lt;span style="color:#f92672">=&lt;/span> deque()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">for&lt;/span> right, x &lt;span style="color:#f92672">in&lt;/span> enumerate(nums):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> q &lt;span style="color:#f92672">and&lt;/span> nums[q[&lt;span style="color:#f92672">-&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span>]] &lt;span style="color:#f92672">&amp;lt;=&lt;/span> x:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> q&lt;span style="color:#f92672">.&lt;/span>pop()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> q&lt;span style="color:#f92672">.&lt;/span>append(right)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> left &lt;span style="color:#f92672">=&lt;/span> right &lt;span style="color:#f92672">-&lt;/span> k &lt;span style="color:#f92672">+&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> q &lt;span style="color:#f92672">and&lt;/span> q[&lt;span style="color:#ae81ff">0&lt;/span>] &lt;span style="color:#f92672">&amp;lt;&lt;/span> left:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> q&lt;span style="color:#f92672">.&lt;/span>popleft()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> right &lt;span style="color:#f92672">&amp;gt;=&lt;/span> k &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> answer&lt;span style="color:#f92672">.&lt;/span>append(nums[q[&lt;span style="color:#ae81ff">0&lt;/span>]])
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>队首永远是当前窗口最大值的下标。每个下标最多进出队列一次，所以复杂度为 &lt;code>O(n)&lt;/code>。&lt;/p>
+&lt;h2 id="建议学习顺序">建议学习顺序
+&lt;/h2>&lt;p>第一阶段先掌握 01–08：双指针、窗口、二分和链表；第二阶段学习 09–13：递归和二叉树；第三阶段学习 14–16：回溯；第四阶段学习 17–25：动态规划和树形 DP；最后学习 26–27：单调栈和单调队列。&lt;/p>
+&lt;p>每看完一集，建议至少完成视频中的代表题和一道课后题，并写下三句话：状态或指针代表什么、循环不变量是什么、为什么复杂度是这样。能独立解释这三句话，比背出代码更重要。&lt;/p></description></item><item><title>Python 编程基础操作：栈与链表</title><link>https://Guilong-gitlab.github.io/p/python-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%A0%88%E4%B8%8E%E9%93%BE%E8%A1%A8/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://Guilong-gitlab.github.io/p/python-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E6%A0%88%E4%B8%8E%E9%93%BE%E8%A1%A8/</guid><description>&lt;h1 id="栈stack">栈（Stack）
 &lt;/h1>&lt;p>栈（Stack）是一种**后进先出（Last In, First Out，LIFO）**的数据结构。&lt;/p>
 &lt;p>可以把它理解成一摞盘子：只能从最上面放，也只能从最上面取。因此最后放进去的元素会最先被取出来。&lt;/p>
 &lt;p>例如依次放入 &lt;code>1、2、3&lt;/code>：&lt;/p>
